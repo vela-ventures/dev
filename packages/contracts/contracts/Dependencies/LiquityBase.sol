@@ -6,7 +6,7 @@ import "./BaseMath.sol";
 import "./LiquityMath.sol";
 import "../Interfaces/IActivePool.sol";
 import "../Interfaces/IDefaultPool.sol";
-import "../Interfaces/IPriceFeed.sol";
+// import "../Interfaces/IPriceFeed.sol";
 import "../Interfaces/ILiquityBase.sol";
 
 /* 
@@ -39,7 +39,7 @@ contract LiquityBase is BaseMath, ILiquityBase {
 
     IDefaultPool public defaultPool;
 
-    IPriceFeed public override priceFeed;
+    // IPriceFeed public override priceFeed;
 
     // --- Gas compensation functions ---
 

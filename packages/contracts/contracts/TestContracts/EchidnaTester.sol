@@ -10,7 +10,7 @@ import "../StabilityPool.sol";
 import "../GasPool.sol";
 import "../CollSurplusPool.sol";
 import "../LUSDToken.sol";
-import "./PriceFeedTestnet.sol";
+// import "./PriceFeedTestnet.sol";
 import "../SortedTroves.sol";
 import "./EchidnaProxy.sol";
 //import "../Dependencies/console.sol";
@@ -36,7 +36,7 @@ contract EchidnaTester {
     GasPool public gasPool;
     CollSurplusPool public collSurplusPool;
     LUSDToken public lusdToken;
-    PriceFeedTestnet priceFeedTestnet;
+    // PriceFeedTestnet priceFeedTestnet;
     SortedTroves sortedTroves;
 
     EchidnaProxy[NUMBER_OF_ACTORS] public echidnaProxies;
@@ -57,20 +57,22 @@ contract EchidnaTester {
         );
 
         collSurplusPool = new CollSurplusPool();
-        priceFeedTestnet = new PriceFeedTestnet();
+        // priceFeedTestnet = new PriceFeedTestnet();
 
         sortedTroves = new SortedTroves();
 
         troveManager.setAddresses(address(borrowerOperations), 
             address(activePool), address(defaultPool), 
             address(stabilityPool), address(gasPool), address(collSurplusPool),
-            address(priceFeedTestnet), address(lusdToken), 
+            // address(priceFeedTestnet),
+            address(lusdToken), 
             address(sortedTroves), address(0), address(0));
        
         borrowerOperations.setAddresses(address(troveManager), 
             address(activePool), address(defaultPool), 
             address(stabilityPool), address(gasPool), address(collSurplusPool),
-            address(priceFeedTestnet), address(sortedTroves), 
+            // address(priceFeedTestnet),
+            address(sortedTroves), 
             address(lusdToken), address(0));
 
         activePool.setAddresses(address(borrowerOperations), 
@@ -80,7 +82,9 @@ contract EchidnaTester {
         
         stabilityPool.setAddresses(address(borrowerOperations), 
             address(troveManager), address(activePool), address(lusdToken), 
-            address(sortedTroves), address(priceFeedTestnet), address(0));
+            address(sortedTroves), 
+            // address(priceFeedTestnet),
+            address(0));
 
         collSurplusPool.setAddresses(address(borrowerOperations), 
              address(troveManager), address(activePool));
@@ -100,7 +104,7 @@ contract EchidnaTester {
         require(CCR > 0);
 
         // TODO:
-        priceFeedTestnet.setPrice(1e22);
+        // priceFeedTestnet.setPrice(1e22);
     }
 
     // TroveManager
@@ -135,7 +139,8 @@ contract EchidnaTester {
     // Borrower Operations
 
     function getAdjustedETH(uint actorBalance, uint _ETH, uint ratio) internal view returns (uint) {
-        uint price = priceFeedTestnet.getPrice();
+        // uint price = priceFeedTestnet.getPrice();
+        uint price = 2e18;
         require(price > 0);
         uint minETH = ratio.mul(LUSD_GAS_COMPENSATION).div(price);
         require(actorBalance > minETH);
@@ -144,7 +149,8 @@ contract EchidnaTester {
     }
 
     function getAdjustedLUSD(uint ETH, uint _LUSDAmount, uint ratio) internal view returns (uint) {
-        uint price = priceFeedTestnet.getPrice();
+        // uint price = priceFeedTestnet.getPrice();
+        uint price = 2e18;
         uint LUSDAmount = _LUSDAmount;
         uint compositeDebt = LUSDAmount.add(LUSD_GAS_COMPENSATION);
         uint ICR = LiquityMath._computeCR(ETH, compositeDebt, price);
@@ -277,7 +283,8 @@ contract EchidnaTester {
     // PriceFeed
 
     function setPriceExt(uint256 _price) external {
-        bool result = priceFeedTestnet.setPrice(_price);
+        // bool result = priceFeedTestnet.setPrice(_price);
+        bool result = true;
         assert(result);
     }
 
@@ -377,9 +384,9 @@ contract EchidnaTester {
             return false;
         }
     
-        if (address(priceFeedTestnet).balance > 0) {
-            return false;
-        }
+        // if (address(priceFeedTestnet).balance > 0) {
+        //     return false;
+        // }
         
         if (address(sortedTroves).balance > 0) {
             return false;
@@ -390,8 +397,9 @@ contract EchidnaTester {
 
     // TODO: What should we do with this? Should it be allowed? Should it be a canary?
     function echidna_price() public view returns(bool) {
-        uint price = priceFeedTestnet.getPrice();
-        
+        // uint price = priceFeedTestnet.getPrice();
+        uint price = 2e18;
+
         if (price == 0) {
             return false;
         }

@@ -4,7 +4,7 @@ pragma solidity 0.6.11;
 
 import '../Interfaces/ITroveManager.sol';
 import '../Interfaces/ISortedTroves.sol';
-import '../Interfaces/IPriceFeed.sol';
+// import '../Interfaces/IPriceFeed.sol';
 import '../Dependencies/LiquityMath.sol';
 
 /* Wrapper contract - used for calculating gas of read-only and internal functions. 
@@ -17,8 +17,8 @@ contract FunctionCaller {
     ISortedTroves sortedTroves;
     address public sortedTrovesAddress;
 
-    IPriceFeed priceFeed;
-    address public priceFeedAddress;
+    // IPriceFeed priceFeed;
+    // address public priceFeedAddress;
 
     // --- Dependency setters ---
 
@@ -32,10 +32,10 @@ contract FunctionCaller {
         sortedTroves = ISortedTroves(_sortedTrovesAddress);
     }
 
-     function setPriceFeedAddress(address _priceFeedAddress) external {
-        priceFeedAddress = _priceFeedAddress;
-        priceFeed = IPriceFeed(_priceFeedAddress);
-    }
+    //  function setPriceFeedAddress(address _priceFeedAddress) external {
+    //     priceFeedAddress = _priceFeedAddress;
+    //     priceFeed = IPriceFeed(_priceFeedAddress);
+    // }
 
     // --- Non-view wrapper functions used for calculating gas ---
     
