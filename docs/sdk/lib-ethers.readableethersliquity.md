@@ -38,7 +38,7 @@ The constructor for this class is marked as internal. Third-party code should no
 |  [getLUSDBalance(address, overrides)](./lib-ethers.readableethersliquity.getlusdbalance.md) |  | Get the amount of LUSD held by an address. |
 |  [getLUSDInStabilityPool(overrides)](./lib-ethers.readableethersliquity.getlusdinstabilitypool.md) |  | Get the total amount of LUSD currently deposited in the Stability Pool. |
 |  [getNumberOfTroves(overrides)](./lib-ethers.readableethersliquity.getnumberoftroves.md) |  | Get number of Troves that are currently open. |
-|  [getPrice(overrides)](./lib-ethers.readableethersliquity.getprice.md) |  | Get the current price of the native currency (e.g. Ether) in USD. |
+|  [getPrice(overrides)](./lib-ethers.readableethersliquity.getprice.md) |  |  |
 |  [getRemainingLiquidityMiningLQTYReward(overrides)](./lib-ethers.readableethersliquity.getremainingliquiditymininglqtyreward.md) |  | Get the remaining LQTY that will be collectively rewarded to liquidity miners. |
 |  [getRemainingStabilityPoolLQTYReward(overrides)](./lib-ethers.readableethersliquity.getremainingstabilitypoollqtyreward.md) |  | Get the remaining LQTY that will be collectively rewarded to stability depositors. |
 |  [getStabilityDeposit(address, overrides)](./lib-ethers.readableethersliquity.getstabilitydeposit.md) |  | Get the current state of a Stability Deposit. |

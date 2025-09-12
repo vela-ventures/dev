@@ -1,8 +1,8 @@
 import assert from "assert";
 
+import { Log } from "@ethersproject/abstract-provider";
 import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
 import { AddressZero } from "@ethersproject/constants";
-import { Log } from "@ethersproject/abstract-provider";
 import { ErrorCode } from "@ethersproject/logger";
 import { Transaction } from "@ethersproject/transactions";
 
@@ -10,10 +10,10 @@ import {
   CollateralGainTransferDetails,
   Decimal,
   Decimalish,
-  LiquidationDetails,
-  LiquityReceipt,
   LUSD_MINIMUM_DEBT,
   LUSD_MINIMUM_NET_DEBT,
+  LiquidationDetails,
+  LiquityReceipt,
   MinedReceipt,
   PopulatableLiquity,
   PopulatedLiquityTransaction,
@@ -786,13 +786,14 @@ export class PopulatableEthersLiquity
     ]
   > {
     const { hintHelpers } = _getContracts(this._readable.connection);
-    const price = await this._readable.getPrice();
+    // const price = await this._readable.getPrice();
+    const price = 2;
 
     const {
       firstRedemptionHint,
       partialRedemptionHintNICR,
       truncatedLUSDamount
-    } = await hintHelpers.getRedemptionHints(amount.hex, price.hex, _redeemMaxIterations);
+    } = await hintHelpers.getRedemptionHints(amount.hex, price, _redeemMaxIterations);
 
     const [
       partialRedemptionUpperHint,

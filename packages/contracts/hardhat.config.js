@@ -109,7 +109,19 @@ module.exports = {
     }
   },
   etherscan: {
-    apiKey: getSecret("ETHERSCAN_API_KEY")
+    apiKey: {
+      load: "BLOCKSCOUT_KEY"
+    },
+    customChains: [
+      {
+        network: "load",
+        chainId: 9496,
+        urls: {
+          apiURL: "https://explorer.load.network/api/",
+          browserURL: "https://explorer.load.network/"
+        }
+      }
+    ]
   },
   mocha: { timeout: 12000000 },
   rpc: {

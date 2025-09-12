@@ -1,20 +1,20 @@
-import assert from "assert";
 import { AddressZero } from "@ethersproject/constants";
+import assert from "assert";
 
 import {
   Decimal,
-  LiquityStoreState,
-  LiquityStoreBaseState,
-  TroveWithPendingRedistribution,
-  StabilityDeposit,
+  Fees,
   LQTYStake,
   LiquityStore,
-  Fees
+  LiquityStoreBaseState,
+  LiquityStoreState,
+  StabilityDeposit,
+  TroveWithPendingRedistribution
 } from "@liquity/lib-base";
 
 import { decimalify, promiseAllValues } from "./_utils";
-import { ReadableEthersLiquity } from "./ReadableEthersLiquity";
 import { EthersLiquityConnection, _getProvider } from "./EthersLiquityConnection";
+import { ReadableEthersLiquity } from "./ReadableEthersLiquity";
 import { EthersCallOverrides, EthersProvider } from "./types";
 
 /**
@@ -101,7 +101,7 @@ export class BlockPolledLiquityStore extends LiquityStore<BlockPolledLiquityStor
         blockTag
       }),
 
-      price: this._readable.getPrice({ blockTag }),
+      price: this._readable.getPrice(),
       numberOfTroves: this._readable.getNumberOfTroves({ blockTag }),
       totalRedistributed: this._readable.getTotalRedistributed({ blockTag }),
       total: this._readable.getTotal({ blockTag }),

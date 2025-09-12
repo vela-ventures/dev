@@ -1,24 +1,46 @@
-import React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { WagmiProvider, createConfig, fallback, http } from "wagmi";
-import { injected } from "wagmi/connectors";
-import { mainnet, goerli, sepolia, localhost } from "wagmi/chains";
 import { ConnectKitProvider, getDefaultConfig, getDefaultConnectors } from "connectkit";
-import { Flex, Heading, ThemeUIProvider, Paragraph, Link } from "theme-ui";
+import React from "react";
+import { Flex, Heading, Link, Paragraph, ThemeUIProvider } from "theme-ui";
+import { defineChain } from "viem";
+import { WagmiProvider, createConfig, fallback, http } from "wagmi";
+import { goerli, localhost, mainnet, sepolia } from "wagmi/chains";
+import { injected } from "wagmi/connectors";
 
-import { LiquityProvider } from "./hooks/LiquityContext";
-import { WalletConnector } from "./components/WalletConnector";
-import { TransactionProvider } from "./components/Transaction";
 import { Icon } from "./components/Icon";
+import { TransactionProvider } from "./components/Transaction";
+import { WalletConnector } from "./components/WalletConnector";
 import { getConfig } from "./config";
+import { LiquityProvider } from "./hooks/LiquityContext";
 import theme from "./theme";
 
-import { DisposableWalletProvider } from "./testUtils/DisposableWalletProvider";
 import { LiquityFrontend } from "./LiquityFrontend";
 import { AppLoader } from "./components/AppLoader";
 import { useAsyncValue } from "./hooks/AsyncValue";
+import { DisposableWalletProvider } from "./testUtils/DisposableWalletProvider";
 
 const isDemoMode = import.meta.env.VITE_APP_DEMO_MODE === "true";
+
+const load = defineChain({
+  id: 9496,
+  name: "Load Network",
+  nativeCurrency: {
+    name: "Load",
+    symbol: "LOAD",
+    decimals: 18
+  },
+  rpcUrls: {
+    default: {
+      http: ["https://alphanet.load.network"]
+    }
+  },
+  blockExplorers: {
+    default: {
+      name: "Load Network Explorer",
+      url: "https://explorer.load.network"
+    }
+  }
+});
 
 if (isDemoMode) {
   const ethereum = new DisposableWalletProvider(
@@ -98,12 +120,12 @@ const App = () => {
               appDescription,
               walletConnectProjectId: config.value.walletConnectProjectId,
 
-              chains:
-                isDemoMode || import.meta.env.MODE === "test"
-                  ? [localhost]
-                  : config.value.testnetOnly
-                  ? [goerli, sepolia]
-                  : [mainnet, goerli, sepolia],
+              chains: [load],
+              // isDemoMode || import.meta.env.MODE === "test"
+              //   ? [localhost]
+              //   : config.value.testnetOnly
+              //   ? [goerli, sepolia, load]
+              //   : [mainnet, goerli, sepolia, load],
 
               connectors:
                 isDemoMode || import.meta.env.MODE === "test"
@@ -147,7 +169,8 @@ const App = () => {
                   http()
                 ]),
 
-                [localhost.id]: http()
+                [localhost.id]: http(),
+                [load.id]: http("https://alphanet.load.network")
               }
             })
           )}

@@ -1,5 +1,5 @@
 import { Signer } from "@ethersproject/abstract-signer";
-import { ContractTransaction, ContractFactory, Overrides } from "@ethersproject/contracts";
+import { ContractFactory, ContractTransaction, Overrides } from "@ethersproject/contracts";
 import { Wallet } from "@ethersproject/wallet";
 
 import { Decimal } from "@liquity/lib-base";
@@ -198,7 +198,6 @@ const connectContracts = async (
         stabilityPool.address,
         gasPool.address,
         collSurplusPool.address,
-        priceFeed.address,
         lusdToken.address,
         sortedTroves.address,
         lqtyToken.address,
@@ -214,7 +213,6 @@ const connectContracts = async (
         stabilityPool.address,
         gasPool.address,
         collSurplusPool.address,
-        priceFeed.address,
         sortedTroves.address,
         lusdToken.address,
         lqtyStaking.address,
@@ -228,7 +226,6 @@ const connectContracts = async (
         activePool.address,
         lusdToken.address,
         sortedTroves.address,
-        priceFeed.address,
         communityIssuance.address,
         { ...overrides, nonce }
       ),

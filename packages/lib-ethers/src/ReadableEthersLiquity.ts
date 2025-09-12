@@ -21,14 +21,14 @@ import { decimalify, numberify, panic } from "./_utils";
 import { EthersCallOverrides, EthersProvider, EthersSigner } from "./types";
 
 import {
-  EthersLiquityConnection,
-  EthersLiquityConnectionOptionalParams,
-  EthersLiquityStoreOption,
   _connect,
   _getBlockTimestamp,
   _getContracts,
   _requireAddress,
-  _requireFrontendAddress
+  _requireFrontendAddress,
+  EthersLiquityConnection,
+  EthersLiquityConnectionOptionalParams,
+  EthersLiquityStoreOption
 } from "./EthersLiquityConnection";
 
 import { BlockPolledLiquityStore } from "./BlockPolledLiquityStore";
@@ -202,11 +202,14 @@ export class ReadableEthersLiquity implements ReadableLiquity {
     return (await troveManager.getTroveOwnersCount({ ...overrides })).toNumber();
   }
 
-  /** {@inheritDoc @liquity/lib-base#ReadableLiquity.getPrice} */
-  getPrice(overrides?: EthersCallOverrides): Promise<Decimal> {
-    const { priceFeed } = _getContracts(this.connection);
+  // /** {@inheritDoc @liquity/lib-base#ReadableLiquity.getPrice} */
+  // getPrice(overrides?: EthersCallOverrides): Promise<Decimal> {
+  //   const { priceFeed } = _getContracts(this.connection);
 
-    return priceFeed.callStatic.fetchPrice({ ...overrides }).then(decimalify);
+  //   return priceFeed.callStatic.fetchPrice({ ...overrides }).then(decimalify);
+  // }
+  getPrice(overrides?: EthersCallOverrides): Promise<Decimal> {
+    return Promise.resolve(Decimal.from(2));
   }
 
   /** @internal */

@@ -203,19 +203,6 @@
     "inputs": [
       {
         "indexed": false,
-        "internalType": "address",
-        "name": "_newPriceFeedAddress",
-        "type": "address"
-      }
-    ],
-    "name": "PriceFeedAddressChanged",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
         "internalType": "uint256",
         "name": "_attemptedLUSDAmount",
         "type": "uint256"
@@ -1444,19 +1431,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "priceFeed",
-    "outputs": [
-      {
-        "internalType": "contract IPriceFeed",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -1566,11 +1540,6 @@
       {
         "internalType": "address",
         "name": "_collSurplusPoolAddress",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_priceFeedAddress",
         "type": "address"
       },
       {

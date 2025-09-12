@@ -1,22 +1,22 @@
 import assert from "assert";
+import "colors";
+import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
-import dotenv from "dotenv";
-import "colors";
 
 import { JsonFragment } from "@ethersproject/abi";
-import { Wallet } from "@ethersproject/wallet";
 import { Signer } from "@ethersproject/abstract-signer";
 import { ContractFactory, Overrides } from "@ethersproject/contracts";
+import { Wallet } from "@ethersproject/wallet";
 
-import { task, HardhatUserConfig, types, extendEnvironment } from "hardhat/config";
-import { HardhatRuntimeEnvironment, NetworkUserConfig } from "hardhat/types";
 import "@nomiclabs/hardhat-ethers";
+import { extendEnvironment, HardhatUserConfig, task, types } from "hardhat/config";
+import { HardhatRuntimeEnvironment, NetworkUserConfig } from "hardhat/types";
 
 import { Decimal } from "@liquity/lib-base";
 
-import { deployAndSetupContracts, deployTellorCaller, setSilent } from "./utils/deploy";
 import { _connectToContracts, _LiquityDeploymentJSON, _priceFeedIsTestnet } from "./src/contracts";
+import { deployAndSetupContracts, deployTellorCaller, setSilent } from "./utils/deploy";
 
 import accounts from "./accounts.json";
 
@@ -135,6 +135,11 @@ const config: HardhatUserConfig = {
 
     forkedMainnet: {
       url: "http://localhost:8545"
+    },
+
+    load: {
+      url: "https://alphanet.load.network",
+      accounts: [deployerAccount]
     }
   },
 
