@@ -1,8 +1,8 @@
-from brownie import *
 import random
-import numpy as np
 from bisect import bisect_left
 
+import numpy as np
+from brownie import *
 from helpers import *
 
 #global variables
@@ -18,8 +18,8 @@ n_sim = year
 # number of liquidations for each call to `liquidateTroves`
 NUM_LIQUIDATIONS = 10
 
-LUSD_GAS_COMPENSATION = 200.0
-MIN_NET_DEBT = 1800.0
+LUSD_GAS_COMPENSATION = 50.0
+MIN_NET_DEBT = 200.0
 MAX_FEE = Wei(1e18)
 
 """# Ether price (exogenous)

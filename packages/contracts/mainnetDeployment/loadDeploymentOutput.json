@@ -1,0 +1,62 @@
+{
+  "sortedTroves": {
+    "address": "0x336196B5FF2Fcd00b317dDcc22a43014B782ddd2",
+    "txHash": "0xb82ebc49a398f3265482a621d49451ee5ce88936632da5eaa6bbfdee45562926"
+  },
+  "troveManager": {
+    "address": "0xBb06cD6172aFBF8848ac47a2Cee4975E29e4B944",
+    "txHash": "0xefbc8f979f127130e8722edd07c3115b953395cfbd920701569a3f6d34683ab2"
+  },
+  "activePool": {
+    "address": "0xd6434946725b552208a1BCBD3fE1290A3Df13221",
+    "txHash": "0x4d65bf10593f694c97af45dca36002c3c70ddac5f4d9d1d6d1540aa98998a5cf"
+  },
+  "stabilityPool": {
+    "address": "0x49d510b0F13Cc7D261c459Df8ED9C339838f5566",
+    "txHash": "0xca933e1f19c05e92f8fc295d2ad54c057edc035d7260b628caeb721879b2357a"
+  },
+  "gasPool": {
+    "address": "0x5C20a3C36760F9518aD0615d6880d417C31181c5",
+    "txHash": "0x7dff8170feb74b3a942d951b1afb64b61bc08257de1e290debcd7a3aa9839ac8"
+  },
+  "defaultPool": {
+    "address": "0x3fF9473ED71dC5dB3C973d21a3Ea6940Ca0060dE",
+    "txHash": "0x077ced2ffcf434f9bc2f068771203e527ab719c9cc27d7cb9f4760667709ad72"
+  },
+  "collSurplusPool": {
+    "address": "0x50b00A0f69B53C0ca6e4b9bdC65600F2A847Ed5A",
+    "txHash": "0xf129fe56397db6b4e9255072137d4e5615f1dd242749ce5c87a2e86606c92a66"
+  },
+  "borrowerOperations": {
+    "address": "0x1F01135CB7A354fa0B1cf4d399Fe5dC42a8415af",
+    "txHash": "0x4931f4c77a67259544e51e59ddd722c73d6713a41fba4b3e8781a7ceeffcbb48"
+  },
+  "hintHelpers": {
+    "address": "0xd26e597f5358c2B94CCCe832374099D061C83bE1",
+    "txHash": "0xf39fed016c58d861eea55dc5962f3e23c89e36f6570f51a06194351b507a8676"
+  },
+  "lusdToken": {
+    "address": "0x4299de791eD667B45988bceB57c775105bf6C06a",
+    "txHash": "0x0cad9bced5d102915439c668ecada78520a850e8b28191428d0dfd7778d3969a"
+  },
+  "unipool": {
+    "address": "0x271c1B8E1A3Cd75afEa5ba51896881e23085948c",
+    "txHash": "0xa675006d1e5ae0238cdf87bb917f8aa4982c1c43788ca93ce812e25cfc9e226f"
+  },
+  "lqtyStaking": {
+    "address": "0xF1F51d764f4e996ed1b55EED5c4AA66ee262927d",
+    "txHash": "0xdae964419b4f97c71458c58e05f15a6cd6a30bac1c2ae6c098fc451f3d164412"
+  },
+  "lockupContractFactory": {
+    "address": "0x94Ddb268C695B03b730cA11Bfe62640BD6E6F173",
+    "txHash": "0xf20c97cdc02da796c45eb4a47fb79b08eeedc6cf6f4d6261b8732b6a71d2f8df"
+  },
+  "communityIssuance": {
+    "address": "0xfd99A989cc1d07c4580c81955Ac4C91942eEa8F1",
+    "txHash": "0xa85636c780414e3268c5bbb659406b3a8bb645bf26d16da5c567c68d9d6628aa"
+  },
+  "lqtyToken": {
+    "address": "0x6db19B7948d41551C849C2638f83Db2a81802C6C",
+    "txHash": "0x43897d9a2b88fb23c3e9facce39a5a706f99e8f41464a13cb41cc2c0e25ec546"
+  }
+}
