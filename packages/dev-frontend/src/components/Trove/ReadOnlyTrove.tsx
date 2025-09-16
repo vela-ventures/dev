@@ -1,12 +1,12 @@
-import React, { useCallback } from "react";
-import { Card, Heading, Box, Flex, Button } from "theme-ui";
-import { useLiquitySelector } from "@liquity/lib-react";
 import { LiquityStoreState } from "@liquity/lib-base";
+import { useLiquitySelector } from "@liquity/lib-react";
+import React, { useCallback } from "react";
+import { Box, Button, Card, Flex, Heading } from "theme-ui";
+import { COIN } from "../../strings";
+import { Icon } from "../Icon";
+import { CollateralRatio, CollateralRatioInfoBubble } from "./CollateralRatio";
 import { DisabledEditableRow } from "./Editor";
 import { useTroveView } from "./context/TroveViewContext";
-import { Icon } from "../Icon";
-import { COIN } from "../../strings";
-import { CollateralRatio, CollateralRatioInfoBubble } from "./CollateralRatio";
 
 const select = ({ trove, price }: LiquityStoreState) => ({ trove, price });
 
@@ -24,14 +24,14 @@ export const ReadOnlyTrove: React.FC = () => {
   // console.log("READONLY TROVE", trove.collateral.prettify(4));
   return (
     <Card>
-      <Heading>Trove</Heading>
+      <Heading>Vault</Heading>
       <Box sx={{ p: [2, 3] }}>
         <Box>
           <DisabledEditableRow
             label="Collateral"
             inputId="trove-collateral"
             amount={trove.collateral.prettify(4)}
-            unit="ETH"
+            unit="AR"
           />
 
           <DisabledEditableRow
@@ -47,7 +47,7 @@ export const ReadOnlyTrove: React.FC = () => {
 
         <Flex variant="layout.actions">
           <Button variant="outline" onClick={handleCloseTrove}>
-            Close Trove
+            Close Vault
           </Button>
           <Button onClick={handleAdjustTrove}>
             <Icon name="pen" size="sm" />

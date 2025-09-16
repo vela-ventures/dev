@@ -11,14 +11,14 @@ import {
 
 import { LiquityStoreUpdate, useLiquityReducer, useLiquitySelector } from "@liquity/lib-react";
 
-import { GT, COIN } from "../../strings";
+import { COIN, GT } from "../../strings";
 
-import { useStakingView } from "./context/StakingViewContext";
-import { StakingEditor } from "./StakingEditor";
-import { StakingManagerAction } from "./StakingManagerAction";
 import { ActionDescription, Amount } from "../ActionDescription";
 import { ErrorDescription } from "../ErrorDescription";
 import { InfoBubble } from "../InfoBubble";
+import { useStakingView } from "./context/StakingViewContext";
+import { StakingEditor } from "./StakingEditor";
+import { StakingManagerAction } from "./StakingManagerAction";
 
 const init = ({ lqtyStake }: LiquityStoreState) => ({
   originalStake: lqtyStake,
@@ -74,7 +74,7 @@ const StakingManagerActionDescription: React.FC<StakingManagerActionDescriptionP
 }) => {
   const stakeLQTY = change.stakeLQTY?.prettify().concat(" ", GT);
   const unstakeLQTY = change.unstakeLQTY?.prettify().concat(" ", GT);
-  const collateralGain = originalStake.collateralGain.nonZero?.prettify(4).concat(" ETH");
+  const collateralGain = originalStake.collateralGain.nonZero?.prettify(4).concat(" AR");
   const lusdGain = originalStake.lusdGain.nonZero?.prettify().concat(" ", COIN);
 
   if (originalStake.isEmpty && stakeLQTY) {

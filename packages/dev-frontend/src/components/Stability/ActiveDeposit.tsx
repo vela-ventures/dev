@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect } from "react";
-import { Card, Heading, Box, Flex, Button } from "theme-ui";
+import { Box, Button, Card, Flex, Heading } from "theme-ui";
 
 import { LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 
 import { COIN, GT } from "../../strings";
 import { Icon } from "../Icon";
+import { InfoIcon } from "../InfoIcon";
 import { LoadingOverlay } from "../LoadingOverlay";
 import { useMyTransactionState } from "../Transaction";
 import { DisabledEditableRow, StaticRow } from "../Trove/Editor";
@@ -14,7 +15,6 @@ import { ClaimRewards } from "./actions/ClaimRewards";
 import { useStabilityView } from "./context/StabilityViewContext";
 import { RemainingLQTY } from "./RemainingLQTY";
 import { Yield } from "./Yield";
-import { InfoIcon } from "../InfoIcon";
 
 const selector = ({ stabilityDeposit, trove, lusdInStabilityPool }: LiquityStoreState) => ({
   stabilityDeposit,
@@ -79,7 +79,7 @@ export const ActiveDeposit: React.FC = () => {
             inputId="deposit-gain"
             amount={stabilityDeposit.collateralGain.prettify(4)}
             color={stabilityDeposit.collateralGain.nonZero && "success"}
-            unit="ETH"
+            unit="AR"
           />
 
           <Flex sx={{ alignItems: "center" }}>
@@ -93,7 +93,7 @@ export const ActiveDeposit: React.FC = () => {
                 <InfoIcon
                   tooltip={
                     <Card variant="tooltip" sx={{ width: "240px" }}>
-                      Although the LQTY rewards accrue every minute, the value on the UI only updates
+                      Although the NAU rewards accrue every minute, the value on the UI only updates
                       when a user transacts with the Stability Pool. Therefore you may receive more
                       rewards than is displayed when you claim or adjust your deposit.
                     </Card>
@@ -113,12 +113,10 @@ export const ActiveDeposit: React.FC = () => {
             &nbsp;Adjust
           </Button>
 
-          <ClaimRewards disabled={!hasGain && !hasReward}>Claim ETH and LQTY</ClaimRewards>
+          <ClaimRewards disabled={!hasGain && !hasReward}>Claim AR and NAU</ClaimRewards>
         </Flex>
 
-        {hasTrove && (
-          <ClaimAndMove disabled={!hasGain}>Claim LQTY and move ETH to Trove</ClaimAndMove>
-        )}
+        {hasTrove && <ClaimAndMove disabled={!hasGain}>Claim NAU and move AR to Vault</ClaimAndMove>}
       </Box>
 
       {isWaitingForTransaction && <LoadingOverlay />}

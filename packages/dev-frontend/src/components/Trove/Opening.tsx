@@ -1,34 +1,33 @@
 /** @jsxImportSource theme-ui */
-import React, { useCallback, useEffect, useState } from "react";
-import { Flex, Button, Box, Card, Heading, Spinner } from "theme-ui";
-import { Link } from "react-router-dom";
 import {
-  LiquityStoreState,
   Decimal,
-  Trove,
+  LiquityStoreState,
   LUSD_LIQUIDATION_RESERVE,
   LUSD_MINIMUM_NET_DEBT,
-  Percent
+  Percent,
+  Trove
 } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
+import React, { useCallback, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Box, Button, Card, Flex, Heading, Spinner } from "theme-ui";
 
 import { useStableTroveChange } from "../../hooks/useStableTroveChange";
-import { InfoBubble } from "../InfoBubble";
-import { useMyTransactionState } from "../Transaction";
-import { TroveAction } from "./TroveAction";
-import { useTroveView } from "./context/TroveViewContext";
 import { COIN } from "../../strings";
 import { Icon } from "../Icon";
+import { InfoBubble } from "../InfoBubble";
 import { InfoIcon } from "../InfoIcon";
 import { LoadingOverlay } from "../LoadingOverlay";
+import { useMyTransactionState } from "../Transaction";
 import { CollateralRatio, CollateralRatioInfoBubble } from "./CollateralRatio";
 import { EditableRow, StaticRow } from "./Editor";
 import { ExpensiveTroveChangeWarning, GasEstimationState } from "./ExpensiveTroveChangeWarning";
+import { TroveAction } from "./TroveAction";
+import { useTroveView } from "./context/TroveViewContext";
 import {
   selectForTroveChangeValidation,
   validateTroveChange
 } from "./validation/validateTroveChange";
-import { LearnMoreLink } from "../Tooltip";
 
 const selector = (state: LiquityStoreState) => {
   const { fees, price, accountBalance } = state;
@@ -100,7 +99,7 @@ export const Opening: React.FC = () => {
   return (
     <Card>
       <Heading>
-        Trove
+        Vault
         {isDirty && !isTransactionPending && (
           <Button variant="titleIcon" sx={{ ":enabled:hover": { color: "danger" } }} onClick={reset}>
             <Icon name="history" size="lg" />
@@ -116,7 +115,7 @@ export const Opening: React.FC = () => {
           maxAmount={maxCollateral.toString()}
           maxedOut={collateralMaxedOut}
           editingState={editingState}
-          unit="ETH"
+          unit="AR"
           editedAmount={collateral.toString(4)}
           setEditedAmount={(amount: string) => setCollateral(Decimal.from(amount))}
         />
@@ -140,8 +139,8 @@ export const Opening: React.FC = () => {
             <InfoIcon
               tooltip={
                 <Card variant="tooltip" sx={{ width: "200px" }}>
-                  An amount set aside to cover the liquidator’s gas costs if your Trove needs to be
-                  liquidated. The amount increases your debt and is refunded if you close your Trove
+                  An amount set aside to cover the liquidator’s gas costs if your Vault needs to be
+                  liquidated. The amount increases your debt and is refunded if you close your Vault
                   by fully paying off its net debt.
                 </Card>
               }
@@ -176,11 +175,11 @@ export const Opening: React.FC = () => {
             <InfoIcon
               tooltip={
                 <Card variant="tooltip" sx={{ width: "240px" }}>
-                  The total amount of LUSD your Trove will hold.{" "}
+                  The total amount of GiB your Vault will hold.{" "}
                   {isDirty && (
                     <>
                       You will need to repay {totalDebt.sub(LUSD_LIQUIDATION_RESERVE).prettify(2)}{" "}
-                      LUSD to reclaim your collateral ({LUSD_LIQUIDATION_RESERVE.toString()} LUSD
+                      GiB to reclaim your collateral ({LUSD_LIQUIDATION_RESERVE.toString()} GiB
                       Liquidation Reserve excluded).
                     </>
                   )}
@@ -195,19 +194,19 @@ export const Opening: React.FC = () => {
         <InfoBubble>
           Keep your collateral ratio above the{" "}
           <Link sx={{ variant: "styles.a" }} to="/risky-troves">
-            riskiest Troves
+            riskiest Vaults
           </Link>{" "}
-          to avoid being{" "}
-          <LearnMoreLink link="https://docs.liquity.org/faq/lusd-redemptions#how-can-i-avoid-being-redeemed-against">
+          to avoid being redeemed.
+          {/* <LearnMoreLink link="https://docs.liquity.org/faq/lusd-redemptions#how-can-i-avoid-being-redeemed-against">
             redeemed.
-          </LearnMoreLink>
+          </LearnMoreLink> */}
         </InfoBubble>
 
         <CollateralRatioInfoBubble value={collateralRatio} />
 
         {description ?? (
           <InfoBubble>
-            Start by entering the amount of ETH you'd like to deposit as collateral.
+            Start by entering the amount of AR you'd like to deposit as collateral.
           </InfoBubble>
         )}
 

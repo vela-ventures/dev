@@ -1,26 +1,26 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { Card, Button, Text, Box, Heading, Flex } from "theme-ui";
+import { Box, Button, Card, Flex, Heading, Text } from "theme-ui";
 
 import {
-  Percent,
-  MINIMUM_COLLATERAL_RATIO,
   CRITICAL_COLLATERAL_RATIO,
-  UserTrove,
-  Decimal
+  Decimal,
+  MINIMUM_COLLATERAL_RATIO,
+  Percent,
+  UserTrove
 } from "@liquity/lib-base";
 import { BlockPolledLiquityStoreState } from "@liquity/lib-ethers";
 import { useLiquitySelector } from "@liquity/lib-react";
 
-import { shortenAddress } from "../utils/shortenAddress";
 import { useLiquity } from "../hooks/LiquityContext";
 import { COIN } from "../strings";
+import { shortenAddress } from "../utils/shortenAddress";
 
+import { Abbreviation } from "./Abbreviation";
 import { Icon } from "./Icon";
 import { LoadingOverlay } from "./LoadingOverlay";
-import { Transaction } from "./Transaction";
 import { Tooltip } from "./Tooltip";
-import { Abbreviation } from "./Abbreviation";
+import { Transaction } from "./Transaction";
 
 const rowHeight = "40px";
 
@@ -156,7 +156,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
   return (
     <Card sx={{ width: "100%" }}>
       <Heading>
-        <Abbreviation short="Troves">Risky Troves</Abbreviation>
+        <Abbreviation short="Troves">Risky Vaults</Abbreviation>
 
         <Flex sx={{ alignItems: "center" }}>
           {numberOfTroves !== 0 && (
@@ -196,7 +196,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
       {!troves || troves.length === 0 ? (
         <Box sx={{ p: [2, 3] }}>
           <Box sx={{ p: 4, fontSize: 3, textAlign: "center" }}>
-            {!troves ? "Loading..." : "There are no Troves yet"}
+            {!troves ? "Loading..." : "There are no Vaults yet"}
           </Box>
         </Box>
       ) : (
@@ -225,7 +225,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
                 <th>Owner</th>
                 <th>
                   <Abbreviation short="Coll.">Collateral</Abbreviation>
-                  <Box sx={{ fontSize: [0, 1], fontWeight: "body", opacity: 0.5 }}>ETH</Box>
+                  <Box sx={{ fontSize: [0, 1], fontWeight: "body", opacity: 0.5 }}>AR</Box>
                 </th>
                 <th>
                   Debt

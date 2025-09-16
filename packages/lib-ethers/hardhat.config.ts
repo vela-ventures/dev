@@ -97,7 +97,8 @@ const wethAddresses = {
   rinkeby: "0xc778417E063141139Fce010982780140Aa0cD5Ab",
   goerli: "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6",
   kovan: "0xd0A1E359811322d97991E03f863a0C30C2cF029C",
-  sepolia: "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14"
+  sepolia: "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14",
+  load: "0x611B6deD9b7029592D8eccBcF8Ca10Bb88B80c4D"
 };
 
 const hasWETH = (network: string): network is keyof typeof wethAddresses => network in wethAddresses;
@@ -135,6 +136,11 @@ const config: HardhatUserConfig = {
 
     forkedMainnet: {
       url: "http://localhost:8545"
+    },
+
+    load: {
+      url: "https://alphanet.load.network",
+      accounts: [deployerAccount]
     }
   },
 
