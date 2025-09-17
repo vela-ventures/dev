@@ -52,8 +52,8 @@ contract LQTYToken is CheckContract, ILQTYToken {
 
     // --- ERC20 Data ---
 
-    string constant internal _NAME = "LQTY";
-    string constant internal _SYMBOL = "LQTY";
+    string constant internal _NAME = "NAU";
+    string constant internal _SYMBOL = "NAU";
     string constant internal _VERSION = "1";
     uint8 constant internal  _DECIMALS = 18;
 
