@@ -8,6 +8,7 @@ import "../Interfaces/IActivePool.sol";
 import "../Interfaces/IDefaultPool.sol";
 import "../Interfaces/IPriceFeed.sol";
 import "../Interfaces/ILiquityBase.sol";
+import "./IERC20.sol";
 
 /* 
 * Base contract for TroveManager, BorrowerOperations and StabilityPool. Contains global system constants and
@@ -15,6 +16,8 @@ import "../Interfaces/ILiquityBase.sol";
 */
 contract LiquityBase is BaseMath, ILiquityBase {
     using SafeMath for uint;
+
+    IERC20 constant public AR = IERC20(0x611B6deD9b7029592D8eccBcF8Ca10Bb88B80c4D);
 
     uint constant public _100pct = 1000000000000000000; // 1e18 == 100%
 
@@ -58,8 +61,8 @@ contract LiquityBase is BaseMath, ILiquityBase {
     }
 
     function getEntireSystemColl() public view returns (uint entireSystemColl) {
-        uint activeColl = activePool.getETH();
-        uint liquidatedColl = defaultPool.getETH();
+        uint activeColl = activePool.getCollateralBalance();
+        uint liquidatedColl = defaultPool.getCollateralBalance();
 
         return activeColl.add(liquidatedColl);
     }

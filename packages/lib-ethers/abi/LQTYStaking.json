@@ -41,6 +41,25 @@
         "type": "uint256"
       }
     ],
+    "name": "CollateralSent",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_account",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
+    ],
     "name": "EtherSent",
     "type": "event"
   },
@@ -50,11 +69,11 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "_F_ETH",
+        "name": "_F_Collateral",
         "type": "uint256"
       }
     ],
-    "name": "F_ETHUpdated",
+    "name": "F_CollateralUpdated",
     "type": "event"
   },
   {
@@ -146,7 +165,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "_F_ETH",
+        "name": "_F_Collateral",
         "type": "uint256"
       },
       {
@@ -177,7 +196,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "ETHGain",
+        "name": "collateralGain",
         "type": "uint256"
       }
     ],
@@ -225,7 +244,7 @@
   },
   {
     "inputs": [],
-    "name": "F_ETH",
+    "name": "F_Collateral",
     "outputs": [
       {
         "internalType": "uint256",
@@ -296,7 +315,7 @@
         "type": "address"
       }
     ],
-    "name": "getPendingETHGain",
+    "name": "getPendingCollateralGain",
     "outputs": [
       {
         "internalType": "uint256",
@@ -330,11 +349,11 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_ETHFee",
+        "name": "_collateralFee",
         "type": "uint256"
       }
     ],
-    "name": "increaseF_ETH",
+    "name": "increaseF_Collateral",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -449,7 +468,7 @@
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "F_ETH_Snapshot",
+        "name": "F_Collateral_Snapshot",
         "type": "uint256"
       },
       {
@@ -531,9 +550,5 @@
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
-  },
-  {
-    "stateMutability": "payable",
-    "type": "receive"
   }
 ]

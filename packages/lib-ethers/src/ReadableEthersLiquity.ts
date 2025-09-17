@@ -151,7 +151,7 @@ export class ReadableEthersLiquity implements ReadableLiquity {
     const { troveManager } = _getContracts(this.connection);
 
     const [collateral, debt] = await Promise.all([
-      troveManager.L_ETH({ ...overrides }).then(decimalify),
+      troveManager.L_Collateral({ ...overrides }).then(decimalify),
       troveManager.L_LUSDDebt({ ...overrides }).then(decimalify)
     ]);
 
@@ -178,7 +178,7 @@ export class ReadableEthersLiquity implements ReadableLiquity {
         decimalify(trove.coll),
         decimalify(trove.debt),
         decimalify(trove.stake),
-        new Trove(decimalify(snapshot.ETH), decimalify(snapshot.LUSDDebt))
+        new Trove(decimalify(snapshot.collateral), decimalify(snapshot.LUSDDebt))
       );
     } else {
       return new TroveWithPendingRedistribution(address, userTroveStatusFrom(trove.status));
@@ -215,7 +215,7 @@ export class ReadableEthersLiquity implements ReadableLiquity {
 
     const [activeCollateral, activeDebt] = await Promise.all(
       [
-        activePool.getETH({ ...overrides }),
+        activePool.getCollateralBalance({ ...overrides }),
         activePool.getLUSDDebt({ ...overrides })
       ].map(getBigNumber => getBigNumber.then(decimalify))
     );
@@ -229,7 +229,7 @@ export class ReadableEthersLiquity implements ReadableLiquity {
 
     const [liquidatedCollateral, closedDebt] = await Promise.all(
       [
-        defaultPool.getETH({ ...overrides }),
+        defaultPool.getCollateralBalance({ ...overrides }),
         defaultPool.getLUSDDebt({ ...overrides })
       ].map(getBigNumber => getBigNumber.then(decimalify))
     );
@@ -263,7 +263,7 @@ export class ReadableEthersLiquity implements ReadableLiquity {
     ] = await Promise.all([
       stabilityPool.deposits(address, { ...overrides }),
       stabilityPool.getCompoundedLUSDDeposit(address, { ...overrides }),
-      stabilityPool.getDepositorETHGain(address, { ...overrides }),
+      stabilityPool.getDepositorCollateralGain(address, { ...overrides }),
       stabilityPool.getDepositorLQTYGain(address, { ...overrides })
     ]);
 
@@ -477,7 +477,7 @@ export class ReadableEthersLiquity implements ReadableLiquity {
     const [stakedLQTY, collateralGain, lusdGain] = await Promise.all(
       [
         lqtyStaking.stakes(address, { ...overrides }),
-        lqtyStaking.getPendingETHGain(address, { ...overrides }),
+        lqtyStaking.getPendingCollateralGain(address, { ...overrides }),
         lqtyStaking.getPendingLUSDGain(address, { ...overrides })
       ].map(getBigNumber => getBigNumber.then(decimalify))
     );

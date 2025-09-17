@@ -10,7 +10,7 @@ contract ActivePoolTester is ActivePool {
         LUSDDebt  = LUSDDebt.add(_amount);
     }
 
-    function unprotectedPayable() external payable {
-        ETH = ETH.add(msg.value);
+    function unprotectedIncreaseCollateralBalance(uint _amount) external {
+        collateralTokenBalance = collateralTokenBalance.add(_amount);
     }
 }
