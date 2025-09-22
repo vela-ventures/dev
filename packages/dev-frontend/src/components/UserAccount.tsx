@@ -5,6 +5,7 @@ import { Decimal, LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 
 import { useLiquity } from "../hooks/LiquityContext";
+import { useArweaveBalance } from "../hooks/useArweaveBalance";
 import { COIN, GT } from "../strings";
 import { shortenAddress } from "../utils/shortenAddress";
 
@@ -24,6 +25,7 @@ export const UserAccount: React.FC = () => {
   const { accountBalance, lusdBalance: realLusdBalance, lqtyBalance } = useLiquitySelector(select);
   const { bLusdBalance, lusdBalance: customLusdBalance } = useBondView();
   const { LUSD_OVERRIDE_ADDRESS } = useBondAddresses();
+  const arweaveBalance = useArweaveBalance();
 
   const lusdBalance = LUSD_OVERRIDE_ADDRESS === null ? realLusdBalance : customLusdBalance;
 
@@ -53,7 +55,8 @@ export const UserAccount: React.FC = () => {
         <Icon name="wallet" size="lg" />
 
         {([
-          ["AR", accountBalance],
+          ["LOAD", accountBalance],
+          ["AR", arweaveBalance],
           [COIN, Decimal.from(lusdBalance || 0)],
           [GT, Decimal.from(lqtyBalance)]
           // ["bLUSD", Decimal.from(bLusdBalance || 0)]
