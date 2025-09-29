@@ -11,7 +11,9 @@ import { useLiquitySelector } from "@liquity/lib-react";
 import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Box, Button, Card, Flex, Heading, Spinner } from "theme-ui";
+import { useLiquity } from "../../hooks/LiquityContext";
 
+import { useArweaveBalance } from "../../hooks/useArweaveBalance";
 import { useStableTroveChange } from "../../hooks/useStableTroveChange";
 import { COIN } from "../../strings";
 import { Icon } from "../Icon";
@@ -30,22 +32,22 @@ import {
 } from "./validation/validateTroveChange";
 
 const selector = (state: LiquityStoreState) => {
-  const { fees, price, accountBalance } = state;
+  const { fees, price } = state;
   return {
     fees,
     price,
-    accountBalance,
     validationContext: selectForTroveChangeValidation(state)
   };
 };
 
 const EMPTY_TROVE = new Trove(Decimal.ZERO, Decimal.ZERO);
 const TRANSACTION_ID = "trove-creation";
-const GAS_ROOM_ETH = Decimal.from(0.1);
 
 export const Opening: React.FC = () => {
   const { dispatchEvent } = useTroveView();
-  const { fees, price, accountBalance, validationContext } = useLiquitySelector(selector);
+  const { fees, price, validationContext } = useLiquitySelector(selector);
+  const { liquity } = useLiquity();
+  const arweaveBalance = useArweaveBalance();
   const borrowingRate = fees.borrowingRate();
   const editingState = useState<string>();
 
@@ -59,9 +61,8 @@ export const Opening: React.FC = () => {
   const totalDebt = borrowAmount.add(LUSD_LIQUIDATION_RESERVE).add(fee);
   const isDirty = !collateral.isZero || !borrowAmount.isZero;
   const trove = isDirty ? new Trove(collateral, totalDebt) : EMPTY_TROVE;
-  const maxCollateral = accountBalance.gt(GAS_ROOM_ETH)
-    ? accountBalance.sub(GAS_ROOM_ETH)
-    : Decimal.ZERO;
+  // arweaveBalance is the AR token balance, can use full amount for collateral
+  const maxCollateral = arweaveBalance;
   const collateralMaxedOut = collateral.eq(maxCollateral);
   const collateralRatio =
     !collateral.isZero && !borrowAmount.isZero ? trove.collateralRatio(price) : undefined;
@@ -70,7 +71,8 @@ export const Opening: React.FC = () => {
     EMPTY_TROVE,
     trove,
     borrowingRate,
-    validationContext
+    validationContext,
+    arweaveBalance
   );
 
   const stableTroveChange = useStableTroveChange(troveChange);

@@ -5,6 +5,7 @@ import { Decimal, Decimalish, LiquityStoreState, LUSD_MINIMUM_DEBT, Trove } from
 
 import { LiquityStoreUpdate, useLiquityReducer, useLiquitySelector } from "@liquity/lib-react";
 
+import { useArweaveBalance } from "../../hooks/useArweaveBalance";
 import { InfoBubble } from "../InfoBubble";
 import { useMyTransactionState } from "../Transaction";
 
@@ -159,6 +160,7 @@ type TroveManagerProps = {
 export const TroveManager: React.FC<TroveManagerProps> = ({ collateral, debt }) => {
   const [{ original, edited, changePending }, dispatch] = useLiquityReducer(reduce, init);
   const { fees, validationContext } = useLiquitySelector(select);
+  const arweaveBalance = useArweaveBalance();
 
   useEffect(() => {
     if (collateral !== undefined) {
@@ -176,7 +178,8 @@ export const TroveManager: React.FC<TroveManagerProps> = ({ collateral, debt }) 
     original,
     edited,
     borrowingRate,
-    validationContext
+    validationContext,
+    arweaveBalance
   );
 
   const { dispatchEvent } = useTroveView();

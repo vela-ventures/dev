@@ -1,16 +1,18 @@
+import { Contract } from "@ethersproject/contracts";
 import React, { useState } from "react";
 import { Box, Button, Card, Container, Flex, Heading } from "theme-ui";
-import { Contract } from "@ethersproject/contracts";
 
 import { useLiquity } from "../hooks/LiquityContext";
 
-const FAUCET_ADDRESS = "0x35Dded4cda3d8f523F08eF00c03061b132462922";
-const FAUCET_ABI = [
-  "function drip()"
-];
+const FAUCET_ADDRESS = "0xBBC0157d436fe4dFbAfaA12b6af330b11588c4FE";
+const FAUCET_ABI = ["function drip()"];
 
 export const Faucet: React.FC = () => {
-  const { liquity: { connection: { signer } } } = useLiquity();
+  const {
+    liquity: {
+      connection: { signer }
+    }
+  } = useLiquity();
   const [isLoading, setIsLoading] = useState(false);
 
   const faucetContract = new Contract(FAUCET_ADDRESS, FAUCET_ABI, signer);

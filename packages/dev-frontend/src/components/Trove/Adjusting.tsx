@@ -10,6 +10,7 @@ import { useLiquitySelector } from "@liquity/lib-react";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Box, Button, Card, Flex, Heading } from "theme-ui";
 
+import { useArweaveBalance } from "../../hooks/useArweaveBalance";
 import { useStableTroveChange } from "../../hooks/useStableTroveChange";
 import { COIN } from "../../strings";
 import { Icon } from "../Icon";
@@ -39,7 +40,6 @@ const selector = (state: LiquityStoreState) => {
 };
 
 const TRANSACTION_ID = "trove-adjustment";
-const GAS_ROOM_ETH = Decimal.from(0.1);
 
 const feeFrom = (original: Trove, edited: Trove, borrowingRate: Decimal): Decimal => {
   const change = original.whatChanged(edited, borrowingRate);
@@ -84,6 +84,7 @@ const applyUnsavedNetDebtChanges = (unsavedChanges: Difference, trove: Trove) =>
 export const Adjusting: React.FC = () => {
   const { dispatchEvent } = useTroveView();
   const { trove, fees, price, accountBalance, validationContext } = useLiquitySelector(selector);
+  const arweaveBalance = useArweaveBalance();
   const editingState = useState<string>();
   const previousTrove = useRef<Trove>(trove);
   const [collateral, setCollateral] = useState<Decimal>(trove.collateral);
@@ -132,10 +133,8 @@ export const Adjusting: React.FC = () => {
   const maxBorrowingRate = borrowingRate.add(0.005);
   const updatedTrove = isDirty ? new Trove(collateral, totalDebt) : trove;
   const feePct = new Percent(borrowingRate);
-  const availableEth = accountBalance.gt(GAS_ROOM_ETH)
-    ? accountBalance.sub(GAS_ROOM_ETH)
-    : Decimal.ZERO;
-  const maxCollateral = trove.collateral.add(availableEth);
+  // accountBalance is now AR token balance, no need to reserve for gas (gas is paid in ETH)
+  const maxCollateral = trove.collateral.add(arweaveBalance);
   const collateralMaxedOut = collateral.eq(maxCollateral);
   const collateralRatio =
     !collateral.isZero && !netDebt.isZero ? updatedTrove.collateralRatio(price) : undefined;
@@ -145,7 +144,8 @@ export const Adjusting: React.FC = () => {
     trove,
     updatedTrove,
     borrowingRate,
-    validationContext
+    validationContext,
+    arweaveBalance
   );
 
   const stableTroveChange = useStableTroveChange(troveChange);

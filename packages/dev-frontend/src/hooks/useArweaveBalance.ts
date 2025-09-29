@@ -1,13 +1,11 @@
-import { useState, useEffect } from "react";
-import { BigNumber, ethers } from "ethers";
 import { Decimal } from "@liquity/lib-base";
+import { BigNumber, ethers } from "ethers";
+import { useEffect, useState } from "react";
 import { useLiquity } from "./LiquityContext";
 
-const ERC20_ABI = [
-  "function balanceOf(address owner) view returns (uint256)"
-];
+const ERC20_ABI = ["function balanceOf(address owner) view returns (uint256)"];
 
-const ARWEAVE_TOKEN_ADDRESS = "0x611B6deD9b7029592D8eccBcF8Ca10Bb88B80c4D";
+const ARWEAVE_TOKEN_ADDRESS = "0x94E72f7Ce4901D59FB19F1FBE510483511f20BEb";
 
 export function useArweaveBalance(): Decimal {
   const { account, provider } = useLiquity();

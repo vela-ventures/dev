@@ -452,6 +452,7 @@ contract BorrowerOperations is LiquityBase, Ownable, CheckContract, IBorrowerOpe
     // Send AR tokens to Active Pool and increase its recorded collateral balance
     function _activePoolAddColl(IActivePool _activePool, uint _amount) internal {
         AR.transfer(address(_activePool), _amount);
+        activePool.depositCollateral(_amount);
     }
 
     // Issue the specified amount of LUSD to _account and increases the total active debt (_netDebtIncrease potentially includes a LUSDFee)

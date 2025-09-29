@@ -134,8 +134,8 @@ contract ActivePool is Ownable, CheckContract, IActivePool, LiquityBase {
 
     function depositCollateral(uint _amount) external override {
         _requireCallerIsBorrowerOperationsOrDefaultPool();
-        bool success = AR.transferFrom(msg.sender, address(this), _amount);
-        require(success, "ActivePool: transferFrom failed");
+        // bool success = AR.transferFrom(msg.sender, address(this), _amount);
+        // require(success, "ActivePool: transferFrom failed");
         collateralTokenBalance = collateralTokenBalance.add(_amount);
         emit ActivePoolCollateralBalanceUpdated(collateralTokenBalance);
     }

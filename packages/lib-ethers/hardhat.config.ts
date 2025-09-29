@@ -1,22 +1,22 @@
 import assert from "assert";
+import "colors";
+import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
-import dotenv from "dotenv";
-import "colors";
 
 import { JsonFragment } from "@ethersproject/abi";
-import { Wallet } from "@ethersproject/wallet";
 import { Signer } from "@ethersproject/abstract-signer";
 import { ContractFactory, Overrides } from "@ethersproject/contracts";
+import { Wallet } from "@ethersproject/wallet";
 
-import { task, HardhatUserConfig, types, extendEnvironment } from "hardhat/config";
-import { HardhatRuntimeEnvironment, NetworkUserConfig } from "hardhat/types";
 import "@nomiclabs/hardhat-ethers";
+import { extendEnvironment, HardhatUserConfig, task, types } from "hardhat/config";
+import { HardhatRuntimeEnvironment, NetworkUserConfig } from "hardhat/types";
 
 import { Decimal } from "@liquity/lib-base";
 
-import { deployAndSetupContracts, deployTellorCaller, setSilent } from "./utils/deploy";
 import { _connectToContracts, _LiquityDeploymentJSON, _priceFeedIsTestnet } from "./src/contracts";
+import { deployAndSetupContracts, deployTellorCaller, setSilent } from "./utils/deploy";
 
 import accounts from "./accounts.json";
 
@@ -98,7 +98,7 @@ const wethAddresses = {
   goerli: "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6",
   kovan: "0xd0A1E359811322d97991E03f863a0C30C2cF029C",
   sepolia: "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14",
-  load: "0x611B6deD9b7029592D8eccBcF8Ca10Bb88B80c4D"
+  load: "0x94E72f7Ce4901D59FB19F1FBE510483511f20BEb"
 };
 
 const hasWETH = (network: string): network is keyof typeof wethAddresses => network in wethAddresses;

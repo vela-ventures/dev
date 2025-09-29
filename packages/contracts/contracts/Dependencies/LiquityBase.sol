@@ -17,7 +17,7 @@ import "./IERC20.sol";
 contract LiquityBase is BaseMath, ILiquityBase {
     using SafeMath for uint;
 
-    IERC20 constant public AR = IERC20(0x611B6deD9b7029592D8eccBcF8Ca10Bb88B80c4D);
+    IERC20 constant public AR = IERC20(0x94E72f7Ce4901D59FB19F1FBE510483511f20BEb);
 
     uint constant public _100pct = 1000000000000000000; // 1e18 == 100%
 

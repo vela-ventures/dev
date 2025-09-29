@@ -1,0 +1,328 @@
+fazer deploy do subgraph
+ja fiz o redeploy, nao consigo abrir uma vault
+é preciso fazer o flow do approve, ou seja mudar o frontend?
+
+Complete Guide: Converting Liquity Protocol from ETH to ERC20 Collateral
+
+  Here are all instances where the protocol deals with ETH that you need to modify for ERC20 token support:
+
+  1. BorrowerOperations.sol
+
+  Functions that need payable removed and ERC20 logic added:
+
+  BorrowerOperations.sol:156
+  function openTrove(uint _maxFeePercentage, uint _LUSDAmount, address _upperHint, address _lowerHint) external payable override
+  - Remove payable
+  - Replace msg.value with ERC20 transferFrom(msg.sender, address(this), _collAmount)
+  - Add uint _collAmount parameter
+
+  BorrowerOperations.sol:213
+  function addColl(address _upperHint, address _lowerHint) external payable override
+  - Remove payable
+  - Add uint _collAmount parameter
+  - Use ERC20 transferFrom
+
+  BorrowerOperations.sol:218
+  function moveETHGainToTrove(address _borrower, address _upperHint, address _lowerHint) external payable override
+  - Remove payable
+  - Add uint _collAmount parameter
+  - Use ERC20 transferFrom
+
+  BorrowerOperations.sol:238
+  function adjustTrove(uint _maxFeePercentage, uint _collWithdrawal, uint _LUSDChange, bool _isDebtIncrease, address _upperHint, address _lowerHint) external payable override
+  - Remove payable
+  - Add uint _collDeposit parameter for deposits
+  - Use ERC20 transfers
+
+  Internal function changes:
+
+  BorrowerOperations.sol:179-180
+  vars.ICR = LiquityMath._computeCR(msg.value, vars.compositeDebt, vars.price);
+  vars.NICR = LiquityMath._computeNominalCR(msg.value, vars.compositeDebt);
+  - Replace msg.value with _collAmount parameter
+
+  BorrowerOperations.sol:186
+  uint newTCR = _getNewTCRFromTroveChange(msg.value, true, vars.compositeDebt, true, vars.price);
+  - Replace msg.value with _collAmount
+
+  BorrowerOperations.sol:192
+  contractsCache.troveManager.increaseTroveColl(msg.sender, msg.value);
+  - Replace msg.value with _collAmount
+
+  BorrowerOperations.sol:203
+  _activePoolAddColl(contractsCache.activePool, msg.value);
+  - Replace with ERC20 transfer to ActivePool
+
+  BorrowerOperations.sol:208
+  emit TroveUpdated(msg.sender, vars.compositeDebt, msg.value, vars.stake, BorrowerOperation.openTrove);
+  - Replace msg.value with _collAmount
+
+  BorrowerOperations.sol:265
+  assert(msg.sender == _borrower || (msg.sender == stabilityPoolAddress && msg.value > 0 && _LUSDChange == 0));
+  - Replace msg.value > 0 with _collDeposit > 0
+
+  BorrowerOperations.sol:270
+  (vars.collChange, vars.isCollIncrease) = _getCollChange(msg.value, _collWithdrawal);
+  - Replace msg.value with _collDeposit
+
+  BorrowerOperations.sol:446-449 - Replace ETH transfer with ERC20:
+  function _activePoolAddColl(IActivePool _activePool, uint _amount) internal {
+      (bool success, ) = address(_activePool).call{value: _amount}("");
+      require(success, "BorrowerOps: Sending ETH to ActivePool failed");
+  }
+  - Replace with: collateralToken.transfer(address(_activePool), _amount)
+
+  BorrowerOperations.sol:466
+  require(msg.value == 0 || _collWithdrawal == 0, "BorrowerOperations: Cannot withdraw and add coll");
+  - Replace msg.value with _collDeposit
+
+  BorrowerOperations.sol:474
+  require(msg.value != 0 || _collWithdrawal != 0 || _LUSDChange != 0, "BorrowerOps: There must be either a collateral change or a debt change");
+  - Replace msg.value with _collDeposit
+
+  2. ActivePool.sol
+
+  ActivePool.sol:27 - Storage variable:
+  uint256 internal ETH;  // deposited ether tracker
+  - Rename to uint256 internal collateralTokenBalance;
+
+  ActivePool.sol:35 - Event:
+  event ActivePoolETHBalanceUpdated(uint _ETH);
+  - Rename to event ActivePoolCollateralBalanceUpdated(uint _amount);
+
+  ActivePool.sol:73-74 - Getter function:
+  function getETH() external view override returns (uint) {
+      return ETH;
+  }
+  - Rename to getCollateralBalance() and return collateralTokenBalance
+
+  ActivePool.sol:83-91 - Replace ETH transfer with ERC20:
+  function sendETH(address _account, uint _amount) external override {
+      _requireCallerIsBOorTroveMorSP();
+      ETH = ETH.sub(_amount);
+      emit ActivePoolETHBalanceUpdated(ETH);
+      emit EtherSent(_account, _amount);
+
+      (bool success, ) = _account.call{ value: _amount }("");
+      require(success, "ActivePool: sending ETH failed");
+  }
+  - Replace with ERC20 transfer() and update balance tracking
+
+  ActivePool.sol:131-135 - Remove receive function:
+  receive() external payable {
+      _requireCallerIsBorrowerOperationsOrDefaultPool();
+      ETH = ETH.add(msg.value);
+      emit ActivePoolETHBalanceUpdated(ETH);
+  }
+  - Replace with explicit ERC20 deposit function
+
+  3. StabilityPool.sol
+
+  StabilityPool.sol:153 - Storage variable:
+  uint256 internal ETH;  // deposited ether tracker
+  - Rename to uint256 internal collateralTokenBalance;
+
+  StabilityPool.sol:224 - Event:
+  event StabilityPoolETHBalanceUpdated(uint _newBalance);
+  - Rename to event StabilityPoolCollateralBalanceUpdated(uint _newBalance);
+
+  StabilityPool.sol:249 - Event:
+  event ETHGainWithdrawn(address indexed _depositor, uint _ETH, uint _LUSDLoss);
+  - Rename to event CollateralGainWithdrawn(...)
+
+  StabilityPool.sol:298-300 - Getter function:
+  function getETH() external view override returns (uint) {
+      return ETH;
+  }
+  - Rename and update
+
+  StabilityPool.sol:328 - Function rename:
+  uint depositorETHGain = getDepositorETHGain(msg.sender);
+  - Rename to getDepositorCollateralGain
+
+  StabilityPool.sol:350 - Function call:
+  _sendETHGainToDepositor(depositorETHGain);
+  - Rename to _sendCollateralGainToDepositor
+
+  StabilityPool.sol:408 - Function rename:
+  function withdrawETHGainToTrove(address _upperHint, address _lowerHint) external override
+  - Rename to withdrawCollateralGainToTrove
+
+  StabilityPool.sol:412 - Function call:
+  _requireUserHasETHGain(msg.sender);
+  - Rename to _requireUserHasCollateralGain
+
+  StabilityPool.sol:418 - Function call:
+  uint depositorETHGain = getDepositorETHGain(msg.sender);
+  - Rename function
+
+  StabilityPool.sol:441-443 - Balance update:
+  ETH = ETH.sub(depositorETHGain);
+  emit StabilityPoolETHBalanceUpdated(ETH);
+  emit EtherSent(msg.sender, depositorETHGain);
+  - Update to use ERC20 balance tracking
+
+  StabilityPool.sol:445 - Function call:
+  borrowerOperations.moveETHGainToTrove{ value: depositorETHGain }(msg.sender, _upperHint, _lowerHint);
+  - Replace with ERC20 transfer + function call
+
+  StabilityPool.sol:638 - Function call:
+  activePoolCached.sendETH(address(this), _collToAdd);
+  - Replace with ERC20 transfer
+
+  StabilityPool.sol:655 - Function rename:
+  function getDepositorETHGain(address _depositor) public view override returns (uint)
+  - Rename to getDepositorCollateralGain
+
+  StabilityPool.sol:831-840 - Replace ETH transfer with ERC20:
+  function _sendETHGainToDepositor(uint _amount) internal {
+      if (_amount == 0) {return;}
+      uint newETH = ETH.sub(_amount);
+      ETH = newETH;
+      emit StabilityPoolETHBalanceUpdated(newETH);
+      emit EtherSent(msg.sender, _amount);
+
+      (bool success, ) = msg.sender.call{ value: _amount }("");
+      require(success, "StabilityPool: sending ETH failed");
+  }
+  - Replace with ERC20 transfer()
+
+  StabilityPool.sol:988-992 - Remove receive function:
+  receive() external payable {
+      _requireCallerIsActivePool();
+      ETH = ETH.add(msg.value);
+      StabilityPoolETHBalanceUpdated(ETH);
+  }
+  - Replace with explicit ERC20 deposit function
+
+  4. DefaultPool.sol
+
+  DefaultPool.sol:25 - Storage variable:
+  uint256 internal ETH;  // deposited ETH tracker
+  - Rename to uint256 internal collateralTokenBalance;
+
+  DefaultPool.sol:30 - Event:
+  event DefaultPoolETHBalanceUpdated(uint _ETH);
+  - Rename to event DefaultPoolCollateralBalanceUpdated(uint _amount);
+
+  DefaultPool.sol:60-61 - Getter function:
+  function getETH() external view override returns (uint) {
+      return ETH;
+  }
+  - Rename and update
+
+  DefaultPool.sol:70-78 - Replace ETH transfer:
+  function sendETHToActivePool(uint _amount) external override {
+      _requireCallerIsTroveManager();
+      ETH = ETH.sub(_amount);
+      emit DefaultPoolETHBalanceUpdated(ETH);
+      emit EtherSent(address(activePool), _amount);
+
+      (bool success, ) = address(activePool).call{ value: _amount }("");
+      require(success, "DefaultPool: sending ETH failed");
+  }
+  - Replace with ERC20 transfer
+
+  DefaultPool.sol:105-108 - Remove receive function:
+  receive() external payable {
+      _requireCallerIsActivePool();
+      ETH = ETH.add(msg.value);
+      emit DefaultPoolETHBalanceUpdated(ETH);
+  }
+  - Replace with explicit ERC20 deposit function
+
+  5. TroveManager.sol
+
+  TroveManager.sol:99 - Variable rename:
+  uint public L_ETH;
+  - Rename to L_Collateral
+
+  TroveManager.sol:106 - Struct field:
+  struct RewardSnapshot { uint ETH; uint LUSDDebt;}
+  - Rename ETH to collateral
+
+  TroveManager.sol:112 - Variable rename:
+  uint public lastETHError_Redistribution;
+  - Rename to lastCollateralError_Redistribution
+
+  Multiple instances throughout TroveManager.sol - Replace all ETH transfers with ERC20:
+  - Lines 528, 670, 802, 810, 889, 1011, 1022, 1236
+  - Replace sendETH() calls with ERC20 transfers
+
+  TroveManager.sol:1099 - Function rename:
+  function getPendingETHReward(address _borrower) public view override returns (uint)
+  - Rename to getPendingCollateralReward
+
+  6. LQTYStaking.sol
+
+  LQTYStaking.sol:24 - Variable rename:
+  uint public F_ETH;  // Running sum of ETH fees per-LQTY-staked
+  - Rename to F_Collateral
+
+  LQTYStaking.sol:31 - Struct field:
+  struct Snapshot {
+      uint F_ETH_Snapshot;
+      uint F_LUSD_Snapshot;
+  }
+  - Rename F_ETH_Snapshot to F_Collateral_Snapshot
+
+  Replace all ETH transfers in LQTYStaking with ERC20 transfers
+
+  7. Interface Changes
+
+  IBorrowerOperations.sol:
+
+  - Remove payable from functions (lines 40, 42, 44, 54)
+  - Add collateral amount parameters
+  - Rename moveETHGainToTrove to moveCollateralGainToTrove
+
+  IActivePool.sol:
+
+  - Rename sendETH to sendCollateral (line 16)
+  - Update events
+
+  IDefaultPool.sol:
+
+  - Rename sendETHToActivePool to sendCollateralToActivePool (line 15)
+
+  IStabilityPool.sol:
+
+  - Rename all ETH-related functions and events
+  - Remove payable where applicable
+
+  IPool.sol:
+
+  - Rename getETH() to getCollateralBalance()
+  - Update events
+
+  ITroveManager.sol:
+
+  - Rename getPendingETHReward to getPendingCollateralReward
+  - Update all events and function signatures
+
+  ILQTYStaking.sol:
+
+  - Rename increaseF_ETH to increaseF_Collateral
+  - Rename getPendingETHGain to getPendingCollateralGain
+
+  8. Additional Changes Needed
+
+  1. Add ERC20 interface: Import and use IERC20 interface
+  2. Constructor changes: Add collateral token address parameter to all contracts
+  3. Add collateral token state variable: IERC20 public collateralToken;
+  4. Remove all receive() and fallback() functions
+  5. Update all comments and documentation that reference ETH
+  6. Update variable names consistently throughout
+  7. Add explicit deposit functions where receive() was used
+  8. Update math calculations if token has different decimals than 18
+
+  This comprehensive list covers every location where ETH is handled in the Liquity protocol. Each location needs to be updated to work with ERC20 tokens instead of native ETH.
+
+// --- 
+
+Chains de interesse:
+
+RISE - Liquity
+Ritual
+Solana - Liquity
+Somnia - AAVE, Liquity

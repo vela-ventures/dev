@@ -29,7 +29,7 @@ const TroveChangeDescription: React.FC<TroveAdjustmentDescriptionParams> = ({ pa
   <ActionDescription>
     {params.depositCollateral && params.borrowLUSD ? (
       <>
-        You will deposit <Amount>{params.depositCollateral.prettify()} ETH</Amount> and receive{" "}
+        You will deposit <Amount>{params.depositCollateral.prettify()} AR</Amount> and receive{" "}
         <Amount>
           {params.borrowLUSD.prettify()} {COIN}
         </Amount>
@@ -40,29 +40,29 @@ const TroveChangeDescription: React.FC<TroveAdjustmentDescriptionParams> = ({ pa
         <Amount>
           {params.repayLUSD.prettify()} {COIN}
         </Amount>{" "}
-        and receive <Amount>{params.withdrawCollateral.prettify()} ETH</Amount>
+        and receive <Amount>{params.withdrawCollateral.prettify()} AR</Amount>
       </>
     ) : params.depositCollateral && params.repayLUSD ? (
       <>
-        You will deposit <Amount>{params.depositCollateral.prettify()} ETH</Amount> and pay{" "}
+        You will deposit <Amount>{params.depositCollateral.prettify()} AR</Amount> and pay{" "}
         <Amount>
           {params.repayLUSD.prettify()} {COIN}
         </Amount>
       </>
     ) : params.borrowLUSD && params.withdrawCollateral ? (
       <>
-        You will receive <Amount>{params.withdrawCollateral.prettify()} ETH</Amount> and{" "}
+        You will receive <Amount>{params.withdrawCollateral.prettify()} AR</Amount> and{" "}
         <Amount>
           {params.borrowLUSD.prettify()} {COIN}
         </Amount>
       </>
     ) : params.depositCollateral ? (
       <>
-        You will deposit <Amount>{params.depositCollateral.prettify()} ETH</Amount>
+        You will deposit <Amount>{params.depositCollateral.prettify()} AR</Amount>
       </>
     ) : params.withdrawCollateral ? (
       <>
-        You will receive <Amount>{params.withdrawCollateral.prettify()} ETH</Amount>
+        You will receive <Amount>{params.withdrawCollateral.prettify()} AR</Amount>
       </>
     ) : params.borrowLUSD ? (
       <>
@@ -104,7 +104,8 @@ export const validateTroveChange = (
   originalTrove: Trove,
   adjustedTrove: Trove,
   borrowingRate: Decimal,
-  selectedState: TroveChangeValidationSelectedState
+  selectedState: TroveChangeValidationSelectedState,
+  arBalance: Decimal
 ): [
   validChange: Exclude<TroveChange<Decimal>, { type: "invalidCreation" }> | undefined,
   description: JSX.Element | undefined
@@ -127,6 +128,7 @@ export const validateTroveChange = (
 
   const context: TroveChangeValidationContext = {
     ...selectedState,
+    accountBalance: arBalance, // Use AR balance instead of ETH balance from store
     originalTrove,
     resultingTrove,
     recoveryMode,
@@ -215,7 +217,7 @@ const validateTroveCreation = (
     return (
       <ErrorDescription>
         The amount you're trying to deposit exceeds your balance by{" "}
-        <Amount>{depositCollateral.sub(accountBalance).prettify()} ETH</Amount>.
+        <Amount>{depositCollateral.sub(accountBalance).prettify()} AR</Amount>.
       </ErrorDescription>
     );
   }
@@ -311,7 +313,7 @@ const validateTroveAdjustment = (
     return (
       <ErrorDescription>
         The amount you're trying to deposit exceeds your balance by{" "}
-        <Amount>{depositCollateral.sub(accountBalance).prettify()} ETH</Amount>.
+        <Amount>{depositCollateral.sub(accountBalance).prettify()} AR</Amount>.
       </ErrorDescription>
     );
   }
