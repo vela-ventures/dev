@@ -225,6 +225,19 @@
   },
   {
     "inputs": [],
+    "name": "AR",
+    "outputs": [
+      {
+        "internalType": "contract IERC20",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "BORROWING_FEE_FLOOR",
     "outputs": [
       {
@@ -364,11 +377,16 @@
         "internalType": "address",
         "name": "_lowerHint",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_collAmount",
+        "type": "uint256"
       }
     ],
     "name": "addColl",
     "outputs": [],
-    "stateMutability": "payable",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -381,6 +399,11 @@
       {
         "internalType": "uint256",
         "name": "_collWithdrawal",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_collDeposit",
         "type": "uint256"
       },
       {
@@ -406,7 +429,7 @@
     ],
     "name": "adjustTrove",
     "outputs": [],
-    "stateMutability": "payable",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -549,11 +572,16 @@
         "internalType": "address",
         "name": "_lowerHint",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_collAmount",
+        "type": "uint256"
       }
     ],
-    "name": "moveETHGainToTrove",
+    "name": "moveCollateralGainToTrove",
     "outputs": [],
-    "stateMutability": "payable",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -577,11 +605,16 @@
         "internalType": "address",
         "name": "_lowerHint",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_collAmount",
+        "type": "uint256"
       }
     ],
     "name": "openTrove",
     "outputs": [],
-    "stateMutability": "payable",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {

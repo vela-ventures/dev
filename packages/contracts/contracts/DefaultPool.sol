@@ -7,6 +7,7 @@ import "./Dependencies/SafeMath.sol";
 import "./Dependencies/Ownable.sol";
 import "./Dependencies/CheckContract.sol";
 import "./Dependencies/console.sol";
+import "./Dependencies/LiquityBase.sol";
 
 /*
  * The Default Pool holds the ETH and LUSD debt (but not LUSD tokens) from liquidations that have been redistributed
@@ -15,19 +16,21 @@ import "./Dependencies/console.sol";
  * When a trove makes an operation that applies its pending ETH and LUSD debt, its pending ETH and LUSD debt is moved
  * from the Default Pool to the Active Pool.
  */
-contract DefaultPool is Ownable, CheckContract, IDefaultPool {
+contract DefaultPool is Ownable, CheckContract, IDefaultPool, LiquityBase {
     using SafeMath for uint256;
 
     string constant public NAME = "DefaultPool";
 
     address public troveManagerAddress;
     address public activePoolAddress;
-    uint256 internal ETH;  // deposited ETH tracker
+    uint256 internal collateralTokenBalance;  // deposited collateral token tracker
     uint256 internal LUSDDebt;  // debt
 
     event TroveManagerAddressChanged(address _newTroveManagerAddress);
     event DefaultPoolLUSDDebtUpdated(uint _LUSDDebt);
-    event DefaultPoolETHBalanceUpdated(uint _ETH);
+    event DefaultPoolCollateralBalanceUpdated(uint _amount);
+    event ActivePoolAddressChanged(address _newActivePoolAddress);
+    event CollateralSent(address _to, uint _amount);
 
     // --- Dependency setters ---
 
@@ -53,12 +56,12 @@ contract DefaultPool is Ownable, CheckContract, IDefaultPool {
     // --- Getters for public variables. Required by IPool interface ---
 
     /*
-    * Returns the ETH state variable.
+    * Returns the collateral token balance state variable.
     *
-    * Not necessarily equal to the the contract's raw ETH balance - ether can be forcibly sent to contracts.
+    * Not necessarily equal to the contract's raw token balance - tokens can be forcibly sent to contracts.
     */
-    function getETH() external view override returns (uint) {
-        return ETH;
+    function getCollateralBalance() external view override returns (uint) {
+        return collateralTokenBalance;
     }
 
     function getLUSDDebt() external view override returns (uint) {
@@ -67,15 +70,15 @@ contract DefaultPool is Ownable, CheckContract, IDefaultPool {
 
     // --- Pool functionality ---
 
-    function sendETHToActivePool(uint _amount) external override {
+    function sendCollateralToActivePool(uint _amount) external override {
         _requireCallerIsTroveManager();
         address activePool = activePoolAddress; // cache to save an SLOAD
-        ETH = ETH.sub(_amount);
-        emit DefaultPoolETHBalanceUpdated(ETH);
-        emit EtherSent(activePool, _amount);
+        collateralTokenBalance = collateralTokenBalance.sub(_amount);
+        emit DefaultPoolCollateralBalanceUpdated(collateralTokenBalance);
+        emit CollateralSent(activePool, _amount);
 
-        (bool success, ) = activePool.call{ value: _amount }("");
-        require(success, "DefaultPool: sending ETH failed");
+        bool success = AR.transfer(activePool, _amount);
+        require(success, "DefaultPool: sending collateral failed");
     }
 
     function increaseLUSDDebt(uint _amount) external override {
@@ -90,6 +93,12 @@ contract DefaultPool is Ownable, CheckContract, IDefaultPool {
         emit DefaultPoolLUSDDebtUpdated(LUSDDebt);
     }
 
+    function increaseCollateralBalance(uint _amount) external override {
+        _requireCallerIsTroveManager();
+        collateralTokenBalance = collateralTokenBalance.add(_amount);
+        emit DefaultPoolCollateralBalanceUpdated(collateralTokenBalance);
+    }
+
     // --- 'require' functions ---
 
     function _requireCallerIsActivePool() internal view {
@@ -102,9 +111,11 @@ contract DefaultPool is Ownable, CheckContract, IDefaultPool {
 
     // --- Fallback function ---
 
-    receive() external payable {
+    function depositCollateral(uint _amount) external override {
         _requireCallerIsActivePool();
-        ETH = ETH.add(msg.value);
-        emit DefaultPoolETHBalanceUpdated(ETH);
+        bool success = AR.transferFrom(msg.sender, address(this), _amount);
+        require(success, "DefaultPool: transferFrom failed");
+        collateralTokenBalance = collateralTokenBalance.add(_amount);
+        emit DefaultPoolCollateralBalanceUpdated(collateralTokenBalance);
     }
 }

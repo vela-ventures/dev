@@ -439,11 +439,11 @@ export class PopulatedEthersRedemption
       ({ logs }) =>
         troveManager
           .extractEvents(logs, "Redemption")
-          .map(({ args: { _ETHSent, _ETHFee, _actualLUSDAmount, _attemptedLUSDAmount } }) => ({
+          .map(({ args: { _collateralSent, _collateralFee, _actualLUSDAmount, _attemptedLUSDAmount } }) => ({
             attemptedLUSDAmount: decimalify(_attemptedLUSDAmount),
             actualLUSDAmount: decimalify(_actualLUSDAmount),
-            collateralTaken: decimalify(_ETHSent),
-            fee: decimalify(_ETHFee)
+            collateralTaken: decimalify(_collateralSent),
+            fee: decimalify(_collateralFee)
           }))[0]
     );
 
@@ -550,7 +550,7 @@ export class PopulatableEthersLiquity
           .map(({ args: { value } }) => decimalify(value));
 
         const [withdrawCollateral] = activePool
-          .extractEvents(logs, "EtherSent")
+          .extractEvents(logs, "CollateralSent")
           .filter(({ args: { _to } }) => _to === userAddress)
           .map(({ args: { _amount } }) => decimalify(_amount));
 
@@ -605,8 +605,8 @@ export class PopulatableEthersLiquity
       .map(({ args: { _newDeposit } }) => decimalify(_newDeposit));
 
     const [[collateralGain, lusdLoss]] = stabilityPool
-      .extractEvents(logs, "ETHGainWithdrawn")
-      .map(({ args: { _ETH, _LUSDLoss } }) => [decimalify(_ETH), decimalify(_LUSDLoss)]);
+      .extractEvents(logs, "CollateralGainWithdrawn")
+      .map(({ args: { _collateral, _LUSDLoss } }) => [decimalify(_collateral), decimalify(_LUSDLoss)]);
 
     const [lqtyReward] = stabilityPool
       .extractEvents(logs, "LQTYPaidToDepositor")
@@ -853,7 +853,8 @@ export class PopulatableEthersLiquity
       maxBorrowingRate.hex,
       borrowLUSD.hex,
       ...hints,
-      { value: depositCollateral.hex, ...overrides }
+      depositCollateral.hex,
+      overrides
     ];
 
     let gasHeadroom: number | undefined;
@@ -984,10 +985,11 @@ export class PopulatableEthersLiquity
     const txParams = (borrowLUSD?: Decimal): Parameters<typeof borrowerOperations.adjustTrove> => [
       maxBorrowingRate.hex,
       (withdrawCollateral ?? Decimal.ZERO).hex,
+      (depositCollateral ?? Decimal.ZERO).hex,
       (borrowLUSD ?? repayLUSD ?? Decimal.ZERO).hex,
       !!borrowLUSD,
       ...hints,
-      { value: depositCollateral?.hex, ...overrides }
+      overrides
     ];
 
     let gasHeadroom: number | undefined;
@@ -1168,7 +1170,7 @@ export class PopulatableEthersLiquity
     const finalTrove = initialTrove.addCollateral(stabilityDeposit.collateralGain);
 
     return this._wrapCollateralGainTransfer(
-      await stabilityPool.estimateAndPopulate.withdrawETHGainToTrove(
+      await stabilityPool.estimateAndPopulate.withdrawCollateralGainToTrove(
         overrides,
         compose(addGasForPotentialListTraversal, addGasForLQTYIssuance),
         ...(await this._findHints(finalTrove, overrides.from))

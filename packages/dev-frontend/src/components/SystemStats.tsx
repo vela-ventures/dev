@@ -1,12 +1,10 @@
-import React from "react";
-import { Card, Heading, Link, Box, Text } from "theme-ui";
-import { AddressZero } from "@ethersproject/constants";
-import { Decimal, Percent, LiquityStoreState } from "@liquity/lib-base";
+import { Decimal, LiquityStoreState, Percent } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
+import React from "react";
+import { Box, Card, Heading, Link, Text } from "theme-ui";
 
-import { useLiquity } from "../hooks/LiquityContext";
-import { Statistic } from "./Statistic";
 import * as l from "../lexicon";
+import { Statistic } from "./Statistic";
 
 const selectBalances = ({ accountBalance, lusdBalance, lqtyBalance }: LiquityStoreState) => ({
   accountBalance,
@@ -60,11 +58,11 @@ const select = ({
 });
 
 export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", showBalances }) => {
-  const {
-    liquity: {
-      connection: { version: contractsVersion, deploymentDate, frontendTag }
-    }
-  } = useLiquity();
+  // const {
+  //   liquity: {
+  //     connection: { version: contractsVersion, deploymentDate, frontendTag }
+  //   }
+  // } = useLiquity();
 
   const {
     numberOfTroves,
@@ -72,21 +70,21 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
     lusdInStabilityPool,
     total,
     borrowingRate,
-    totalStakedLQTY,
-    kickbackRate
+    totalStakedLQTY
+    // kickbackRate
   } = useLiquitySelector(select);
 
   const lusdInStabilityPoolPct =
     total.debt.nonZero && new Percent(lusdInStabilityPool.div(total.debt));
   const totalCollateralRatioPct = new Percent(total.collateralRatio(price));
   const borrowingFeePct = new Percent(borrowingRate);
-  const kickbackRatePct = frontendTag === AddressZero ? "100" : kickbackRate?.mul(100).prettify();
+  // const kickbackRatePct = frontendTag === AddressZero ? "100" : kickbackRate?.mul(100).prettify();
 
   return (
     <Card {...{ variant }}>
       {showBalances && <Balances />}
 
-      <Heading>Liquity statistics</Heading>
+      <Heading>NAU statistics</Heading>
 
       <Heading as="h2" sx={{ mt: 3, fontWeight: "body" }}>
         Protocol
@@ -115,7 +113,7 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
       </Statistic>
       {}
 
-      <Heading as="h2" sx={{ mt: 3, fontWeight: "body" }}>
+      {/* <Heading as="h2" sx={{ mt: 3, fontWeight: "body" }}>
         Frontend
       </Heading>
       {kickbackRatePct && <Statistic lexicon={l.KICKBACK_RATE}>{kickbackRatePct}%</Statistic>}
@@ -133,7 +131,7 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
             <GitHubCommit>{import.meta.env.VITE_APP_VERSION}</GitHubCommit>
           )}
         </Box>
-      </Box>
+      </Box> */}
     </Card>
   );
 };

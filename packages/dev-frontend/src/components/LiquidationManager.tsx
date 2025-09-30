@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Box, Heading, Flex, Button, Label, Input } from "theme-ui";
+import { Box, Button, Card, Flex, Heading, Input, Label } from "theme-ui";
 
 import { useLiquity } from "../hooks/LiquityContext";
 
@@ -28,7 +28,7 @@ export const LiquidationManager: React.FC = () => {
             onChange={e => setNumberOfTrovesToLiquidate(e.target.value)}
           />
 
-          <Label>Troves</Label>
+          <Label>Vaults</Label>
 
           <Flex sx={{ ml: 2, alignItems: "center" }}>
             <Transaction

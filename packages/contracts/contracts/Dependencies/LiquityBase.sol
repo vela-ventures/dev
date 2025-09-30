@@ -8,6 +8,7 @@ import "../Interfaces/IActivePool.sol";
 import "../Interfaces/IDefaultPool.sol";
 import "../Interfaces/IPriceFeed.sol";
 import "../Interfaces/ILiquityBase.sol";
+import "./IERC20.sol";
 
 /* 
 * Base contract for TroveManager, BorrowerOperations and StabilityPool. Contains global system constants and
@@ -15,6 +16,8 @@ import "../Interfaces/ILiquityBase.sol";
 */
 contract LiquityBase is BaseMath, ILiquityBase {
     using SafeMath for uint;
+
+    IERC20 constant public AR = IERC20(0x94E72f7Ce4901D59FB19F1FBE510483511f20BEb);
 
     uint constant public _100pct = 1000000000000000000; // 1e18 == 100%
 
@@ -25,10 +28,10 @@ contract LiquityBase is BaseMath, ILiquityBase {
     uint constant public CCR = 1500000000000000000; // 150%
 
     // Amount of LUSD to be locked in gas pool on opening troves
-    uint constant public LUSD_GAS_COMPENSATION = 200e18;
+    uint constant public LUSD_GAS_COMPENSATION = 20e18;
 
     // Minimum amount of net LUSD debt a trove must have
-    uint constant public MIN_NET_DEBT = 1800e18;
+    uint constant public MIN_NET_DEBT = 180e18;
     // uint constant public MIN_NET_DEBT = 0; 
 
     uint constant public PERCENT_DIVISOR = 200; // dividing by 200 yields 0.5%
@@ -58,8 +61,8 @@ contract LiquityBase is BaseMath, ILiquityBase {
     }
 
     function getEntireSystemColl() public view returns (uint entireSystemColl) {
-        uint activeColl = activePool.getETH();
-        uint liquidatedColl = defaultPool.getETH();
+        uint activeColl = activePool.getCollateralBalance();
+        uint liquidatedColl = defaultPool.getCollateralBalance();
 
         return activeColl.add(liquidatedColl);
     }

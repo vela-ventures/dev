@@ -1,15 +1,16 @@
 import { useCallback, useEffect } from "react";
-import { Flex, Button } from "theme-ui";
+import { Button, Flex } from "theme-ui";
 
-import { LiquityStoreState, Decimal, Trove, Decimalish, LUSD_MINIMUM_DEBT } from "@liquity/lib-base";
+import { Decimal, Decimalish, LiquityStoreState, LUSD_MINIMUM_DEBT, Trove } from "@liquity/lib-base";
 
 import { LiquityStoreUpdate, useLiquityReducer, useLiquitySelector } from "@liquity/lib-react";
 
+import { useArweaveBalance } from "../../hooks/useArweaveBalance";
 import { InfoBubble } from "../InfoBubble";
 import { useMyTransactionState } from "../Transaction";
 
-import { TroveEditor } from "./TroveEditor";
 import { TroveAction } from "./TroveAction";
+import { TroveEditor } from "./TroveEditor";
 import { useTroveView } from "./context/TroveViewContext";
 
 import {
@@ -159,6 +160,7 @@ type TroveManagerProps = {
 export const TroveManager: React.FC<TroveManagerProps> = ({ collateral, debt }) => {
   const [{ original, edited, changePending }, dispatch] = useLiquityReducer(reduce, init);
   const { fees, validationContext } = useLiquitySelector(select);
+  const arweaveBalance = useArweaveBalance();
 
   useEffect(() => {
     if (collateral !== undefined) {
@@ -176,7 +178,8 @@ export const TroveManager: React.FC<TroveManagerProps> = ({ collateral, debt }) 
     original,
     edited,
     borrowingRate,
-    validationContext
+    validationContext,
+    arweaveBalance
   );
 
   const { dispatchEvent } = useTroveView();
@@ -218,10 +221,10 @@ export const TroveManager: React.FC<TroveManagerProps> = ({ collateral, debt }) 
       {description ??
         (openingNewTrove ? (
           <InfoBubble>
-            Start by entering the amount of ETH you'd like to deposit as collateral.
+            Start by entering the amount of AR you'd like to deposit as collateral.
           </InfoBubble>
         ) : (
-          <InfoBubble>Adjust your Trove by modifying its collateral, debt, or both.</InfoBubble>
+          <InfoBubble>Adjust your Vault by modifying its collateral, debt, or both.</InfoBubble>
         ))}
 
       <Flex variant="layout.actions">

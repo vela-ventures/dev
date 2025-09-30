@@ -1,23 +1,23 @@
 import React from "react";
-import { Heading, Box, Card } from "theme-ui";
+import { Box, Card, Heading } from "theme-ui";
 
 import {
-  Percent,
-  Difference,
-  Decimalish,
   Decimal,
-  Trove,
+  Decimalish,
+  Difference,
   LiquityStoreState,
-  LUSD_LIQUIDATION_RESERVE
+  LUSD_LIQUIDATION_RESERVE,
+  Percent,
+  Trove
 } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 
 import { COIN } from "../../strings";
 
-import { StaticRow } from "./Editor";
+import { InfoIcon } from "../InfoIcon";
 import { LoadingOverlay } from "../LoadingOverlay";
 import { CollateralRatio } from "./CollateralRatio";
-import { InfoIcon } from "../InfoIcon";
+import { StaticRow } from "./Editor";
 
 type TroveEditorProps = React.PropsWithChildren<{
   original: Trove;
@@ -51,7 +51,7 @@ export const TroveEditor: React.FC<TroveEditorProps> = ({
 
   return (
     <Card>
-      <Heading>Trove</Heading>
+      <Heading>Vault</Heading>
 
       <Box sx={{ p: [2, 3] }}>
         <StaticRow
@@ -73,9 +73,9 @@ export const TroveEditor: React.FC<TroveEditorProps> = ({
               <InfoIcon
                 tooltip={
                   <Card variant="tooltip" sx={{ width: "200px" }}>
-                    An amount set aside to cover the liquidator’s gas costs if your Trove needs to be
+                    An amount set aside to cover the liquidator’s gas costs if your Vault needs to be
                     liquidated. The amount increases your debt and is refunded if you close your
-                    Trove by fully paying off its net debt.
+                    Vault by fully paying off its net debt.
                   </Card>
                 }
               />

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Card, Paragraph, Text } from "theme-ui";
 import { Decimal, LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
-import { InfoIcon } from "../InfoIcon";
+import React, { useEffect, useState } from "react";
+import { Card, Paragraph, Text } from "theme-ui";
 import { Badge } from "../Badge";
+import { InfoIcon } from "../InfoIcon";
 import { fetchLqtyPrice } from "./context/fetchLqtyPrice";
 
 const selector = ({ lusdInStabilityPool, remainingStabilityPoolLQTYReward }: LiquityStoreState) => ({
@@ -43,17 +43,17 @@ export const Yield: React.FC = () => {
 
   return (
     <Badge>
-      <Text>LQTY APR {aprPercentage.toString(2)}%</Text>
+      <Text>NAU APR {aprPercentage.toString(2)}%</Text>
       <InfoIcon
         tooltip={
           <Card variant="tooltip" sx={{ width: ["220px", "518px"] }}>
             <Paragraph>
-              An <Text sx={{ fontWeight: "bold" }}>estimate</Text> of the LQTY return on the LUSD
-              deposited to the Stability Pool over the next year, not including your ETH gains from
+              An <Text sx={{ fontWeight: "bold" }}>estimate</Text> of the NAU return on the GiB
+              deposited to the Stability Pool over the next year, not including your AR gains from
               liquidations.
             </Paragraph>
             <Paragraph sx={{ fontSize: "12px", fontFamily: "monospace", mt: 2 }}>
-              ($LQTY_REWARDS * DAILY_ISSUANCE% / DEPOSITED_LUSD) * 365 * 100 ={" "}
+              ($NAU_REWARDS * DAILY_ISSUANCE% / DEPOSITED_GiB) * 365 * 100 ={" "}
               <Text sx={{ fontWeight: "bold" }}> APR</Text>
             </Paragraph>
             <Paragraph sx={{ fontSize: "12px", fontFamily: "monospace" }}>

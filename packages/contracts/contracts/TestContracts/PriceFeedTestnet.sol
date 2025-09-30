@@ -10,7 +10,7 @@ import "../Interfaces/IPriceFeed.sol";
 */
 contract PriceFeedTestnet is IPriceFeed {
     
-    uint256 private _price = 200 * 1e18;
+    uint256 private _price = 2 * 1e18;
 
     // --- Functions ---
 

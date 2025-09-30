@@ -5,11 +5,12 @@ import { Decimal } from "@liquity/lib-base";
 
 import devOrNull from "../deployments/dev.json";
 import goerli from "../deployments/goerli.json";
+import kiln from "../deployments/kiln.json";
 import kovan from "../deployments/kovan.json";
+import load from "../deployments/load.json";
+import mainnet from "../deployments/mainnet.json";
 import rinkeby from "../deployments/rinkeby.json";
 import ropsten from "../deployments/ropsten.json";
-import mainnet from "../deployments/mainnet.json";
-import kiln from "../deployments/kiln.json";
 import sepolia from "../deployments/sepolia.json";
 
 import { numberify, panic } from "./_utils";
@@ -36,6 +37,7 @@ const deployments: {
   [kovan.chainId]: kovan,
   [kiln.chainId]: kiln,
   [sepolia.chainId]: sepolia,
+  [load.chainId]: load,
 
   ...(dev !== null ? { [dev.chainId]: dev } : {})
 };

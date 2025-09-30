@@ -9,7 +9,7 @@ pragma solidity 0.6.11;
  * LUSD in the Stability Pool:  that is, the offset debt evaporates, and an equal amount of LUSD tokens in the Stability Pool is burned.
  *
  * Thus, a liquidation causes each depositor to receive a LUSD loss, in proportion to their deposit as a share of total deposits.
- * They also receive an ETH gain, as the ETH collateral of the liquidated trove is distributed among Stability depositors,
+ * They also receive an collateral gain, as the collateral collateral of the liquidated trove is distributed among Stability depositors,
  * in the same proportion.
  *
  * When a liquidation occurs, it depletes every deposit by the same fraction: for example, a liquidation that depletes 40%
@@ -18,7 +18,7 @@ pragma solidity 0.6.11;
  * A deposit that has experienced a series of liquidations is termed a "compounded deposit": each liquidation depletes the deposit,
  * multiplying it by some factor in range ]0,1[
  *
- * Please see the implementation spec in the proof document, which closely follows on from the compounded deposit / ETH gain derivations:
+ * Please see the implementation spec in the proof document, which closely follows on from the compounded deposit / collateral gain derivations:
  * https://github.com/liquity/liquity/blob/master/papers/Scalable_Reward_Distribution_with_Compounding_Stakes.pdf
  *
  * --- LQTY ISSUANCE TO STABILITY POOL DEPOSITORS ---
@@ -37,7 +37,7 @@ interface IStabilityPool {
 
     // --- Events ---
     
-    event StabilityPoolETHBalanceUpdated(uint _newBalance);
+    event StabilityPoolCollateralBalanceUpdated(uint _newBalance);
     event StabilityPoolLUSDBalanceUpdated(uint _newBalance);
 
     event BorrowerOperationsAddressChanged(address _newBorrowerOperationsAddress);
@@ -62,10 +62,10 @@ interface IStabilityPool {
     event UserDepositChanged(address indexed _depositor, uint _newDeposit);
     event FrontEndStakeChanged(address indexed _frontEnd, uint _newFrontEndStake, address _depositor);
 
-    event ETHGainWithdrawn(address indexed _depositor, uint _ETH, uint _LUSDLoss);
+    event CollateralGainWithdrawn(address indexed _depositor, uint _collateral, uint _LUSDLoss);
     event LQTYPaidToDepositor(address indexed _depositor, uint _LQTY);
     event LQTYPaidToFrontEnd(address indexed _frontEnd, uint _LQTY);
-    event EtherSent(address _to, uint _amount);
+    event CollateralSent(address _to, uint _amount);
 
     // --- Functions ---
 
@@ -91,7 +91,7 @@ interface IStabilityPool {
      * ---
      * - Triggers a LQTY issuance, based on time passed since the last issuance. The LQTY issuance is shared between *all* depositors and front ends
      * - Tags the deposit with the provided front end tag param, if it's a new deposit
-     * - Sends depositor's accumulated gains (LQTY, ETH) to depositor
+     * - Sends depositor's accumulated gains (LQTY, collateral) to depositor
      * - Sends the tagged front end's accumulated LQTY gains to the tagged front end
      * - Increases deposit and tagged front end's stake, and takes new snapshots for each.
      */
@@ -104,7 +104,7 @@ interface IStabilityPool {
      * ---
      * - Triggers a LQTY issuance, based on time passed since the last issuance. The LQTY issuance is shared between *all* depositors and front ends
      * - Removes the deposit's front end tag if it is a full withdrawal
-     * - Sends all depositor's accumulated gains (LQTY, ETH) to depositor
+     * - Sends all depositor's accumulated gains (LQTY, collateral) to depositor
      * - Sends the tagged front end's accumulated LQTY gains to the tagged front end
      * - Decreases deposit and tagged front end's stake, and takes new snapshots for each.
      *
@@ -116,16 +116,16 @@ interface IStabilityPool {
      * Initial checks:
      * - User has a non zero deposit
      * - User has an open trove
-     * - User has some ETH gain
+     * - User has some collateral gain
      * ---
      * - Triggers a LQTY issuance, based on time passed since the last issuance. The LQTY issuance is shared between *all* depositors and front ends
      * - Sends all depositor's LQTY gain to  depositor
      * - Sends all tagged front end's LQTY gain to the tagged front end
-     * - Transfers the depositor's entire ETH gain from the Stability Pool to the caller's trove
+     * - Transfers the depositor's entire collateral gain from the Stability Pool to the caller's trove
      * - Leaves their compounded deposit in the Stability Pool
      * - Updates snapshots for deposit and tagged front end stake
      */
-    function withdrawETHGainToTrove(address _upperHint, address _lowerHint) external;
+    function withdrawCollateralGainToTrove(address _upperHint, address _lowerHint) external;
 
     /*
      * Initial checks:
@@ -142,16 +142,16 @@ interface IStabilityPool {
      * - Caller is TroveManager
      * ---
      * Cancels out the specified debt against the LUSD contained in the Stability Pool (as far as possible)
-     * and transfers the Trove's ETH collateral from ActivePool to StabilityPool.
+     * and transfers the Trove's collateral collateral from ActivePool to StabilityPool.
      * Only called by liquidation functions in the TroveManager.
      */
     function offset(uint _debt, uint _coll) external;
 
     /*
-     * Returns the total amount of ETH held by the pool, accounted in an internal variable instead of `balance`,
-     * to exclude edge cases like ETH received from a self-destruct.
+     * Returns the total amount of collateral held by the pool, accounted in an internal variable instead of `balance`,
+     * to exclude edge cases like collateral received from a self-destruct.
      */
-    function getETH() external view returns (uint);
+    function getCollateralBalance() external view returns (uint);
 
     /*
      * Returns LUSD held in the pool. Changes when users deposit/withdraw, and when Trove debt is offset.
@@ -166,9 +166,9 @@ interface IStabilityPool {
     function getMaxAmountToOffset() external view returns (uint);
 
     /*
-     * Calculates the ETH gain earned by the deposit since its last snapshots were taken.
+     * Calculates the collateral gain earned by the deposit since its last snapshots were taken.
      */
-    function getDepositorETHGain(address _depositor) external view returns (uint);
+    function getDepositorCollateralGain(address _depositor) external view returns (uint);
 
     /*
      * Calculate the LQTY gain earned by a deposit since its last snapshots were taken.
@@ -197,7 +197,7 @@ interface IStabilityPool {
 
     /*
      * Fallback function
-     * Only callable by Active Pool, it just accounts for ETH received
+     * Only callable by Active Pool, it just accounts for collateral received
      * receive() external payable;
      */
 }

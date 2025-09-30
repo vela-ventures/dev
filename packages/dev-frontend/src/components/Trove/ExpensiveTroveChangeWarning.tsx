@@ -71,12 +71,12 @@ export const ExpensiveTroveChangeWarning: React.FC<ExpensiveTroveChangeWarningPa
   ) {
     return troveChange.type === "creation" ? (
       <WarningBubble>
-        The cost of opening a Trove in this collateral ratio range is rather high. To lower it,
+        The cost of opening a Vault in this collateral ratio range is rather high. To lower it,
         choose a slightly different collateral ratio.
       </WarningBubble>
     ) : (
       <WarningBubble>
-        The cost of adjusting a Trove into this collateral ratio range is rather high. To lower it,
+        The cost of adjusting a Vault into this collateral ratio range is rather high. To lower it,
         choose a slightly different collateral ratio.
       </WarningBubble>
     );

@@ -1,27 +1,28 @@
-import React, { useCallback, useEffect, useState, useRef } from "react";
-import { Flex, Button, Box, Card, Heading } from "theme-ui";
 import {
-  LiquityStoreState,
   Decimal,
-  Trove,
+  Difference,
+  LiquityStoreState,
   LUSD_LIQUIDATION_RESERVE,
   Percent,
-  Difference
+  Trove
 } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { Box, Button, Card, Flex, Heading } from "theme-ui";
 
+import { useArweaveBalance } from "../../hooks/useArweaveBalance";
 import { useStableTroveChange } from "../../hooks/useStableTroveChange";
-import { InfoBubble } from "../InfoBubble";
-import { useMyTransactionState } from "../Transaction";
-import { TroveAction } from "./TroveAction";
-import { useTroveView } from "./context/TroveViewContext";
 import { COIN } from "../../strings";
 import { Icon } from "../Icon";
+import { InfoBubble } from "../InfoBubble";
 import { InfoIcon } from "../InfoIcon";
 import { LoadingOverlay } from "../LoadingOverlay";
+import { useMyTransactionState } from "../Transaction";
 import { CollateralRatio, CollateralRatioInfoBubble } from "./CollateralRatio";
 import { EditableRow, StaticRow } from "./Editor";
 import { ExpensiveTroveChangeWarning, GasEstimationState } from "./ExpensiveTroveChangeWarning";
+import { TroveAction } from "./TroveAction";
+import { useTroveView } from "./context/TroveViewContext";
 import {
   selectForTroveChangeValidation,
   validateTroveChange
@@ -39,7 +40,6 @@ const selector = (state: LiquityStoreState) => {
 };
 
 const TRANSACTION_ID = "trove-adjustment";
-const GAS_ROOM_ETH = Decimal.from(0.1);
 
 const feeFrom = (original: Trove, edited: Trove, borrowingRate: Decimal): Decimal => {
   const change = original.whatChanged(edited, borrowingRate);
@@ -84,6 +84,7 @@ const applyUnsavedNetDebtChanges = (unsavedChanges: Difference, trove: Trove) =>
 export const Adjusting: React.FC = () => {
   const { dispatchEvent } = useTroveView();
   const { trove, fees, price, accountBalance, validationContext } = useLiquitySelector(selector);
+  const arweaveBalance = useArweaveBalance();
   const editingState = useState<string>();
   const previousTrove = useRef<Trove>(trove);
   const [collateral, setCollateral] = useState<Decimal>(trove.collateral);
@@ -132,10 +133,8 @@ export const Adjusting: React.FC = () => {
   const maxBorrowingRate = borrowingRate.add(0.005);
   const updatedTrove = isDirty ? new Trove(collateral, totalDebt) : trove;
   const feePct = new Percent(borrowingRate);
-  const availableEth = accountBalance.gt(GAS_ROOM_ETH)
-    ? accountBalance.sub(GAS_ROOM_ETH)
-    : Decimal.ZERO;
-  const maxCollateral = trove.collateral.add(availableEth);
+  // accountBalance is now AR token balance, no need to reserve for gas (gas is paid in ETH)
+  const maxCollateral = trove.collateral.add(arweaveBalance);
   const collateralMaxedOut = collateral.eq(maxCollateral);
   const collateralRatio =
     !collateral.isZero && !netDebt.isZero ? updatedTrove.collateralRatio(price) : undefined;
@@ -145,7 +144,8 @@ export const Adjusting: React.FC = () => {
     trove,
     updatedTrove,
     borrowingRate,
-    validationContext
+    validationContext,
+    arweaveBalance
   );
 
   const stableTroveChange = useStableTroveChange(troveChange);
@@ -162,7 +162,7 @@ export const Adjusting: React.FC = () => {
   return (
     <Card>
       <Heading>
-        Trove
+        Vault
         {isDirty && !isTransactionPending && (
           <Button variant="titleIcon" sx={{ ":enabled:hover": { color: "danger" } }} onClick={reset}>
             <Icon name="history" size="lg" />
@@ -178,7 +178,7 @@ export const Adjusting: React.FC = () => {
           maxAmount={maxCollateral.toString()}
           maxedOut={collateralMaxedOut}
           editingState={editingState}
-          unit="ETH"
+          unit="AR"
           editedAmount={collateral.toString(4)}
           setEditedAmount={(amount: string) => setCollateral(Decimal.from(amount))}
         />
@@ -202,8 +202,8 @@ export const Adjusting: React.FC = () => {
             <InfoIcon
               tooltip={
                 <Card variant="tooltip" sx={{ width: "200px" }}>
-                  An amount set aside to cover the liquidator’s gas costs if your Trove needs to be
-                  liquidated. The amount increases your debt and is refunded if you close your Trove
+                  An amount set aside to cover the liquidator’s gas costs if your Vault needs to be
+                  liquidated. The amount increases your debt and is refunded if you close your Vault
                   by fully paying off its net debt.
                 </Card>
               }
@@ -238,11 +238,11 @@ export const Adjusting: React.FC = () => {
             <InfoIcon
               tooltip={
                 <Card variant="tooltip" sx={{ width: "240px" }}>
-                  The total amount of LUSD your Trove will hold.{" "}
+                  The total amount of GiB your Vault will hold.{" "}
                   {isDirty && (
                     <>
                       You will need to repay {totalDebt.sub(LUSD_LIQUIDATION_RESERVE).prettify(2)}{" "}
-                      LUSD to reclaim your collateral ({LUSD_LIQUIDATION_RESERVE.toString()} LUSD
+                      GiB to reclaim your collateral ({LUSD_LIQUIDATION_RESERVE.toString()} GiB
                       Liquidation Reserve excluded).
                     </>
                   )}
@@ -256,7 +256,7 @@ export const Adjusting: React.FC = () => {
         <CollateralRatioInfoBubble value={collateralRatio} />
 
         {description ?? (
-          <InfoBubble>Adjust your Trove by modifying its collateral, debt, or both.</InfoBubble>
+          <InfoBubble>Adjust your Vault by modifying its collateral, debt, or both.</InfoBubble>
         )}
 
         <ExpensiveTroveChangeWarning

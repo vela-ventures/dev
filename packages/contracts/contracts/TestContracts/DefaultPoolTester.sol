@@ -10,7 +10,7 @@ contract DefaultPoolTester is DefaultPool {
         LUSDDebt  = LUSDDebt.add(_amount);
     }
 
-    function unprotectedPayable() external payable {
-        ETH = ETH.add(msg.value);
+    function unprotectedIncreaseCollateralBalance(uint _amount) external {
+        collateralTokenBalance = collateralTokenBalance.add(_amount);
     }
 }

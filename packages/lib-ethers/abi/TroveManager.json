@@ -109,7 +109,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "_L_ETH",
+        "name": "_L_Collateral",
         "type": "uint256"
       },
       {
@@ -229,13 +229,13 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "_ETHSent",
+        "name": "_collateralSent",
         "type": "uint256"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "_ETHFee",
+        "name": "_collateralFee",
         "type": "uint256"
       }
     ],
@@ -356,7 +356,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "_L_ETH",
+        "name": "_L_Collateral",
         "type": "uint256"
       },
       {
@@ -405,6 +405,19 @@
     ],
     "name": "TroveUpdated",
     "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "AR",
+    "outputs": [
+      {
+        "internalType": "contract IERC20",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
     "inputs": [],
@@ -486,7 +499,7 @@
   },
   {
     "inputs": [],
-    "name": "L_ETH",
+    "name": "L_Collateral",
     "outputs": [
       {
         "internalType": "uint256",
@@ -984,7 +997,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "pendingETHReward",
+        "name": "pendingCollateralReward",
         "type": "uint256"
       }
     ],
@@ -1044,7 +1057,7 @@
         "type": "address"
       }
     ],
-    "name": "getPendingETHReward",
+    "name": "getPendingCollateralReward",
     "outputs": [
       {
         "internalType": "uint256",
@@ -1078,7 +1091,7 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_ETHDrawn",
+        "name": "_collateralDrawn",
         "type": "uint256"
       }
     ],
@@ -1328,7 +1341,7 @@
   },
   {
     "inputs": [],
-    "name": "lastETHError_Redistribution",
+    "name": "lastCollateralError_Redistribution",
     "outputs": [
       {
         "internalType": "uint256",
@@ -1524,7 +1537,7 @@
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "ETH",
+        "name": "collateral",
         "type": "uint256"
       },
       {
