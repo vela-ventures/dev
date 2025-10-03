@@ -83,7 +83,7 @@ const applyUnsavedNetDebtChanges = (unsavedChanges: Difference, trove: Trove) =>
 
 export const Adjusting: React.FC = () => {
   const { dispatchEvent } = useTroveView();
-  const { trove, fees, price, accountBalance, validationContext } = useLiquitySelector(selector);
+  const { trove, fees, price, validationContext } = useLiquitySelector(selector);
   const arweaveBalance = useArweaveBalance();
   const editingState = useState<string>();
   const previousTrove = useRef<Trove>(trove);
