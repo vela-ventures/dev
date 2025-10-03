@@ -1,7 +1,7 @@
 import { Decimal, LiquityStoreState, Percent } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import React from "react";
-import { Box, Card, Heading, Link, Text } from "theme-ui";
+import { Box, Card, Heading, Text } from "theme-ui";
 
 import * as l from "../lexicon";
 import { Statistic } from "./Statistic";
@@ -25,12 +25,12 @@ const Balances: React.FC = () => {
   );
 };
 
-const GitHubCommit: React.FC<{ children?: string }> = ({ children }) =>
-  children?.match(/[0-9a-f]{40}/) ? (
-    <Link href={`https://github.com/liquity/dev/commit/${children}`}>{children.substr(0, 7)}</Link>
-  ) : (
-    <>unknown</>
-  );
+// const GitHubCommit: React.FC<{ children?: string }> = ({ children }) =>
+//   children?.match(/[0-9a-f]{40}/) ? (
+//     <Link href={`https://github.com/liquity/dev/commit/${children}`}>{children.substr(0, 7)}</Link>
+//   ) : (
+//     <>unknown</>
+//   );
 
 type SystemStatsProps = {
   variant?: string;

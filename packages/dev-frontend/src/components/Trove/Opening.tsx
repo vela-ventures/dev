@@ -11,7 +11,6 @@ import { useLiquitySelector } from "@liquity/lib-react";
 import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Box, Button, Card, Flex, Heading, Spinner } from "theme-ui";
-import { useLiquity } from "../../hooks/LiquityContext";
 
 import { useArweaveBalance } from "../../hooks/useArweaveBalance";
 import { useStableTroveChange } from "../../hooks/useStableTroveChange";
@@ -46,7 +45,7 @@ const TRANSACTION_ID = "trove-creation";
 export const Opening: React.FC = () => {
   const { dispatchEvent } = useTroveView();
   const { fees, price, validationContext } = useLiquitySelector(selector);
-  const { liquity } = useLiquity();
+  // const { liquity } = useLiquity();
   const arweaveBalance = useArweaveBalance();
   const borrowingRate = fees.borrowingRate();
   const editingState = useState<string>();
