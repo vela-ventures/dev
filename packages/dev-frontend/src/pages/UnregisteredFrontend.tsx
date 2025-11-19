@@ -1,8 +1,8 @@
 import { Box, Flex, Heading, Paragraph } from "theme-ui";
 
-import { shortenAddress } from "../utils/shortenAddress";
-import { Icon } from "../components/Icon";
+import { TriangleAlertIcon } from "lucide-react";
 import { useLiquity } from "../hooks/LiquityContext";
+import { shortenAddress } from "../utils/shortenAddress";
 
 export const UnregisteredFrontend: React.FC = () => {
   const {
@@ -27,7 +27,7 @@ export const UnregisteredFrontend: React.FC = () => {
       }}
     >
       <Flex sx={{ alignItems: "center", mx: 3, mb: 2 }}>
-        <Icon name="exclamation-triangle" size="2x" />
+        <TriangleAlertIcon/>
         <Heading sx={{ ml: 3, fontSize: "18px" }}>Frontend not yet registered</Heading>
       </Flex>
 

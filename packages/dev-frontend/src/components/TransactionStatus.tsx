@@ -1,9 +1,8 @@
-import { memo, useState, useEffect } from "react";
-import { Flex, Box, Text, ThemeUIStyleObject } from "theme-ui";
-import { CircularProgressbarWithChildren } from "react-circular-progressbar";
-import { buildStyles } from "react-circular-progressbar";
+import { CheckIcon, EllipsisIcon, XIcon } from "lucide-react";
+import { memo, useEffect, useState } from "react";
+import { buildStyles, CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { Icon } from "./Icon";
+import { Box, Flex, Text, ThemeUIStyleObject } from "theme-ui";
 import type { TransactionState } from "./Transaction";
 
 const strokeWidth = 10;
@@ -55,15 +54,15 @@ const TransactionProgressDonut: React.FC<TransactionProgressDonutProps> = ({ sta
 
   return state === "confirmed" ? (
     <Donut {...{ value, maxValue, ...fastProgress }}>
-      <Icon name="check" color="white" size="lg" />
+      <CheckIcon color="white"/>
     </Donut>
   ) : state === "failed" || state === "cancelled" ? (
     <Donut value={0} {...{ maxValue, ...fastProgress }}>
-      <Icon name="times" color="white" size="lg" />
+      <XIcon color="white"/>
     </Donut>
   ) : (
     <Donut {...{ value, maxValue, ...slowProgress }}>
-      <Icon name="cog" color="white" size="lg" spin />
+      <EllipsisIcon color="white"/>
     </Donut>
   );
 };

@@ -5,10 +5,10 @@ import { useLiquitySelector } from "@liquity/lib-react";
 
 import { COIN, GT } from "../../strings";
 
-import { Icon } from "../Icon";
 import { LoadingOverlay } from "../LoadingOverlay";
 import { DisabledEditableRow, StaticRow } from "../Trove/Editor";
 
+import { PencilIcon } from "lucide-react";
 import { useStakingView } from "./context/StakingViewContext";
 import { StakingGainsAction } from "./StakingGainsAction";
 
@@ -60,7 +60,7 @@ export const ReadOnlyStake: React.FC = () => {
 
         <Flex variant="layout.actions">
           <Button variant="outline" onClick={() => dispatch({ type: "startAdjusting" })}>
-            <Icon name="pen" size="sm" />
+            <PencilIcon size="16"/>
             &nbsp;Adjust
           </Button>
 

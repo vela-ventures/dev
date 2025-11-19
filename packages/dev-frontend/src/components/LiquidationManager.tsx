@@ -3,7 +3,7 @@ import { Box, Button, Card, Flex, Heading, Input, Label } from "theme-ui";
 
 import { useLiquity } from "../hooks/LiquityContext";
 
-import { Icon } from "./Icon";
+import { Trash2Icon } from "lucide-react";
 import { Transaction } from "./Transaction";
 
 export const LiquidationManager: React.FC = () => {
@@ -43,7 +43,7 @@ export const LiquidationManager: React.FC = () => {
               }}
             >
               <Button variant="dangerIcon">
-                <Icon name="trash" size="lg" />
+                <Trash2Icon/>
               </Button>
             </Transaction>
           </Flex>

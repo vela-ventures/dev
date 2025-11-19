@@ -13,7 +13,7 @@ import { useLiquitySelector } from "@liquity/lib-react";
 
 import { COIN, GT } from "../../strings";
 
-import { Icon } from "../Icon";
+import { HistoryIcon } from "lucide-react";
 import { InfoIcon } from "../InfoIcon";
 import { LoadingOverlay } from "../LoadingOverlay";
 import { EditableRow, StaticRow } from "../Trove/Editor";
@@ -65,7 +65,7 @@ export const StabilityDepositEditor: React.FC<StabilityDepositEditorProps> = ({
             sx={{ ":enabled:hover": { color: "danger" } }}
             onClick={() => dispatch({ type: "revert" })}
           >
-            <Icon name="history" size="lg" />
+            <HistoryIcon/>
           </Button>
         )}
       </Heading>

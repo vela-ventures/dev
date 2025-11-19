@@ -1,6 +1,6 @@
 import { Box, Flex, Heading, Text } from "theme-ui";
 
-import { Icon } from "./Icon";
+import { InfoIcon } from "lucide-react";
 
 type InfoMessageProps = React.PropsWithChildren<{
   title: string;
@@ -10,7 +10,7 @@ type InfoMessageProps = React.PropsWithChildren<{
 export const InfoMessage: React.FC<InfoMessageProps> = ({ title, children, icon }) => (
   <Box sx={{ mx: 1, mb: 3 }}>
     <Flex sx={{ alignItems: "center", mb: "10px" }}>
-      <Box sx={{ mr: "12px", fontSize: "20px" }}>{icon || <Icon name="info-circle" />}</Box>
+      <Box sx={{ mr: "12px", fontSize: "20px" }}>{icon || <InfoIcon/>}</Box>
 
       <Heading as="h3">{title}</Heading>
     </Flex>

@@ -6,7 +6,7 @@ import { WagmiProvider, createConfig, fallback, http } from "wagmi";
 import { goerli, localhost, mainnet, sepolia } from "wagmi/chains";
 import { injected } from "wagmi/connectors";
 
-import { Icon } from "./components/Icon";
+import { ExternalLinkIcon, TriangleAlertIcon } from "lucide-react";
 import { TransactionProvider } from "./components/Transaction";
 import { WalletConnector } from "./components/WalletConnector";
 import { getConfig } from "./config";
@@ -70,7 +70,7 @@ const UnsupportedMainnetFallback: React.FC = () => (
     }}
   >
     <Heading sx={{ mb: 3 }}>
-      <Icon name="exclamation-triangle" /> This app is for testing purposes only.
+      <TriangleAlertIcon/> This app is for testing purposes only.
     </Heading>
 
     <Paragraph sx={{ mb: 3 }}>Please change your network to Görli or Sepolia.</Paragraph>
@@ -78,7 +78,7 @@ const UnsupportedMainnetFallback: React.FC = () => (
     <Paragraph>
       If you'd like to use the Liquity Protocol on mainnet, please pick a frontend{" "}
       <Link href="https://www.liquity.org/frontend">
-        here <Icon name="external-link-alt" size="xs" />
+        here <ExternalLinkIcon/>
       </Link>
       .
     </Paragraph>
@@ -96,7 +96,7 @@ const UnsupportedNetworkFallback: React.FC = () => (
     }}
   >
     <Heading sx={{ mb: 3 }}>
-      <Icon name="exclamation-triangle" /> Liquity is not supported on this network.
+      <TriangleAlertIcon/> Liquity is not supported on this network.
     </Heading>
     Please switch to mainnet, Görli or Sepolia.
   </Flex>

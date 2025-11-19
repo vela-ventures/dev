@@ -1,9 +1,9 @@
 import { LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
+import { PencilIcon } from "lucide-react";
 import React, { useCallback } from "react";
 import { Box, Button, Card, Flex, Heading } from "theme-ui";
 import { COIN } from "../../strings";
-import { Icon } from "../Icon";
 import { CollateralRatio, CollateralRatioInfoBubble } from "./CollateralRatio";
 import { DisabledEditableRow } from "./Editor";
 import { useTroveView } from "./context/TroveViewContext";
@@ -50,7 +50,7 @@ export const ReadOnlyTrove: React.FC = () => {
             Close Vault
           </Button>
           <Button onClick={handleAdjustTrove}>
-            <Icon name="pen" size="sm" />
+            <PencilIcon size="16"/>
             &nbsp;Adjust
           </Button>
         </Flex>

@@ -1,6 +1,6 @@
-import { Box, Flex, Heading, Paragraph, Button } from "theme-ui";
+import { Box, Button, Flex, Heading, Paragraph } from "theme-ui";
 
-import { Icon } from "../components/Icon";
+import { CheckIcon } from "lucide-react";
 
 type FrontendRegistrationSuccessProps = {
   onDismiss: () => void;
@@ -32,7 +32,7 @@ export const FrontendRegistrationSuccess: React.FC<FrontendRegistrationSuccessPr
       }}
     >
       <Flex sx={{ alignItems: "center", mx: 3, mb: 4, fontSize: 5 }}>
-        <Icon name="check" />
+        <CheckIcon/>
         <Heading sx={{ ml: 3, fontSize: 4 }}>Success!</Heading>
       </Flex>
 

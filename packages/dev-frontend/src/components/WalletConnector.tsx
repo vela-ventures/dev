@@ -1,6 +1,6 @@
 import { ConnectKitButton } from "connectkit";
-import { Box, Button, Flex } from "theme-ui";
-import { Icon } from "./Icon";
+import { PlugIcon } from "lucide-react";
+import { Button, Flex } from "theme-ui";
 
 type WalletConnectorProps = React.PropsWithChildren<{
   loader?: React.ReactNode;
@@ -15,8 +15,8 @@ export const WalletConnector: React.FC<WalletConnectorProps> = ({ children }) =>
         ) : (
           <Flex sx={{ height: "100vh", justifyContent: "center", alignItems: "center" }}>
             <Button onClick={connectKit.show}>
-              <Icon name="plug" size="lg" />
-              <Box sx={{ ml: 2 }}>Connect wallet</Box>
+              <PlugIcon/>
+              <div className="ml-2">Connect wallet</div>
             </Button>
           </Flex>
         )

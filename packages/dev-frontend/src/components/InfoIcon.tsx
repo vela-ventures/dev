@@ -1,11 +1,9 @@
+import { CircleQuestionMarkIcon } from "lucide-react";
 import React from "react";
-import { Icon } from "./Icon";
-import { FontAwesomeIconProps } from "@fortawesome/react-fontawesome";
-import { Tooltip } from "./Tooltip";
 import type { TooltipProps } from "./Tooltip";
+import { Tooltip } from "./Tooltip";
 
-export type InfoIconProps = Pick<TooltipProps, "placement" | "link"> &
-  Pick<FontAwesomeIconProps, "size"> & {
+export type InfoIconProps = Pick<TooltipProps, "placement" | "link" > & {
     tooltip: React.ReactNode;
   };
 
@@ -13,12 +11,10 @@ export const InfoIcon: React.FC<InfoIconProps> = ({
   link,
   placement = "right",
   tooltip,
-  size = "1x"
 }) => {
   return (
     <Tooltip message={tooltip} placement={placement} link={link}>
-      &nbsp;
-      <Icon name="question-circle" size={size} />
+      <CircleQuestionMarkIcon size={12} className="ml-1"/>
     </Tooltip>
   );
 };

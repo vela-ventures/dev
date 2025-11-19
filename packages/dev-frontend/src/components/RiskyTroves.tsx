@@ -16,8 +16,8 @@ import { useLiquity } from "../hooks/LiquityContext";
 import { COIN } from "../strings";
 import { shortenAddress } from "../utils/shortenAddress";
 
+import { ChevronLeftIcon, ChevronRightIcon, ClipboardCheckIcon, ClipboardIcon, RotateCwIcon, Trash2Icon } from "lucide-react";
 import { Abbreviation } from "./Abbreviation";
-import { Icon } from "./Icon";
 import { LoadingOverlay } from "./LoadingOverlay";
 import { Tooltip } from "./Tooltip";
 import { Transaction } from "./Transaction";
@@ -170,7 +170,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
               </Abbreviation>
 
               <Button variant="titleIcon" onClick={previousPage} disabled={clampedPage <= 0}>
-                <Icon name="chevron-left" size="lg" />
+                <ChevronLeftIcon/>
               </Button>
 
               <Button
@@ -178,7 +178,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
                 onClick={nextPage}
                 disabled={clampedPage >= numberOfPages - 1}
               >
-                <Icon name="chevron-right" size="lg" />
+                <ChevronRightIcon/>
               </Button>
             </>
           )}
@@ -188,7 +188,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
             sx={{ opacity: loading ? 0 : 1, ml: [0, 3] }}
             onClick={forceReload}
           >
-            <Icon name="redo" size="lg" />
+            <RotateCwIcon/>
           </Button>
         </Flex>
       </Heading>
@@ -283,10 +283,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
                           onCopy={() => setCopied(trove.ownerAddress)}
                         >
                           <Button variant="icon" sx={{ width: "24px", height: "24px" }}>
-                            <Icon
-                              name={copied === trove.ownerAddress ? "clipboard-check" : "clipboard"}
-                              size="sm"
-                            />
+                            {copied === trove.ownerAddress ? <ClipboardCheckIcon size={16}/> : <ClipboardIcon size={16}/>}
                           </Button>
                         </CopyToClipboard>
                       </td>
@@ -332,7 +329,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
                           send={liquity.send.liquidate.bind(liquity.send, trove.ownerAddress)}
                         >
                           <Button variant="dangerIcon">
-                            <Icon name="trash" />
+                            <Trash2Icon/>
                           </Button>
                         </Transaction>
                       </td>

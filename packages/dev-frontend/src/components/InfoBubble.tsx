@@ -1,6 +1,6 @@
 import { Box, Flex, Text } from "theme-ui";
 
-import { Icon } from "./Icon";
+import { InfoIcon } from "lucide-react";
 
 export const InfoBubble: React.FC<React.PropsWithChildren> = ({ children }) => (
   <Box
@@ -20,7 +20,7 @@ export const InfoBubble: React.FC<React.PropsWithChildren> = ({ children }) => (
     }}
   >
     <Flex sx={{ alignItems: "center" }}>
-      <Icon name="info-circle" size="lg" />
+      <InfoIcon/>
       <Text sx={{ ml: 2 }}>{children}</Text>
     </Flex>
   </Box>

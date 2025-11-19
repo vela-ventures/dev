@@ -1,6 +1,6 @@
 import { Box, Flex, Text } from "theme-ui";
 
-import { Icon } from "./Icon";
+import { TriangleAlertIcon } from "lucide-react";
 
 export const WarningBubble: React.FC<React.PropsWithChildren> = ({ children }) => (
   <Box
@@ -20,7 +20,7 @@ export const WarningBubble: React.FC<React.PropsWithChildren> = ({ children }) =
     }}
   >
     <Flex sx={{ alignItems: "center" }}>
-      <Icon name="exclamation-triangle" size="lg" />
+      <TriangleAlertIcon/>
       <Text sx={{ ml: 2 }}>{children}</Text>
     </Flex>
   </Box>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Text, Flex, Label, Input, SxProp, Button, ThemeUICSSProperties } from "theme-ui";
+import { Button, Flex, Input, Label, SxProp, Text, ThemeUICSSProperties } from "theme-ui";
 
-import { Icon } from "../Icon";
+import { ChevronDownIcon, ChevronsDownIcon, ChevronsUpIcon, ChevronUpIcon } from "lucide-react";
 
 type RowProps = SxProp &
   React.PropsWithChildren<{
@@ -42,25 +42,27 @@ type PendingAmountProps = SxProp & {
 };
 
 const PendingAmount: React.FC<PendingAmountProps> = ({ sx, value }) => (
-  <Text sx={{ ...sx }}>
-    (
+  <Flex sx={{ alignItems: "center", ...sx }}>
+    <Text>(</Text>
     {value === "++" ? (
-      <Icon name="angle-double-up" />
+      <ChevronsUpIcon size={16}/>
     ) : value === "--" ? (
-      <Icon name="angle-double-down" />
+      <ChevronsDownIcon size={16}/>
     ) : value?.startsWith("+") ? (
       <>
-        <Icon name="angle-up" /> {value.substr(1)}
+        <ChevronUpIcon size={16}/>
+        <Text>{value.substr(1)}</Text>
       </>
     ) : value?.startsWith("-") ? (
       <>
-        <Icon name="angle-down" /> {value.substr(1)}
+        <ChevronDownIcon size={16}/>
+        <Text>{value.substr(1)}</Text>
       </>
     ) : (
-      value
+      <Text>{value}</Text>
     )}
-    )
-  </Text>
+    <Text>)</Text>
+  </Flex>
 );
 
 type StaticAmountsProps = React.PropsWithChildren<{
