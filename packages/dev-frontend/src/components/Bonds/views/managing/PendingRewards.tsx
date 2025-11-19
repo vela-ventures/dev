@@ -1,4 +1,5 @@
-import { Box, Card, Flex } from "theme-ui";
+import { Card } from "@/components/ui/card";
+import { Box, Flex } from "theme-ui";
 import { InfoIcon } from "../../../InfoIcon";
 import { StaticRow } from "../../../Trove/Editor";
 import { useBondView } from "../../context/BondViewContext";

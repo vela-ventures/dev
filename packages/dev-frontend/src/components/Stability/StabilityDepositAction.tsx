@@ -1,4 +1,4 @@
-import { Button } from "theme-ui";
+import { Button } from "@/components/ui/button";
 import { Decimal, LiquityStoreState, StabilityDepositChange } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 

@@ -1,4 +1,5 @@
-import { Card, Flex, ThemeUIStyleObject } from "theme-ui";
+import { Flex, ThemeUIStyleObject } from "theme-ui";
+import { Card } from "@/components/ui/card";
 import { EventType, HorizontalTimeline, UNKNOWN_DATE } from "../../../HorizontalTimeline";
 import { Record } from "../../Record";
 import { Actions } from "./actions/Actions";

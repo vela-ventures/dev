@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Card, Container, Paragraph } from "theme-ui";
+import { Box, Container, Paragraph } from "theme-ui";
+import { Card } from "@/components/ui/card";
 import { InfoMessage } from "../components/InfoMessage";
 import { LiquidationManager } from "../components/LiquidationManager";
 import { RiskyTroves } from "../components/RiskyTroves";

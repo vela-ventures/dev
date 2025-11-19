@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
-import { Box, Button, Container, Flex } from "theme-ui";
+import { Box, Container, Flex } from "theme-ui";
+import { Button } from "@/components/ui/button";
 import { Icon } from "./Icon";
 import { Link } from "./Link";
 import { LiquityLogo } from "./LiquityLogo";

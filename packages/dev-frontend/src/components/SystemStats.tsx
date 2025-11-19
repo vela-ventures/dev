@@ -1,7 +1,8 @@
+import { Card } from "@/components/ui/card";
 import { Decimal, LiquityStoreState, Percent } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import React from "react";
-import { Box, Card, Heading, Text } from "theme-ui";
+import { Box, Heading, Text } from "theme-ui";
 
 import * as l from "../lexicon";
 import { Statistic } from "./Statistic";

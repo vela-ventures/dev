@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Box, Button, Card, Flex, Heading, Input, Label } from "theme-ui";
-
 import { Decimal, LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
+import React, { useEffect, useState } from "react";
+import { Box, Flex, Heading, Label } from "theme-ui";
 
 import { useLiquity } from "../hooks/LiquityContext";
 
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Icon } from "./Icon";
 import { Transaction } from "./Transaction";
+
 
 const selectPrice = ({ price }: LiquityStoreState) => price;
 

@@ -7,7 +7,7 @@ import { useLiquity } from "../hooks/LiquityContext";
 import { LiquityLogo } from "./LiquityLogo";
 
 import { Nav } from "./Nav";
-import { SideNav } from "./SideNav";
+// import { SideNav } from "./SideNav";
 
 const logoHeight = "32px";
 
@@ -37,7 +37,7 @@ export const Header: React.FC<React.PropsWithChildren> = ({ children }) => {
         />
         {isFrontendRegistered && (
           <>
-            <SideNav />
+            {/* <SideNav /> */}
             <Nav />
           </>
         )}

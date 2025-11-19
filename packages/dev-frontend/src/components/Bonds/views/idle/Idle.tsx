@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Card, Box, Heading, Flex, Button } from "theme-ui";
+import { Box, Heading, Flex } from "theme-ui";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Empty } from "./Empty";
 import { BondList } from "./BondList";
 import { useBondView } from "../../context/BondViewContext";

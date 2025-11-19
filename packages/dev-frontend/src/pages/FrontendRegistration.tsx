@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { Card, Heading, Box, Flex, Input, Label, Paragraph, Button, Spinner } from "theme-ui";
+import { Heading, Box, Flex, Label, Paragraph, Spinner } from "theme-ui";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 import { Decimal } from "@liquity/lib-base";
 

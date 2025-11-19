@@ -7,7 +7,7 @@ import { Decimal, Difference, Trove } from "@liquity/lib-base";
 import { LiquityStoreProvider } from "@liquity/lib-react";
 
 import { Header } from "./components/Header";
-import { SystemStatsPopup } from "./components/SystemStatsPopup";
+// import { SystemStatsPopup } from "./components/SystemStatsPopup";
 import { TransactionMonitor } from "./components/Transaction";
 import { UserAccount } from "./components/UserAccount";
 import { useLiquity } from "./hooks/LiquityContext";
@@ -50,7 +50,7 @@ export const LiquityFrontend: React.FC<LiquityFrontendProps> = ({ loader }) => {
                 <Flex sx={{ flexDirection: "column", minHeight: "100%" }}>
                   <Header>
                     <UserAccount />
-                    <SystemStatsPopup />
+                    {/* <SystemStatsPopup /> */}
                   </Header>
 
                   <Container

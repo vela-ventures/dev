@@ -1,5 +1,6 @@
 import React from "react";
-import { Card, Heading, Text, Flex } from "theme-ui";
+import { Heading, Text, Flex } from "theme-ui";
+import { Card } from "@/components/ui/card";
 import { Decimal } from "@liquity/lib-base";
 import * as l from "../components/Bonds/lexicon";
 import { Statistic } from "./Statistic";

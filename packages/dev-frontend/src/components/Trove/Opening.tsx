@@ -1,4 +1,6 @@
 /** @jsxImportSource theme-ui */
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Decimal,
   LiquityStoreState,
@@ -10,12 +12,11 @@ import {
 import { useLiquitySelector } from "@liquity/lib-react";
 import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Box, Button, Card, Flex, Heading, Spinner } from "theme-ui";
+import { Box, Flex, Spinner } from "theme-ui";
 
 import { useArweaveBalance } from "../../hooks/useArweaveBalance";
 import { useStableTroveChange } from "../../hooks/useStableTroveChange";
 import { COIN } from "../../strings";
-import { Icon } from "../Icon";
 import { InfoBubble } from "../InfoBubble";
 import { InfoIcon } from "../InfoIcon";
 import { LoadingOverlay } from "../LoadingOverlay";
@@ -99,15 +100,20 @@ export const Opening: React.FC = () => {
 
   return (
     <Card>
-      <Heading>
-        Vault
+      <CardHeader>
+        <CardTitle>
+          Vault
+        </CardTitle>
+      </CardHeader>
+      {/* <Heading>
+        
         {isDirty && !isTransactionPending && (
           <Button variant="titleIcon" sx={{ ":enabled:hover": { color: "danger" } }} onClick={reset}>
             <Icon name="history" size="lg" />
           </Button>
         )}
-      </Heading>
-
+      </Heading> */}
+      <CardContent>
       <Box sx={{ p: [2, 3] }}>
         <EditableRow
           label="Collateral"
@@ -243,6 +249,7 @@ export const Opening: React.FC = () => {
         </Flex>
       </Box>
       {isTransactionPending && <LoadingOverlay />}
+      </CardContent>
     </Card>
   );
 };

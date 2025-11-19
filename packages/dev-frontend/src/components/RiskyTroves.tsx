@@ -1,6 +1,9 @@
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Table } from "@/components/ui/table";
 import React, { useCallback, useEffect, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { Box, Button, Card, Flex, Heading, Text } from "theme-ui";
+import { Box, Flex, Heading, Text } from "theme-ui";
 
 import {
   CRITICAL_COLLATERAL_RATIO,
@@ -154,11 +157,11 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
   }, [copied]);
 
   return (
-    <Card sx={{ width: "100%" }}>
+    <Card className="w-full">
       <Heading>
         <Abbreviation short="Troves">Risky Vaults</Abbreviation>
 
-        <Flex sx={{ alignItems: "center" }}>
+        <Flex className="items-center">
           {numberOfTroves !== 0 && (
             <>
               <Abbreviation
@@ -194,24 +197,14 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
       </Heading>
 
       {!troves || troves.length === 0 ? (
-        <Box sx={{ p: [2, 3] }}>
+        <Box className="p-4 text-center text-3xl">
           <Box sx={{ p: 4, fontSize: 3, textAlign: "center" }}>
             {!troves ? "Loading..." : "There are no Vaults yet"}
           </Box>
         </Box>
       ) : (
-        <Box sx={{ p: [2, 3] }}>
-          <Box
-            as="table"
-            sx={{
-              mt: 2,
-              pl: [1, 4],
-              width: "100%",
-
-              textAlign: "center",
-              lineHeight: 1.15
-            }}
-          >
+        <Box className="p-4 text-center text-3xl">
+          <Table>
             <colgroup>
               <col style={{ width: "50px" }} />
               <col />
@@ -340,7 +333,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
                   )
               )}
             </tbody>
-          </Box>
+          </Table>
         </Box>
       )}
 

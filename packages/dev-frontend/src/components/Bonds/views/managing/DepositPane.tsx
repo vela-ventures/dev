@@ -1,6 +1,8 @@
 import { Decimal } from "@liquity/lib-base";
 import React, { useEffect, useState } from "react";
-import { Flex, Button, Spinner, Checkbox, Label, Card, Text } from "theme-ui";
+import { Flex, Spinner, Checkbox, Label, Text } from "theme-ui";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Amount } from "../../../ActionDescription";
 import { ErrorDescription } from "../../../ErrorDescription";
 import { Icon } from "../../../Icon";

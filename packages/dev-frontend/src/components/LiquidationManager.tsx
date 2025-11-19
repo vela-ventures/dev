@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { Box, Button, Card, Flex, Heading, Input, Label } from "theme-ui";
+import { Box, Flex, Heading, Label } from "theme-ui";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 
 import { useLiquity } from "../hooks/LiquityContext";
 
+import { Button } from "@/components/ui/button";
 import { Icon } from "./Icon";
 import { Transaction } from "./Transaction";
 

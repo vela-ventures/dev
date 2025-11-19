@@ -1,4 +1,5 @@
-import { Box, Flex, Heading, Paragraph, Button } from "theme-ui";
+import { Box, Flex, Heading, Paragraph } from "theme-ui";
+import { Button } from "@/components/ui/button";
 
 import { Icon } from "../components/Icon";
 

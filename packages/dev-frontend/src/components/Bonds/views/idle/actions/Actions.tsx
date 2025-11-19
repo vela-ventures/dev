@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "theme-ui";
+import { Button } from "@/components/ui/button";
 import Tippy from "@tippyjs/react";
 import { useBondView } from "../../../context/BondViewContext";
 import type { SelectBondPayload } from "../../../context/transitions";

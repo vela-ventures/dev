@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from "react";
-import { Button, Flex } from "theme-ui";
+import { Flex } from "theme-ui";
+import { Button } from "@/components/ui/button";
 
 import { Decimal, Decimalish, LiquityStoreState } from "@liquity/lib-base";
 import { LiquityStoreUpdate, useLiquityReducer, useLiquitySelector } from "@liquity/lib-react";

@@ -1,6 +1,8 @@
 /** @jsxImportSource theme-ui */
 import React, { useEffect, useMemo, useState } from "react";
-import { Flex, Heading, Button, Card, Grid, Close, Text, Image, Spinner } from "theme-ui";
+import { Flex, Heading, Grid, Close, Text, Image, Spinner } from "theme-ui";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Decimal } from "@liquity/lib-base";
 import { EditableRow } from "../../../Trove/Editor";
 import { Record } from "../../Record";

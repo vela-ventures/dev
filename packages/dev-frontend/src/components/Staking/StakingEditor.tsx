@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Heading, Box, Card, Button } from "theme-ui";
+import { Heading, Box } from "theme-ui";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 import { Decimal, Decimalish, Difference, LiquityStoreState, LQTYStake } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";

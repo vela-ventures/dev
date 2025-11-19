@@ -1,7 +1,9 @@
 import { LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import React, { useCallback } from "react";
-import { Box, Button, Card, Flex, Heading } from "theme-ui";
+import { Box, Flex, Heading } from "theme-ui";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { COIN } from "../../strings";
 import { Icon } from "../Icon";
 import { CollateralRatio, CollateralRatioInfoBubble } from "./CollateralRatio";

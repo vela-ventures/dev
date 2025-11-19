@@ -1,7 +1,8 @@
 import Tippy from "@tippyjs/react";
 import type { TippyProps } from "@tippyjs/react";
 import React from "react";
-import { Box, Card, Link } from "theme-ui";
+import { Box, Link } from "theme-ui";
+import { Card } from "@/components/ui/card";
 
 export type TooltipProps = Pick<TippyProps, "placement"> &
   React.PropsWithChildren<{

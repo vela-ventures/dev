@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Box, Button, Card, Heading } from "theme-ui";
+import { Box, Heading } from "theme-ui";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 import {
   Decimal,

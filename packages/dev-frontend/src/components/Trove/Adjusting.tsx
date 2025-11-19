@@ -8,7 +8,9 @@ import {
 } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Box, Button, Card, Flex, Heading } from "theme-ui";
+import { Box, Flex, Heading } from "theme-ui";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 import { useArweaveBalance } from "../../hooks/useArweaveBalance";
 import { useStableTroveChange } from "../../hooks/useStableTroveChange";

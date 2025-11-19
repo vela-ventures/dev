@@ -1,16 +1,16 @@
 /** @jsxImportSource theme-ui */
+import { Button } from "@/components/ui/button";
 import React, { useRef } from "react";
 import {
   Box,
-  Button,
   Checkbox,
   Close,
   Flex,
   Heading,
+  Image,
   Label,
-  Paragraph,
   Link,
-  Image
+  Paragraph
 } from "theme-ui";
 import { useWizard } from "../../../Wizard/Context";
 import { useBondView } from "../../context/BondViewContext";

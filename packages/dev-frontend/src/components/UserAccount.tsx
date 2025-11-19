@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Button, Flex, Heading, Text } from "theme-ui";
+import { Box, Flex, Heading, Text } from "theme-ui";
+import { Button } from "@/components/ui/button";
 
 import { Decimal, LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";

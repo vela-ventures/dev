@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
-import { Container, Flex, Button } from "theme-ui";
+import { Container, Flex } from "theme-ui";
+import { Button } from "@/components/ui/button";
 
 import { LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";

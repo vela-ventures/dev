@@ -2,7 +2,9 @@
 
 import { Decimal, Percent } from "@liquity/lib-base";
 import React, { useEffect, useRef, useState } from "react";
-import { Flex, Button, Spinner, Heading, Close, Box, Label, Radio, Input, Link } from "theme-ui";
+import { Flex, Spinner, Heading, Close, Box, Label, Radio, Link } from "theme-ui";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Amount } from "../../../ActionDescription";
 import { ErrorDescription } from "../../../ErrorDescription";
 import { Icon } from "../../../Icon";

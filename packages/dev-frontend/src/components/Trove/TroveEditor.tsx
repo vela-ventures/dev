@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Card, Heading } from "theme-ui";
+import { Box, Heading } from "theme-ui";
+import { Card } from "@/components/ui/card";
 
 import {
   Decimal,

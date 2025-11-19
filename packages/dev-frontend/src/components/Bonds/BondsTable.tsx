@@ -1,6 +1,8 @@
 /** @jsxImportSource theme-ui */
 import React from "react";
-import { Card, Text, Box, Heading, Flex, Grid, Button } from "theme-ui";
+import { Text, Box, Heading, Flex, Grid } from "theme-ui";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { InfoIcon } from "../InfoIcon";
 import * as lexicon from "./lexicon";
 import { Empty } from "./views/idle/Empty";

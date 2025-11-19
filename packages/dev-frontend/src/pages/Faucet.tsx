@@ -1,6 +1,8 @@
 import { Contract } from "@ethersproject/contracts";
 import React, { useState } from "react";
-import { Box, Button, Card, Container, Flex, Heading } from "theme-ui";
+import { Box, Container, Flex, Heading } from "theme-ui";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 import { useLiquity } from "../hooks/LiquityContext";
 

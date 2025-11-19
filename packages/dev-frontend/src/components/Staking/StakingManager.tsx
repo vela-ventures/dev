@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, Flex } from "theme-ui";
+import { Flex } from "theme-ui";
+import { Button } from "@/components/ui/button";
 
 import {
   Decimal,

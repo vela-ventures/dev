@@ -1,5 +1,6 @@
 import { ConnectKitButton } from "connectkit";
-import { Box, Button, Flex } from "theme-ui";
+import { Box, Flex } from "theme-ui";
+import { Button } from "@/components/ui/button";
 import { Icon } from "./Icon";
 
 type WalletConnectorProps = React.PropsWithChildren<{

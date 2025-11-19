@@ -1,6 +1,7 @@
 import { Decimal } from "@liquity/lib-base";
 import React from "react";
-import { Flex, Button, Spinner } from "theme-ui";
+import { Flex, Spinner } from "theme-ui";
+import { Button } from "@/components/ui/button";
 import { StaticRow, StaticAmounts } from "../../../Trove/Editor";
 import { useBondView } from "../../context/BondViewContext";
 import { PendingRewards } from "./PendingRewards";

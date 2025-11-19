@@ -1,4 +1,6 @@
-import { Card, Flex, Button, Image, ThemeUIStyleObject } from "theme-ui";
+import { Flex, Image, ThemeUIStyleObject } from "theme-ui";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { EventType, HorizontalTimeline } from "../../../HorizontalTimeline";
 import { Record } from "../../Record";
 import { Actions } from "./actions/Actions";

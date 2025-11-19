@@ -1,5 +1,6 @@
 import React from "react";
-import { Flex, Button, Spinner } from "theme-ui";
+import { Flex, Spinner } from "theme-ui";
+import { Button } from "@/components/ui/button";
 import { ActionDescription, Amount } from "../../../../../ActionDescription";
 import { useBondView } from "../../../../context/BondViewContext";
 
