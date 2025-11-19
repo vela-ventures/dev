@@ -1,5 +1,4 @@
 import React from "react";
-import { Flex } from "theme-ui";
 
 import { LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
@@ -12,8 +11,8 @@ export const RemainingLQTY: React.FC = () => {
   const { remainingStabilityPoolLQTYReward } = useLiquitySelector(selector);
 
   return (
-    <Flex sx={{ mr: 2, fontSize: 2, fontWeight: "medium" }}>
+    <div className="flex mr-2" style={{ fontSize: "var(--theme-ui-fontSizes-2)", fontWeight: "medium" }}>
       {remainingStabilityPoolLQTYReward.prettify(0)} NAU remaining
-    </Flex>
+    </div>
   );
 };

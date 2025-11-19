@@ -8,7 +8,7 @@ import {
 } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Box, Flex, Heading } from "theme-ui";
+import { Box, Heading } from "theme-ui";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -269,7 +269,7 @@ export const Adjusting: React.FC = () => {
           setGasEstimationState={setGasEstimationState}
         />
 
-        <Flex variant="layout.actions">
+        <div className="flex" style={{ variant: "layout.actions" }}>
           <Button variant="cancel" onClick={handleCancelPressed}>
             Cancel
           </Button>
@@ -286,7 +286,7 @@ export const Adjusting: React.FC = () => {
           ) : (
             <Button disabled>Confirm</Button>
           )}
-        </Flex>
+        </div>
       </Box>
       {isTransactionPending && <LoadingOverlay />}
     </Card>

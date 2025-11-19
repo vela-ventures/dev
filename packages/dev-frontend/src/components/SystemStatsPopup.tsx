@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Container, Flex } from "theme-ui";
+import { Container } from "theme-ui";
 import { Button } from "@/components/ui/button";
 
 import { LiquityStoreState } from "@liquity/lib-base";
@@ -29,23 +29,20 @@ export const SystemStatsPopup: React.FC = () => {
         <Icon name="info-circle" size="2x" />
 
         {total.collateralRatioIsBelowCritical(price) && (
-          <Flex
-            sx={{
+          <div
+            className="flex items-start justify-end"
+            style={{
               position: "absolute",
               right: 0,
               top: 0,
               width: "100%",
               height: "100%",
-
-              alignItems: "flex-start",
-              justifyContent: "flex-end",
-              pt: "2px",
-
-              color: "danger"
+              paddingTop: "2px",
+              color: "var(--theme-ui-colors-danger)"
             }}
           >
             <Icon name="exclamation-circle" size="xs" />
-          </Flex>
+          </div>
         )}
       </Button>
 

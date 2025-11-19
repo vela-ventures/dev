@@ -1,5 +1,4 @@
 import React from "react";
-import { Flex } from "theme-ui";
 import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
 import { Link } from "../../../Link";
 import { FilteredBondList } from "./FilteredBondList";
@@ -12,7 +11,7 @@ export const BondList: React.FC = () => {
   return (
     <>
       {bonds && (
-        <Flex as="nav" mt={2}>
+        <nav className="flex mt-2">
           <Link to={`${url}/all`} p={2}>
             All
           </Link>
@@ -25,7 +24,7 @@ export const BondList: React.FC = () => {
           <Link to={`${url}/cancelled`} p={2}>
             Cancelled
           </Link>
-        </Flex>
+        </nav>
       )}
 
       <Switch>

@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 import React from "react";
-import { Text, Box, Heading, Flex, Grid } from "theme-ui";
+import { Text, Box, Heading, Grid } from "theme-ui";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { InfoIcon } from "../InfoIcon";
@@ -21,12 +21,13 @@ const {
 } = lexicon;
 
 const LineSegment: React.FC = () => (
-  <Flex
-    sx={{
+  <div
+    className="flex"
+    style={{
       borderTop: "1px dotted gray",
       width: "100%",
-      mt: "-20px",
-      mb: 0
+      marginTop: "-20px",
+      marginBottom: 0
     }}
   />
 );
@@ -57,14 +58,14 @@ export const BondsTable: React.FC = () => {
   return (
     <Card>
       <Heading>
-        <Flex>
+        <div className="flex">
           Pending bonds{" "}
           <InfoIcon
             placement="left"
             size="xs"
-            tooltip={<Card variant="tooltip">{BONDS.description}</Card>}
+            tooltip={<Card>{BONDS.description}</Card>}
           />
-        </Flex>
+        </div>
       </Heading>
 
       <Box sx={{ p: [2, 3] }}>
@@ -79,35 +80,35 @@ export const BondsTable: React.FC = () => {
               {BOND_AMOUNT.term}{" "}
               <InfoIcon
                 size="xs"
-                tooltip={<Card variant="tooltip">{BOND_AMOUNT.description}</Card>}
+                tooltip={<Card>{BOND_AMOUNT.description}</Card>}
               />
             </Text>
             <Text sx={{ fontWeight: "bold" }}>
               {ACCRUED_AMOUNT.term}{" "}
               <InfoIcon
                 size="xs"
-                tooltip={<Card variant="tooltip">{ACCRUED_AMOUNT.description}</Card>}
+                tooltip={<Card>{ACCRUED_AMOUNT.description}</Card>}
               />
             </Text>
             <Text sx={{ fontWeight: "bold" }}>
               {MARKET_VALUE.term}{" "}
               <InfoIcon
                 size="xs"
-                tooltip={<Card variant="tooltip">{MARKET_VALUE.description}</Card>}
+                tooltip={<Card>{MARKET_VALUE.description}</Card>}
               />
             </Text>
             <Text sx={{ fontWeight: "bold" }}>
               {BREAK_EVEN_TIME.term}{" "}
               <InfoIcon
                 size="xs"
-                tooltip={<Card variant="tooltip">{BREAK_EVEN_TIME.description}</Card>}
+                tooltip={<Card>{BREAK_EVEN_TIME.description}</Card>}
               />
             </Text>
             <Text sx={{ fontWeight: "bold" }}>
               {OPTIMUM_REBOND_TIME.term}{" "}
               <InfoIcon
                 size="xs"
-                tooltip={<Card variant="tooltip">{OPTIMUM_REBOND_TIME.description}</Card>}
+                tooltip={<Card>{OPTIMUM_REBOND_TIME.description}</Card>}
               />
             </Text>
             {Line(5)}
@@ -136,11 +137,11 @@ export const BondsTable: React.FC = () => {
             })}
           </Grid>
         )}
-        <Flex variant="layout.actions" mt={3}>
+        <div className="flex mt-3">
           <Link to="/bonds/pending" m={0} p={0}>
             <Button variant="primary">Go to bonds</Button>
           </Link>
-        </Flex>
+        </div>
       </Box>
     </Card>
   );

@@ -1,4 +1,4 @@
-import { Heading, Box, Flex } from "theme-ui";
+import { Heading, Box } from "theme-ui";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -18,9 +18,9 @@ export const NoStake: React.FC = () => {
           Stake {GT} to earn a share of borrowing and redemption fees.
         </InfoMessage>
 
-        <Flex variant="layout.actions">
+        <div className="flex" style={{ justifyContent: "space-between", gap: "12px" }}>
           <Button onClick={() => dispatch({ type: "startAdjusting" })}>Start staking</Button>
-        </Flex>
+        </div>
       </Box>
     </Card>
   );

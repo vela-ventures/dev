@@ -12,7 +12,7 @@ import {
 import { useLiquitySelector } from "@liquity/lib-react";
 import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Box, Flex, Spinner } from "theme-ui";
+import { Box, Spinner } from "theme-ui";
 
 import { useArweaveBalance } from "../../hooks/useArweaveBalance";
 import { useStableTroveChange } from "../../hooks/useStableTroveChange";
@@ -225,7 +225,7 @@ export const Opening: React.FC = () => {
           setGasEstimationState={setGasEstimationState}
         />
 
-        <Flex variant="layout.actions">
+        <div className="flex" style={{ variant: "layout.actions" }}>
           <Button variant="cancel" onClick={handleCancelPressed}>
             Cancel
           </Button>
@@ -246,7 +246,7 @@ export const Opening: React.FC = () => {
           ) : (
             <Button disabled>Confirm</Button>
           )}
-        </Flex>
+        </div>
       </Box>
       {isTransactionPending && <LoadingOverlay />}
       </CardContent>

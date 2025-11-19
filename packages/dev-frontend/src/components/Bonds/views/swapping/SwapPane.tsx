@@ -2,7 +2,7 @@
 
 import { Decimal, Percent } from "@liquity/lib-base";
 import React, { useEffect, useRef, useState } from "react";
-import { Flex, Spinner, Heading, Close, Box, Label, Radio, Link } from "theme-ui";
+import { Spinner, Heading, Close, Box, Label, Radio, Link } from "theme-ui";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Amount } from "../../../ActionDescription";
@@ -161,9 +161,9 @@ export const SwapPane: React.FC = () => {
   return (
     <>
       <Heading as="h2" sx={{ pt: 2, pb: 3, px: 2 }}>
-        <Flex sx={{ justifyContent: "center" }}>
+        <div className="flex justify-center">
           {inputToken === BLusdAmmTokenIndex.BLUSD ? <>Sell</> : <>Buy</>} bLUSD
-        </Flex>
+        </div>
         <Close
           onClick={handleDismiss}
           sx={{
@@ -186,9 +186,9 @@ export const SwapPane: React.FC = () => {
         maxedOut={inputAmount.eq(inputTokenBalance)}
       />
 
-      <Flex sx={{ justifyContent: "center", mb: 3 }}>
+      <div className="flex justify-center mb-3">
         <Icon name="arrow-down" size="lg" />
-      </Flex>
+      </div>
 
       <DisabledEditableRow label="Buy">
         {outputAmount ? (
@@ -241,7 +241,7 @@ export const SwapPane: React.FC = () => {
       <details>
         <summary sx={{ cursor: "pointer", mx: 2, mb: 2 }}>Slippage tolerance</summary>
 
-        <Flex sx={{ alignItems: "center", mx: 4, mb: 3 }}>
+        <div className="flex items-center mx-4 mb-3">
           <Label variant="radioLabel">
             <Radio
               name="swap-slippage-tolerance"
@@ -309,7 +309,7 @@ export const SwapPane: React.FC = () => {
             />
             &nbsp;%
           </Label>
-        </Flex>
+        </div>
       </details>
 
       {isBalanceInsufficient && (
@@ -325,15 +325,15 @@ export const SwapPane: React.FC = () => {
         <ErrorDescription>No liquidity in pool yet. Swap unavailable.</ErrorDescription>
       )}
 
-      <Flex pb={2} sx={{ fontSize: "15.5px", justifyContent: "center", fontStyle: "italic" }}>
+      <div className="flex justify-center pb-2" style={{ fontSize: "15.5px", fontStyle: "italic" }}>
         Your swap is performed directly in&nbsp;
         <Link href="https://curve.fi/factory-crypto/134" target="_blank">
           Curve
         </Link>
         &nbsp;protocol.
-      </Flex>
+      </div>
 
-      <Flex variant="layout.actions">
+      <div className="flex" style={{ justifyContent: "space-between", gap: "12px" }}>
         <Button
           variant="cancel"
           onClick={handleBackPressed}
@@ -361,7 +361,7 @@ export const SwapPane: React.FC = () => {
             {isApprovePending ? <Spinner size={28} sx={{ color: "white" }} /> : <>Approve</>}
           </Button>
         )}
-      </Flex>
+      </div>
     </>
   );
 };

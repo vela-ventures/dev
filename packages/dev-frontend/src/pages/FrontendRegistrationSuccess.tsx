@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Paragraph } from "theme-ui";
+import { Box, Heading, Paragraph } from "theme-ui";
 import { Button } from "@/components/ui/button";
 
 import { Icon } from "../components/Icon";
@@ -32,10 +32,10 @@ export const FrontendRegistrationSuccess: React.FC<FrontendRegistrationSuccessPr
         boxShadow: 2
       }}
     >
-      <Flex sx={{ alignItems: "center", mx: 3, mb: 4, fontSize: 5 }}>
+      <div className="flex items-center mx-3 mb-4 text-5xl">
         <Icon name="check" />
         <Heading sx={{ ml: 3, fontSize: 4 }}>Success!</Heading>
-      </Flex>
+      </div>
 
       <Paragraph sx={{ fontSize: 2 }}>Your frontend is now ready to receive LQTY rewards.</Paragraph>
     </Box>

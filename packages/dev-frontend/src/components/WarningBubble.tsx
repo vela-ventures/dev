@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "theme-ui";
+import { Box, Text } from "theme-ui";
 
 import { Icon } from "./Icon";
 
@@ -19,9 +19,9 @@ export const WarningBubble: React.FC<React.PropsWithChildren> = ({ children }) =
       // bg: "rgba(46, 182, 234, 0.05)"
     }}
   >
-    <Flex sx={{ alignItems: "center" }}>
+    <div className="flex items-center">
       <Icon name="exclamation-triangle" size="lg" />
       <Text sx={{ ml: 2 }}>{children}</Text>
-    </Flex>
+    </div>
   </Box>
 );

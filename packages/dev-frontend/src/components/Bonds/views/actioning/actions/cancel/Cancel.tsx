@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Spinner } from "theme-ui";
+import { Spinner } from "theme-ui";
 import { Button } from "@/components/ui/button";
 import { ActionDescription, Amount } from "../../../../../ActionDescription";
 import { useBondView } from "../../../../context/BondViewContext";
@@ -26,7 +26,7 @@ export const Cancel: React.FC = () => {
         <Amount>{bond.accrued.shorten()} bLUSD</Amount>
       </ActionDescription>
 
-      <Flex variant="layout.actions">
+      <div className="flex" style={{ justifyContent: "space-between", gap: "12px" }}>
         <Button variant="cancel" onClick={handleBackPressed} disabled={isProcessingTransaction}>
           Back
         </Button>
@@ -34,7 +34,7 @@ export const Cancel: React.FC = () => {
           {!isProcessingTransaction && <>Confirm</>}
           {isProcessingTransaction && <Spinner size={28} sx={{ color: "white" }} />}
         </Button>
-      </Flex>
+      </div>
     </>
   );
 };

@@ -1,5 +1,4 @@
 import React from "react";
-import { Flex } from "theme-ui";
 import { Button } from "@/components/ui/button";
 
 import {
@@ -150,7 +149,7 @@ export const StakingManager: React.FC = () => {
           <InfoBubble>Adjust the {GT} amount to stake or withdraw.</InfoBubble>
         ))}
 
-      <Flex variant="layout.actions">
+      <div className="flex" style={{ justifyContent: "space-between", gap: "12px" }}>
         <Button
           variant="cancel"
           onClick={() => dispatchStakingViewAction({ type: "cancelAdjusting" })}
@@ -163,7 +162,7 @@ export const StakingManager: React.FC = () => {
         ) : (
           <Button disabled>Confirm</Button>
         )}
-      </Flex>
+      </div>
     </StakingEditor>
   );
 };

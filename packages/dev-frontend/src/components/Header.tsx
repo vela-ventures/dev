@@ -2,7 +2,7 @@ import { AddressZero } from "@ethersproject/constants";
 import { LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import React from "react";
-import { Box, Container, Flex } from "theme-ui";
+import { Box, Container } from "theme-ui";
 import { useLiquity } from "../hooks/LiquityContext";
 import { LiquityLogo } from "./LiquityLogo";
 
@@ -24,7 +24,7 @@ export const Header: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   return (
     <Container variant="header">
-      <Flex sx={{ alignItems: "center", flex: 1 }}>
+      <div className="flex items-center" style={{ flex: 1 }}>
         <LiquityLogo height={logoHeight} />
 
         <Box
@@ -41,7 +41,7 @@ export const Header: React.FC<React.PropsWithChildren> = ({ children }) => {
             <Nav />
           </>
         )}
-      </Flex>
+      </div>
 
       {children}
     </Container>

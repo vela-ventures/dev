@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Flex, Heading, Label } from "theme-ui";
+import { Box, Heading, Label } from "theme-ui";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 
@@ -20,7 +20,7 @@ export const LiquidationManager: React.FC = () => {
       <Heading>Liquidate</Heading>
 
       <Box sx={{ p: [2, 3] }}>
-        <Flex sx={{ alignItems: "stretch" }}>
+        <div className="flex items-stretch">
           <Label>Up to</Label>
 
           <Input
@@ -33,7 +33,7 @@ export const LiquidationManager: React.FC = () => {
 
           <Label>Vaults</Label>
 
-          <Flex sx={{ ml: 2, alignItems: "center" }}>
+          <div className="flex items-center ml-2">
             <Transaction
               id="batch-liquidate"
               tooltip="Liquidate"
@@ -49,8 +49,8 @@ export const LiquidationManager: React.FC = () => {
                 <Icon name="trash" size="lg" />
               </Button>
             </Transaction>
-          </Flex>
-        </Flex>
+          </div>
+        </div>
       </Box>
     </Card>
   );

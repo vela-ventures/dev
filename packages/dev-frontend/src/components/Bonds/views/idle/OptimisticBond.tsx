@@ -1,4 +1,4 @@
-import { Flex, ThemeUIStyleObject } from "theme-ui";
+import { ThemeUIStyleObject } from "theme-ui";
 import { Card } from "@/components/ui/card";
 import { EventType, HorizontalTimeline, UNKNOWN_DATE } from "../../../HorizontalTimeline";
 import { Record } from "../../Record";
@@ -66,31 +66,28 @@ export const OptimisticBond: React.FC<BondProps> = ({ bond, style }) => {
   const events = getBondEvents(bond);
 
   return (
-    <Flex
-      sx={{
-        justifyContent: "center",
-        alignItems: "center",
+    <div
+      className="flex justify-center items-center"
+      style={{
         gap: "12px",
         ...style
       }}
     >
-      <Flex sx={{ width: 150, height: 210 }}>
+      <div className="flex" style={{ width: 150, height: 210 }}>
         <Placeholder />
-      </Flex>
+      </div>
       <Card mt={[0, 0, 0, 0]} sx={{ borderRadius: 12, flexGrow: 1 }}>
-        <Flex p={[2, 3]} sx={{ flexDirection: "column" }}>
+        <div className="flex flex-col p-2 md:p-3">
           <HorizontalTimeline
             style={{ fontSize: "14.5px", justifyContent: "center", pt: 2, mx: 3 }}
             events={events}
           />
 
-          <Flex mt={4} variant="layout.actions" sx={{ justifyContent: "flex-end" }}>
-            <Flex
-              sx={{
-                justifyContent: "flex-start",
-                flexGrow: 1,
-                alignItems: "center",
-                pl: 4,
+          <div className="flex mt-4 justify-end" style={{ variant: "layout.actions" }}>
+            <div
+              className="flex justify-start grow items-center"
+              style={{
+                paddingLeft: "1rem",
                 gap: "0 28px",
                 fontSize: "14.5px"
               }}
@@ -98,11 +95,11 @@ export const OptimisticBond: React.FC<BondProps> = ({ bond, style }) => {
               <Record lexicon={l.BOND_DEPOSIT} value={bond.deposit.prettify(2)} type="LUSD" />
 
               <Record lexicon={l.MARKET_VALUE} type="LUSD" />
-            </Flex>
+            </div>
             <Actions bondId={bond.id} disabled />
-          </Flex>
-        </Flex>
+          </div>
+        </div>
       </Card>
-    </Flex>
+    </div>
   );
 };

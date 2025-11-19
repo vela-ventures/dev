@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Table } from "@/components/ui/table";
 import React, { useCallback, useEffect, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { Box, Flex, Heading, Text } from "theme-ui";
+import { Box, Heading, Text } from "theme-ui";
 
 import {
   CRITICAL_COLLATERAL_RATIO,
@@ -161,7 +161,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
       <Heading>
         <Abbreviation short="Troves">Risky Vaults</Abbreviation>
 
-        <Flex className="items-center">
+        <div className="flex items-center">
           {numberOfTroves !== 0 && (
             <>
               <Abbreviation
@@ -193,7 +193,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
           >
             <Icon name="redo" size="lg" />
           </Button>
-        </Flex>
+        </div>
       </Heading>
 
       {!troves || troves.length === 0 ? (

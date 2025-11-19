@@ -1,7 +1,7 @@
 import { LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import React, { useCallback } from "react";
-import { Box, Flex, Heading } from "theme-ui";
+import { Box, Heading } from "theme-ui";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { COIN } from "../../strings";
@@ -47,7 +47,7 @@ export const ReadOnlyTrove: React.FC = () => {
           <CollateralRatioInfoBubble value={trove.collateralRatio(price)} />
         </Box>
 
-        <Flex variant="layout.actions">
+        <div className="flex" style={{ justifyContent: "space-between", gap: "12px" }}>
           <Button variant="outline" onClick={handleCloseTrove}>
             Close Vault
           </Button>
@@ -55,7 +55,7 @@ export const ReadOnlyTrove: React.FC = () => {
             <Icon name="pen" size="sm" />
             &nbsp;Adjust
           </Button>
-        </Flex>
+        </div>
       </Box>
     </Card>
   );

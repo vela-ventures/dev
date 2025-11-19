@@ -1,6 +1,6 @@
 import { Decimal } from "@liquity/lib-base";
 import React from "react";
-import { Flex, Spinner } from "theme-ui";
+import { Spinner } from "theme-ui";
 import { Button } from "@/components/ui/button";
 import { StaticRow, StaticAmounts } from "../../../Trove/Editor";
 import { useBondView } from "../../context/BondViewContext";
@@ -35,7 +35,7 @@ export const RewardsPane: React.FC = () => {
         </StaticAmounts>
       </StaticRow>
 
-      <Flex variant="layout.actions">
+      <div className="flex" style={{ justifyContent: "space-between", gap: "12px" }}>
         <Button variant="cancel" onClick={handleBackPressed} disabled={isManageLiquidityPending}>
           Back
         </Button>
@@ -47,7 +47,7 @@ export const RewardsPane: React.FC = () => {
             <>Claim all rewards</>
           )}
         </Button>
-      </Flex>
+      </div>
     </>
   );
 };

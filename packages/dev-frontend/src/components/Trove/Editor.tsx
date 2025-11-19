@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, Flex, Label, SxProp, ThemeUICSSProperties } from "theme-ui";
+import { Text, Label, SxProp, ThemeUICSSProperties } from "theme-ui";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
@@ -15,7 +15,7 @@ type RowProps = SxProp &
 
 export const Row: React.FC<RowProps> = ({ sx, label, labelId, labelFor, children, infoIcon }) => {
   return (
-    <Flex sx={{ alignItems: "stretch", position: "relative", width: "100%", ...sx }}>
+    <div className="flex items-stretch" style={{ position: "relative", width: "100%", ...sx }}>
       <Label
         id={labelId}
         htmlFor={labelFor}
@@ -29,13 +29,13 @@ export const Row: React.FC<RowProps> = ({ sx, label, labelId, labelFor, children
           borderColor: "transparent"
         }}
       >
-        <Flex sx={{ alignItems: "center" }}>
+        <div className="flex items-center">
           {label}
           {infoIcon && infoIcon}
-        </Flex>
+        </div>
       </Label>
       {children}
-    </Flex>
+    </div>
   );
 };
 
@@ -89,22 +89,19 @@ export const StaticAmounts: React.FC<StaticAmountsProps & SxProp> = ({
   children
 }) => {
   return (
-    <Flex
+    <div
       id={inputId}
       aria-labelledby={labelledBy}
       {...{ onClick }}
-      sx={{
-        justifyContent: "space-between",
-        alignItems: "center",
-
+      className="flex justify-between items-center"
+      style={{
         ...(onClick ? { cursor: "text" } : {}),
-
         ...staticStyle,
         ...sx
       }}
     >
       {amount && (
-        <Flex sx={{ alignItems: "center" }}>
+        <div className="flex items-center">
           <Text sx={{ color, fontWeight: "medium" }}>{amount}</Text>
 
           {unit && (
@@ -123,11 +120,11 @@ export const StaticAmounts: React.FC<StaticAmountsProps & SxProp> = ({
               />
             </>
           )}
-        </Flex>
+        </div>
       )}
 
       {children}
-    </Flex>
+    </div>
   );
 };
 

@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 import React, { useEffect, useMemo, useState } from "react";
-import { Flex, Heading, Grid, Close, Text, Image, Spinner } from "theme-ui";
+import { Heading, Grid, Close, Text, Image, Spinner } from "theme-ui";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Decimal } from "@liquity/lib-base";
@@ -144,7 +144,7 @@ export const Details: React.FC<DetailsProps> = ({ onBack }) => {
   return (
     <>
       <Heading as="h2" sx={{ pt: 1, pb: 3, px: 2 }}>
-        <Flex sx={{ justifyContent: "center" }}>Bond LUSD</Flex>
+        <div className="flex justify-center">Bond LUSD</div>
         <Close
           onClick={handleDismiss}
           sx={{
@@ -155,7 +155,7 @@ export const Details: React.FC<DetailsProps> = ({ onBack }) => {
         />
       </Heading>
 
-      <Flex sx={{ justifyContent: "center", alignItems: "center" }}>
+      <div className="flex justify-center items-center">
         <Image
           sx={{
             height: 180,
@@ -167,14 +167,14 @@ export const Details: React.FC<DetailsProps> = ({ onBack }) => {
         />
         <InfoIcon
           tooltip={
-            <Card variant="tooltip" sx={{ width: "200px" }}>
+            <Card style={{ width: "200px" }}>
               {l.BOND_NFT.description}
             </Card>
           }
         />
-      </Flex>
+      </div>
 
-      <Flex my={4} sx={{ justifyContent: "center" }}>
+      <div className="flex justify-center my-4">
         <HorizontalTimeline
           events={[
             {
@@ -219,7 +219,7 @@ export const Details: React.FC<DetailsProps> = ({ onBack }) => {
             }
           ]}
         />
-      </Flex>
+      </div>
 
       <EditableRow
         label={l.BOND_DEPOSIT.term}
@@ -304,11 +304,11 @@ export const Details: React.FC<DetailsProps> = ({ onBack }) => {
         </ErrorDescription>
       )}
 
-      <Flex pb={2} sx={{ fontSize: "15.5px", justifyContent: "center", fontStyle: "italic" }}>
+      <div className="flex justify-center pb-2" style={{ fontSize: "15.5px", fontStyle: "italic" }}>
         You can cancel your bond at any time to recover your deposited LUSD
-      </Flex>
+      </div>
 
-      <Flex variant="layout.actions">
+      <div className="flex">
         <Button variant="cancel" onClick={handleBack} disabled={isApprovingOrConfirming}>
           Back
         </Button>
@@ -326,7 +326,7 @@ export const Details: React.FC<DetailsProps> = ({ onBack }) => {
             {isApprovingOrConfirming && <Spinner size={28} sx={{ color: "white" }} />}
           </Button>
         )}
-      </Flex>
+      </div>
     </>
   );
 };

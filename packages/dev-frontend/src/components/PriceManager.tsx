@@ -1,7 +1,7 @@
 import { Decimal, LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import React, { useEffect, useState } from "react";
-import { Box, Flex, Heading, Label } from "theme-ui";
+import { Box, Heading, Label } from "theme-ui";
 
 import { useLiquity } from "../hooks/LiquityContext";
 
@@ -34,7 +34,7 @@ export const PriceManager: React.FC = () => {
       <Heading>Price feed</Heading>
 
       <Box sx={{ p: [2, 3] }}>
-        <Flex sx={{ alignItems: "stretch" }}>
+        <div className="flex items-stretch">
           <Label>AR/GiB</Label>
 
           {/* <Label variant="unit">$</Label> */}
@@ -48,7 +48,7 @@ export const PriceManager: React.FC = () => {
           />
 
           {canSetPrice && (
-            <Flex sx={{ ml: 2, alignItems: "center" }}>
+            <div className="flex items-center ml-2">
               <Transaction
                 id="set-price"
                 tooltip="Set"
@@ -64,9 +64,9 @@ export const PriceManager: React.FC = () => {
                   <Icon name="chart-line" size="lg" />
                 </Button>
               </Transaction>
-            </Flex>
+            </div>
           )}
-        </Flex>
+        </div>
       </Box>
     </Card>
   );

@@ -5,7 +5,6 @@ import {
   Box,
   Checkbox,
   Close,
-  Flex,
   Heading,
   Image,
   Label,
@@ -23,7 +22,7 @@ const InformationContainer: React.FC<React.PropsWithChildren> = ({ children }) =
   return (
     <>
       <Heading as="h2" sx={{ pt: 2, pb: 3, px: 2 }}>
-        <Flex sx={{ justifyContent: "center" }}>Bond LUSD</Flex>
+        <div className="flex justify-center">Bond LUSD</div>
         <Close
           onClick={handleDismiss}
           sx={{
@@ -34,9 +33,9 @@ const InformationContainer: React.FC<React.PropsWithChildren> = ({ children }) =
         />
       </Heading>
 
-      <Flex sx={{ justifyContent: "center" }}>
+      <div className="flex justify-center">
         <Image src="./bonds/bond-info.png" sx={{ height: "200px" }} />
-      </Flex>
+      </div>
 
       {children}
     </>
@@ -72,20 +71,20 @@ export const Information: React.FC = () => {
         </Paragraph>
       </Box>
 
-      <Flex variant="layout.actions">
-        <Flex sx={{ justifyContent: "flex-end", flexDirection: "column" }}>
+      <div className="flex">
+        <div className="flex justify-end flex-col">
           <Label sx={{ fontSize: "14px" }}>
-            <Flex>
+            <div className="flex">
               <Checkbox ref={hideMessageRef} />
               Don't show this message again
-            </Flex>
+            </div>
           </Label>
-        </Flex>
+        </div>
         <Button variant="cancel" onClick={back ? back : () => {}}>
           Back
         </Button>
         <Button onClick={handleUnderstandPressed}>Continue</Button>
-      </Flex>
+      </div>
     </InformationContainer>
   );
 };

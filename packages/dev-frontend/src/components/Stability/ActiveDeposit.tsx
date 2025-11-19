@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import { Box, Flex, Heading } from "theme-ui";
+import { Box, Heading } from "theme-ui";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -55,9 +55,9 @@ export const ActiveDeposit: React.FC = () => {
       <Heading>
         Stability Pool
         {!isWaitingForTransaction && (
-          <Flex sx={{ justifyContent: "flex-end" }}>
+          <div className="flex justify-end">
             <RemainingLQTY />
-          </Flex>
+          </div>
         )}
       </Heading>
       <Box sx={{ p: [2, 3] }}>
@@ -84,7 +84,7 @@ export const ActiveDeposit: React.FC = () => {
             unit="AR"
           />
 
-          <Flex sx={{ alignItems: "center" }}>
+          <div className="flex items-center">
             <StaticRow
               label="Reward"
               inputId="deposit-reward"
@@ -103,20 +103,20 @@ export const ActiveDeposit: React.FC = () => {
                 />
               }
             />
-            <Flex sx={{ justifyContent: "flex-end", flexShrink: 0 }}>
+            <div className="flex justify-end shrink-0">
               <Yield />
-            </Flex>
-          </Flex>
+            </div>
+          </div>
         </Box>
 
-        <Flex variant="layout.actions">
+        <div className="flex" style={{ variant: "layout.actions" }}>
           <Button variant="outline" onClick={handleAdjustDeposit}>
             <Icon name="pen" size="sm" />
             &nbsp;Adjust
           </Button>
 
           <ClaimRewards disabled={!hasGain && !hasReward}>Claim AR and NAU</ClaimRewards>
-        </Flex>
+        </div>
 
         {hasTrove && <ClaimAndMove disabled={!hasGain}>Claim NAU and move AR to Vault</ClaimAndMove>}
       </Box>

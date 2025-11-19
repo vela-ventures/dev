@@ -1,5 +1,5 @@
 import { ConnectKitButton } from "connectkit";
-import { Box, Flex } from "theme-ui";
+import { Box } from "theme-ui";
 import { Button } from "@/components/ui/button";
 import { Icon } from "./Icon";
 
@@ -14,12 +14,12 @@ export const WalletConnector: React.FC<WalletConnectorProps> = ({ children }) =>
         connectKit.isConnected ? (
           children
         ) : (
-          <Flex sx={{ height: "100vh", justifyContent: "center", alignItems: "center" }}>
+          <div className="flex h-screen justify-center items-center">
             <Button onClick={connectKit.show}>
               <Icon name="plug" size="lg" />
               <Box sx={{ ml: 2 }}>Connect wallet</Box>
             </Button>
-          </Flex>
+          </div>
         )
       }
     </ConnectKitButton.Custom>

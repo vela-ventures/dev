@@ -1,6 +1,6 @@
 import { Decimal } from "@liquity/lib-base";
 import React, { useEffect, useState } from "react";
-import { Flex, Spinner, Checkbox, Label, Text } from "theme-ui";
+import { Spinner, Checkbox, Label, Text } from "theme-ui";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Amount } from "../../../ActionDescription";
@@ -154,9 +154,9 @@ export const DepositPane: React.FC = () => {
         maxedOut={lusdAmount.eq(coalescedLusdBalance)}
       />
 
-      <Flex sx={{ justifyContent: "center", mb: 3 }}>
+      <div className="flex justify-center mb-3">
         <Icon name="arrow-down" size="lg" />
-      </Flex>
+      </div>
 
       <DisabledEditableRow
         label="Mint LP tokens"
@@ -165,7 +165,7 @@ export const DepositPane: React.FC = () => {
       />
 
       <Label>
-        <Flex sx={{ alignItems: "center" }}>
+        <div className="flex items-center">
           <Checkbox checked={shouldDepositBalanced} onChange={handleToggleShouldDepositBalanced} />
           <Text sx={{ fontWeight: 300, fontSize: "16px" }}>Deposit tokens in a balanced ratio</Text>
           <InfoIcon
@@ -178,11 +178,11 @@ export const DepositPane: React.FC = () => {
               </Card>
             }
           />
-        </Flex>
+        </div>
       </Label>
 
       <Label mb={2}>
-        <Flex sx={{ alignItems: "center" }}>
+        <div className="flex items-center">
           <Checkbox checked={shouldStakeInGauge} onChange={handleToggleShouldStakeInGauge} />
           <Text sx={{ fontWeight: 300, fontSize: "16px" }}>Stake LP tokens in Curve gauge</Text>
           <InfoIcon
@@ -195,7 +195,7 @@ export const DepositPane: React.FC = () => {
               </Card>
             }
           />
-        </Flex>
+        </div>
       </Label>
 
       <PoolDetails />
@@ -215,7 +215,7 @@ export const DepositPane: React.FC = () => {
         </ErrorDescription>
       )}
 
-      <Flex variant="layout.actions">
+      <div className="flex" style={{ variant: "layout.actions" }}>
         <Button
           variant="cancel"
           onClick={handleBackPressed}
@@ -241,7 +241,7 @@ export const DepositPane: React.FC = () => {
             {isApprovePending ? <Spinner size={28} sx={{ color: "white" }} /> : <>Approve</>}
           </Button>
         )}
-      </Flex>
+      </div>
     </>
   );
 };

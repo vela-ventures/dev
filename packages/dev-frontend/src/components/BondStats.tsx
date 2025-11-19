@@ -1,5 +1,5 @@
 import React from "react";
-import { Heading, Text, Flex } from "theme-ui";
+import { Heading, Text } from "theme-ui";
 import { Card } from "@/components/ui/card";
 import { Decimal } from "@liquity/lib-base";
 import * as l from "../components/Bonds/lexicon";
@@ -123,9 +123,9 @@ export const BondStats: React.FC<BondStatsProps> = () => {
         <Metric value={protocolInfo.treasury.total.shorten()} unit="LUSD" />
       </Statistic>
 
-      <Flex mt={3}>
+      <div className="flex mt-3">
         <TreasuryChart />
-      </Flex>
+      </div>
     </Card>
   );
 };

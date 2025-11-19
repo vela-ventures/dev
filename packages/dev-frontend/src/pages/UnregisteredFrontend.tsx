@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Paragraph } from "theme-ui";
+import { Box, Heading, Paragraph } from "theme-ui";
 
 import { shortenAddress } from "../utils/shortenAddress";
 import { Icon } from "../components/Icon";
@@ -26,10 +26,10 @@ export const UnregisteredFrontend: React.FC = () => {
         boxShadow: 2
       }}
     >
-      <Flex sx={{ alignItems: "center", mx: 3, mb: 2 }}>
+      <div className="flex items-center mx-3 mb-2">
         <Icon name="exclamation-triangle" size="2x" />
         <Heading sx={{ ml: 3, fontSize: "18px" }}>Frontend not yet registered</Heading>
-      </Flex>
+      </div>
 
       <Paragraph sx={{ fontSize: 2 }}>
         If you're the operator of this frontend, please select <b>{shortenAddress(frontendTag)}</b>{" "}

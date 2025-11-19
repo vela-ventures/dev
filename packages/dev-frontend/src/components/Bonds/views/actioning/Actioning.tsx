@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 import React from "react";
-import { Flex, Heading, Grid, Close, Box } from "theme-ui";
+import { Heading, Grid, Close, Box } from "theme-ui";
 import { Record } from "../../Record";
 import { useBondView } from "../../context/BondViewContext";
 import { HorizontalTimeline, Label, SubLabel } from "../../../HorizontalTimeline";
@@ -89,9 +89,9 @@ export const Actioning: React.FC = () => {
   return (
     <ReactModal onDismiss={handleDismiss}>
       <Heading as="h2" sx={{ pt: 2, pb: 3, px: 2 }}>
-        <Flex sx={{ justifyContent: "center" }}>
+        <div className="flex justify-center">
           {view === "CANCELLING" ? l.CANCEL_BOND.term : l.CLAIM_BOND.term}
-        </Flex>
+        </div>
         <Close
           onClick={handleDismiss}
           sx={{
@@ -101,9 +101,9 @@ export const Actioning: React.FC = () => {
           }}
         />
       </Heading>
-      <Flex my={4} mx={2} sx={{ justifyContent: "center" }}>
+      <div className="flex justify-center my-4 mx-2">
         <HorizontalTimeline events={events} />
-      </Flex>
+      </div>
       <Grid gap="12px" columns={3} sx={{ my: 4, justifyItems: "center" }}>
         <Record lexicon={l.BOND_DEPOSIT} value={bond.deposit.prettify(2)} type="LUSD" />
 

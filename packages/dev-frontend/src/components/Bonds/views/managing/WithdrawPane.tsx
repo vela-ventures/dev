@@ -1,6 +1,6 @@
 import { Decimal } from "@liquity/lib-base";
 import React, { useEffect, useState } from "react";
-import { Flex, Spinner, Label, Radio, Text } from "theme-ui";
+import { Spinner, Label, Radio, Text } from "theme-ui";
 import { Button } from "@/components/ui/button";
 import { Amount } from "../../../ActionDescription";
 import { ErrorDescription } from "../../../ErrorDescription";
@@ -156,11 +156,11 @@ export const WithdrawPane: React.FC = () => {
         maxedOut={burnLpTokens.eq(coalescedLpTokenBalance)}
       />
 
-      <Flex sx={{ justifyContent: "center", mb: 3 }}>
+      <div className="flex justify-center mb-3">
         <Icon name="arrow-down" size="lg" />
-      </Flex>
+      </div>
 
-      <Flex sx={{ justifyContent: "center", mb: 3 }}>
+      <div className="flex justify-center mb-3">
         {Array.from(tokenSymbol.entries()).map(([key, symbol]) => (
           <Label key={key} variant="radioLabel">
             <Radio
@@ -182,7 +182,7 @@ export const WithdrawPane: React.FC = () => {
           />
           Both
         </Label>
-      </Flex>
+      </div>
 
       <DisabledEditableRow label="Withdraw" inputId="withdraw-output-amount">
         <DisabledEditableAmounts sx={{ justifyContent: "flex-start" }}>
@@ -206,7 +206,7 @@ export const WithdrawPane: React.FC = () => {
         </ErrorDescription>
       )}
 
-      <Flex variant="layout.actions">
+      <div className="flex" style={{ justifyContent: "space-between", gap: "12px" }}>
         <Button
           variant="cancel"
           onClick={handleBackPressed}
@@ -234,7 +234,7 @@ export const WithdrawPane: React.FC = () => {
             {isManageLiquidityPending ? <Spinner size={28} sx={{ color: "white" }} /> : <>Confirm</>}
           </Button>
         )}
-      </Flex>
+      </div>
     </>
   );
 };

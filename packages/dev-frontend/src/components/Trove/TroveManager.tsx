@@ -1,5 +1,4 @@
 import { useCallback, useEffect } from "react";
-import { Flex } from "theme-ui";
 import { Button } from "@/components/ui/button";
 
 import { Decimal, Decimalish, LiquityStoreState, LUSD_MINIMUM_DEBT, Trove } from "@liquity/lib-base";
@@ -228,7 +227,7 @@ export const TroveManager: React.FC<TroveManagerProps> = ({ collateral, debt }) 
           <InfoBubble>Adjust your Vault by modifying its collateral, debt, or both.</InfoBubble>
         ))}
 
-      <Flex variant="layout.actions">
+      <div className="flex" style={{ justifyContent: "space-between", gap: "12px" }}>
         <Button variant="cancel" onClick={handleCancel}>
           Cancel
         </Button>
@@ -245,7 +244,7 @@ export const TroveManager: React.FC<TroveManagerProps> = ({ collateral, debt }) 
         ) : (
           <Button disabled>Confirm</Button>
         )}
-      </Flex>
+      </div>
     </TroveEditor>
   );
 };

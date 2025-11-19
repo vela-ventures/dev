@@ -1,5 +1,5 @@
 import { memo, useState, useEffect } from "react";
-import { Flex, Box, Text, ThemeUIStyleObject } from "theme-ui";
+import { Box, Text, ThemeUIStyleObject } from "theme-ui";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import { buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
@@ -80,9 +80,9 @@ export const TransactionStatus: React.FC<TransactionStatusProps> = ({ state, mes
   }
 
   return (
-    <Flex
+    <div
+      className="flex items-center"
       sx={{
-        alignItems: "center",
         bg:
           state === "confirmed"
             ? "success"
@@ -113,6 +113,6 @@ export const TransactionStatus: React.FC<TransactionStatusProps> = ({ state, mes
           ? message || "Transaction failed. Please try again."
           : "Confirmed"}
       </Text>
-    </Flex>
+    </div>
   );
 };

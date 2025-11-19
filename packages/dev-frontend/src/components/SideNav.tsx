@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Box, Container, Flex } from "theme-ui";
+import { Box, Container } from "theme-ui";
 import { Button } from "@/components/ui/button";
 import { Icon } from "./Icon";
 import { Link } from "./Link";
@@ -28,7 +28,7 @@ export const SideNav: React.FC = () => {
         }
       }}
     >
-      <Flex variant="layout.sidenav">
+      <div className="flex flex-col" style={{ width: "75vw", height: "100vh", background: "white" }}>
         <Button
           sx={{ position: "fixed", right: "25vw", m: 2 }}
           variant="icon"
@@ -42,7 +42,7 @@ export const SideNav: React.FC = () => {
           <Link to="/bonds">Bonds</Link>
           <Link to="/risky-troves">Risky Vaults</Link>
         </Box>
-      </Flex>
+      </div>
     </Container>
   );
 };

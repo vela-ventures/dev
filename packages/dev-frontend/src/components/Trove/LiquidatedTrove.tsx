@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import React, { useCallback } from "react";
-import { Box, Flex, Heading } from "theme-ui";
+import { Box, Heading } from "theme-ui";
 import { Card } from "@/components/ui/card";
 import { CollateralSurplusAction } from "../CollateralSurplusAction";
 import { InfoMessage } from "../InfoMessage";
@@ -30,10 +30,10 @@ export const LiquidatedTrove: React.FC = () => {
             : "You can borrow GiB by opening a Vault."}
         </InfoMessage>
 
-        <Flex variant="layout.actions">
+        <div className="flex" style={{ variant: "layout.actions" }}>
           {hasSurplusCollateral && <CollateralSurplusAction />}
           {!hasSurplusCollateral && <Button onClick={handleOpenTrove}>Open Vault</Button>}
-        </Flex>
+        </div>
       </Box>
     </Card>
   );

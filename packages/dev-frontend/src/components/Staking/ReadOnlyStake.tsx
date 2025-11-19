@@ -1,4 +1,4 @@
-import { Box, Flex, Heading } from "theme-ui";
+import { Box, Heading } from "theme-ui";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -60,14 +60,14 @@ export const ReadOnlyStake: React.FC = () => {
           unit={COIN}
         />
 
-        <Flex variant="layout.actions">
+        <div className="flex" style={{ variant: "layout.actions" }}>
           <Button variant="outline" onClick={() => dispatch({ type: "startAdjusting" })}>
             <Icon name="pen" size="sm" />
             &nbsp;Adjust
           </Button>
 
           <StakingGainsAction />
-        </Flex>
+        </div>
       </Box>
 
       {changePending && <LoadingOverlay />}

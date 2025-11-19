@@ -1,6 +1,6 @@
 import { Contract } from "@ethersproject/contracts";
 import React, { useState } from "react";
-import { Box, Container, Flex, Heading } from "theme-ui";
+import { Box, Container, Heading } from "theme-ui";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -38,11 +38,11 @@ export const Faucet: React.FC = () => {
         <Heading>Faucet</Heading>
         <Box sx={{ p: [2, 3] }}>
           <Box>Click the button to drip test AR.</Box>
-          <Flex variant="layout.actions">
+          <div className="flex">
             <Button onClick={handleDrip} disabled={isLoading}>
               {isLoading ? "Dripping..." : "Drip"}
             </Button>
-          </Flex>
+          </div>
         </Box>
       </Card>
     </Container>
