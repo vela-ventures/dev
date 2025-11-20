@@ -1,11 +1,11 @@
 /** @jsxImportSource theme-ui */
 
 import { Decimal, Percent } from "@liquity/lib-base";
+import { MoveDownIcon } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
-import { Flex, Button, Spinner, Heading, Close, Box, Label, Radio, Input, Link } from "theme-ui";
+import { Box, Button, Close, Flex, Heading, Input, Label, Link, Radio, Spinner } from "theme-ui";
 import { Amount } from "../../../ActionDescription";
 import { ErrorDescription } from "../../../ErrorDescription";
-import { Icon } from "../../../Icon";
 import { Placeholder } from "../../../Placeholder";
 import {
   DisabledEditableAmounts,
@@ -185,7 +185,7 @@ export const SwapPane: React.FC = () => {
       />
 
       <Flex sx={{ justifyContent: "center", mb: 3 }}>
-        <Icon name="arrow-down" size="lg" />
+        <MoveDownIcon>
       </Flex>
 
       <DisabledEditableRow label="Buy">

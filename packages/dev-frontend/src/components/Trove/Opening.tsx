@@ -12,10 +12,10 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Box, Button, Card, Flex, Heading, Spinner } from "theme-ui";
 
+import { HistoryIcon } from "lucide-react";
 import { useArweaveBalance } from "../../hooks/useArweaveBalance";
 import { useStableTroveChange } from "../../hooks/useStableTroveChange";
 import { COIN } from "../../strings";
-import { Icon } from "../Icon";
 import { InfoBubble } from "../InfoBubble";
 import { InfoIcon } from "../InfoIcon";
 import { LoadingOverlay } from "../LoadingOverlay";
@@ -103,7 +103,7 @@ export const Opening: React.FC = () => {
         Vault
         {isDirty && !isTransactionPending && (
           <Button variant="titleIcon" sx={{ ":enabled:hover": { color: "danger" } }} onClick={reset}>
-            <Icon name="history" size="lg" />
+            <HistoryIcon/>
           </Button>
         )}
       </Heading>

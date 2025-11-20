@@ -1,6 +1,6 @@
+import { Menu, XIcon } from "lucide-react";
 import React, { useRef, useState } from "react";
 import { Box, Button, Container, Flex } from "theme-ui";
-import { Icon } from "./Icon";
 import { Link } from "./Link";
 import { LiquityLogo } from "./LiquityLogo";
 
@@ -13,7 +13,7 @@ export const SideNav: React.FC = () => {
   if (!isVisible) {
     return (
       <Button sx={{ display: ["flex", "none"] }} variant="icon" onClick={() => setIsVisible(true)}>
-        <Icon name="bars" size="lg" />
+        <Menu/>
       </Button>
     );
   }
@@ -33,7 +33,7 @@ export const SideNav: React.FC = () => {
           variant="icon"
           onClick={() => setIsVisible(false)}
         >
-          <Icon name="times" size="2x" />
+          <XIcon/>
         </Button>
         <LiquityLogo height={logoHeight} p={2} />
         <Box as="nav" sx={{ m: 3, mt: 1, p: 0 }} onClick={() => setIsVisible(false)}>

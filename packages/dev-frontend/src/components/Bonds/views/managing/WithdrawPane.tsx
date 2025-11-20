@@ -1,9 +1,9 @@
 import { Decimal } from "@liquity/lib-base";
+import { MoveDownIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { Flex, Button, Spinner, Label, Radio, Text } from "theme-ui";
+import { Button, Flex, Label, Radio, Spinner, Text } from "theme-ui";
 import { Amount } from "../../../ActionDescription";
 import { ErrorDescription } from "../../../ErrorDescription";
-import { Icon } from "../../../Icon";
 import { DisabledEditableAmounts, DisabledEditableRow, EditableRow } from "../../../Trove/Editor";
 import { WarningBubble } from "../../../WarningBubble";
 import { useBondView } from "../../context/BondViewContext";
@@ -156,7 +156,7 @@ export const WithdrawPane: React.FC = () => {
       />
 
       <Flex sx={{ justifyContent: "center", mb: 3 }}>
-        <Icon name="arrow-down" size="lg" />
+        <MoveDownIcon/>
       </Flex>
 
       <Flex sx={{ justifyContent: "center", mb: 3 }}>

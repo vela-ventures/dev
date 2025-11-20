@@ -4,8 +4,8 @@ import { Box, Button, Card, Flex, Heading } from "theme-ui";
 import { LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 
+import { PencilIcon } from "lucide-react";
 import { COIN, GT } from "../../strings";
-import { Icon } from "../Icon";
 import { InfoIcon } from "../InfoIcon";
 import { LoadingOverlay } from "../LoadingOverlay";
 import { useMyTransactionState } from "../Transaction";
@@ -109,7 +109,7 @@ export const ActiveDeposit: React.FC = () => {
 
         <Flex variant="layout.actions">
           <Button variant="outline" onClick={handleAdjustDeposit}>
-            <Icon name="pen" size="sm" />
+            <PencilIcon size="16"/>
             &nbsp;Adjust
           </Button>
 

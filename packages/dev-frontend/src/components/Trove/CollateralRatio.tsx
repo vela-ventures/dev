@@ -1,14 +1,14 @@
 import React from "react";
-import { Flex, Box, Card } from "theme-ui";
+import { Box, Card, Flex } from "theme-ui";
 
 import { CRITICAL_COLLATERAL_RATIO, Decimal, Difference, Percent } from "@liquity/lib-base";
 
-import { Icon } from "../Icon";
+import { HeartPulseIcon } from "lucide-react";
 
-import { StaticRow } from "./Editor";
-import { InfoIcon } from "../InfoIcon";
 import { InfoBubble } from "../InfoBubble";
+import { InfoIcon } from "../InfoIcon";
 import { LearnMoreLink } from "../Tooltip";
+import { StaticRow } from "./Editor";
 
 type CollateralRatioProps = {
   value?: Decimal;
@@ -22,7 +22,7 @@ export const CollateralRatio: React.FC<CollateralRatioProps> = ({ value, change 
     <>
       <Flex>
         <Box sx={{ mt: [2, 0], ml: 3, mr: -2, fontSize: "24px" }}>
-          <Icon name="heartbeat" />
+          <HeartPulseIcon />
         </Box>
 
         <StaticRow

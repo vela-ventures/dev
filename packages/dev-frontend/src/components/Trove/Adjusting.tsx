@@ -10,10 +10,10 @@ import { useLiquitySelector } from "@liquity/lib-react";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Box, Button, Card, Flex, Heading } from "theme-ui";
 
+import { HistoryIcon } from "lucide-react";
 import { useArweaveBalance } from "../../hooks/useArweaveBalance";
 import { useStableTroveChange } from "../../hooks/useStableTroveChange";
 import { COIN } from "../../strings";
-import { Icon } from "../Icon";
 import { InfoBubble } from "../InfoBubble";
 import { InfoIcon } from "../InfoIcon";
 import { LoadingOverlay } from "../LoadingOverlay";
@@ -165,7 +165,7 @@ export const Adjusting: React.FC = () => {
         Vault
         {isDirty && !isTransactionPending && (
           <Button variant="titleIcon" sx={{ ":enabled:hover": { color: "danger" } }} onClick={reset}>
-            <Icon name="history" size="lg" />
+            <HistoryIcon/>
           </Button>
         )}
       </Heading>

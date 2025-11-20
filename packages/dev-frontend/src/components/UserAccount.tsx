@@ -10,9 +10,9 @@ import { COIN, GT } from "../strings";
 import { shortenAddress } from "../utils/shortenAddress";
 
 import { ConnectKitButton } from "connectkit";
+import { CircleUserIcon, WalletIcon } from "lucide-react";
 import { useBondAddresses } from "./Bonds/context/BondAddressesContext";
 import { useBondView } from "./Bonds/context/BondViewContext";
-import { Icon } from "./Icon";
 
 const select = ({ accountBalance, lusdBalance, lqtyBalance }: LiquityStoreState) => ({
   accountBalance,
@@ -38,7 +38,7 @@ export const UserAccount: React.FC = () => {
             sx={{ alignItems: "center", p: 2, mr: 3 }}
             onClick={connectKit.show}
           >
-            <Icon name="user-circle" size="lg" />
+            <CircleUserIcon/>
             <Text as="span" sx={{ ml: 2, fontSize: 1 }}>
               {shortenAddress(account)}
             </Text>
@@ -52,7 +52,7 @@ export const UserAccount: React.FC = () => {
           alignItems: "center"
         }}
       >
-        <Icon name="wallet" size="lg" />
+        <WalletIcon/>
 
         {([
           ["LOAD", accountBalance],

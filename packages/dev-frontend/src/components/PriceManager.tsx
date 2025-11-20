@@ -6,7 +6,7 @@ import { useLiquitySelector } from "@liquity/lib-react";
 
 import { useLiquity } from "../hooks/LiquityContext";
 
-import { Icon } from "./Icon";
+import { ChartLineIcon } from "lucide-react";
 import { Transaction } from "./Transaction";
 
 const selectPrice = ({ price }: LiquityStoreState) => price;
@@ -58,7 +58,7 @@ export const PriceManager: React.FC = () => {
                 }}
               >
                 <Button variant="icon">
-                  <Icon name="chart-line" size="lg" />
+                  <ChartLineIcon/>
                 </Button>
               </Transaction>
             </Flex>

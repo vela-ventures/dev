@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Card, Heading, Box, Flex, Input, Label, Paragraph, Button, Spinner } from "theme-ui";
+import { Box, Button, Card, Flex, Heading, Input, Label, Paragraph, Spinner } from "theme-ui";
 
 import { Decimal } from "@liquity/lib-base";
 
-import { shortenAddress } from "../utils/shortenAddress";
-import { useLiquity } from "../hooks/LiquityContext";
+import { HandIcon } from "lucide-react";
 import { Transaction, useMyTransactionState } from "../components/Transaction";
-import { Icon } from "../components/Icon";
+import { useLiquity } from "../hooks/LiquityContext";
+import { shortenAddress } from "../utils/shortenAddress";
 
 type FrontendRegistrationActionProps = {
   kickbackRate: Decimal;
@@ -92,7 +92,7 @@ export const FrontendRegistration: React.FC = () => {
         }}
       >
         <Flex sx={{ alignItems: "center", mx: 3, fontSize: 4 }}>
-          <Icon name="hand-paper" />
+          <HandIcon/>
           <Heading sx={{ ml: 3, fontSize: "18px" }}>Before you proceed</Heading>
         </Flex>
 

@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { Heading, Box, Card, Button } from "theme-ui";
+import { Box, Button, Card, Heading } from "theme-ui";
 
 import { Decimal, Decimalish, Difference, LiquityStoreState, LQTYStake } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 
 import { COIN, GT } from "../../strings";
 
-import { Icon } from "../Icon";
-import { EditableRow, StaticRow } from "../Trove/Editor";
+import { HistoryIcon } from "lucide-react";
 import { LoadingOverlay } from "../LoadingOverlay";
+import { EditableRow, StaticRow } from "../Trove/Editor";
 
 import { useStakingView } from "./context/StakingViewContext";
 
@@ -57,7 +57,7 @@ export const StakingEditor: React.FC<StakingEditorProps> = ({
             sx={{ ":enabled:hover": { color: "danger" } }}
             onClick={() => dispatch({ type: "revert" })}
           >
-            <Icon name="history" size="lg" />
+            <HistoryIcon/>
           </Button>
         )}
       </Heading>
