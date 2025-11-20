@@ -1,6 +1,6 @@
 import { ConnectKitButton } from "connectkit";
 import { PlugIcon } from "lucide-react";
-import { Button, Flex } from "theme-ui";
+import { Button } from "./ui/button";
 
 type WalletConnectorProps = React.PropsWithChildren<{
   loader?: React.ReactNode;
@@ -13,12 +13,11 @@ export const WalletConnector: React.FC<WalletConnectorProps> = ({ children }) =>
         connectKit.isConnected ? (
           children
         ) : (
-          <Flex sx={{ height: "100vh", justifyContent: "center", alignItems: "center" }}>
+          <div className="h-screen flex justify-center items-center">
             <Button onClick={connectKit.show}>
-              <PlugIcon/>
-              <div className="ml-2">Connect wallet</div>
+              <PlugIcon/> Connect wallet
             </Button>
-          </Flex>
+          </div>
         )
       }
     </ConnectKitButton.Custom>
