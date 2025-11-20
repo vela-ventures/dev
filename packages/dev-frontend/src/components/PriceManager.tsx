@@ -1,10 +1,11 @@
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Decimal, LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import React, { useEffect, useState } from "react";
-import { Box, Card, Heading, Input, Label } from "theme-ui";
-import { Button } from "./ui/button";
-
 import { useLiquity } from "../hooks/LiquityContext";
+import { Button } from "./ui/button";
 
 import { ChartLineIcon } from "lucide-react";
 import { Transaction } from "./Transaction";
@@ -27,44 +28,42 @@ export const PriceManager: React.FC = () => {
   }, [price]);
 
   return (
-    <Card>
-      <Heading>Price feed</Heading>
+    <Card className="mt-8">
+      <CardHeader>
+        <CardTitle>Price feed</CardTitle>
+      </CardHeader>
 
-      <Box sx={{ p: [2, 3] }}>
-        <div className="flex items-stretch">
-          <Label>AR/GiB</Label>
+      <CardContent className="p-2 md:p-3 flex items-stretch">
+        <Label className="mr-2">AR/GiB</Label>
 
-          {/* <Label variant="unit">$</Label> */}
+        <Input
+          type={canSetPrice ? "number" : "text"}
+          step="any"
+          value={editedPrice}
+          onChange={e => setEditedPrice(e.target.value)}
+          disabled={!canSetPrice}
+        />
 
-          <Input
-            type={canSetPrice ? "number" : "text"}
-            step="any"
-            value={editedPrice}
-            onChange={e => setEditedPrice(e.target.value)}
-            disabled={!canSetPrice}
-          />
-
-          {canSetPrice && (
-            <div className="flex ml-2 items-center">
-              <Transaction
-                id="set-price"
-                tooltip="Set"
-                tooltipPlacement="bottom"
-                send={overrides => {
-                  if (!editedPrice) {
-                    throw new Error("Invalid price");
-                  }
-                  return liquity.setPrice(Decimal.from(editedPrice), overrides);
-                }}
-              >
-                <Button size="icon-lg" variant="outline">
-                  <ChartLineIcon />
-                </Button>
-              </Transaction>
-            </div>
-          )}
-        </div>
-      </Box>
+        {canSetPrice && (
+          <div className="flex ml-2 items-center">
+            <Transaction
+              id="set-price"
+              tooltip="Set"
+              tooltipPlacement="bottom"
+              send={overrides => {
+                if (!editedPrice) {
+                  throw new Error("Invalid price");
+                }
+                return liquity.setPrice(Decimal.from(editedPrice), overrides);
+              }}
+            >
+              <Button variant="outline">
+                <ChartLineIcon />
+              </Button>
+            </Transaction>
+          </div>
+        )}
+      </CardContent>
     </Card>
   );
 };
