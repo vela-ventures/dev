@@ -1,7 +1,8 @@
+import { Button } from "@/components/ui/button";
 import { Decimal } from "@liquity/lib-base";
 import { MoveDownIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { Button, Flex, Label, Radio, Spinner, Text } from "theme-ui";
+import { Flex, Label, Radio, Spinner, Text } from "theme-ui";
 import { Amount } from "../../../ActionDescription";
 import { ErrorDescription } from "../../../ErrorDescription";
 import { DisabledEditableAmounts, DisabledEditableRow, EditableRow } from "../../../Trove/Editor";
@@ -207,7 +208,7 @@ export const WithdrawPane: React.FC = () => {
 
       <Flex variant="layout.actions">
         <Button
-          variant="cancel"
+          variant="outline"
           onClick={handleBackPressed}
           disabled={isApprovePending || isManageLiquidityPending}
         >
@@ -216,7 +217,6 @@ export const WithdrawPane: React.FC = () => {
 
         {needsApproval && (
           <Button
-            variant="primary"
             onClick={handleApprovePressed}
             disabled={burnLpTokens.isZero || isApprovePending}
           >
@@ -226,7 +226,6 @@ export const WithdrawPane: React.FC = () => {
 
         {!needsApproval && (
           <Button
-            variant="primary"
             onClick={handleConfirmPressed}
             disabled={burnLpTokens.isZero || isBalanceInsufficient || isManageLiquidityPending}
           >

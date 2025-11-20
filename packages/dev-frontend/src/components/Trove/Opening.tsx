@@ -8,11 +8,10 @@ import {
   Trove
 } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
+import { HistoryIcon } from "lucide-react";
 import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Box, Button, Card, Flex, Heading, Spinner } from "theme-ui";
-
-import { HistoryIcon } from "lucide-react";
+import { Box, Card, Flex, Heading, Spinner } from "theme-ui";
 import { useArweaveBalance } from "../../hooks/useArweaveBalance";
 import { useStableTroveChange } from "../../hooks/useStableTroveChange";
 import { COIN } from "../../strings";
@@ -20,6 +19,7 @@ import { InfoBubble } from "../InfoBubble";
 import { InfoIcon } from "../InfoIcon";
 import { LoadingOverlay } from "../LoadingOverlay";
 import { useMyTransactionState } from "../Transaction";
+import { Button } from "../ui/button";
 import { CollateralRatio, CollateralRatioInfoBubble } from "./CollateralRatio";
 import { EditableRow, StaticRow } from "./Editor";
 import { ExpensiveTroveChangeWarning, GasEstimationState } from "./ExpensiveTroveChangeWarning";
@@ -102,7 +102,7 @@ export const Opening: React.FC = () => {
       <Heading>
         Vault
         {isDirty && !isTransactionPending && (
-          <Button variant="titleIcon" sx={{ ":enabled:hover": { color: "danger" } }} onClick={reset}>
+          <Button variant="link" sx={{ ":enabled:hover": { color: "danger" } }} onClick={reset}>
             <HistoryIcon/>
           </Button>
         )}
@@ -220,7 +220,7 @@ export const Opening: React.FC = () => {
         />
 
         <Flex variant="layout.actions">
-          <Button variant="cancel" onClick={handleCancelPressed}>
+          <Button variant="outline" onClick={handleCancelPressed}>
             Cancel
           </Button>
 

@@ -1,7 +1,8 @@
+import { Button } from "@/components/ui/button";
 import { Decimal } from "@liquity/lib-base";
 import React from "react";
-import { Flex, Button, Spinner } from "theme-ui";
-import { StaticRow, StaticAmounts } from "../../../Trove/Editor";
+import { Flex, Spinner } from "theme-ui";
+import { StaticAmounts, StaticRow } from "../../../Trove/Editor";
 import { useBondView } from "../../context/BondViewContext";
 import { PendingRewards } from "./PendingRewards";
 import { PoolBalance } from "./PoolBalance";
@@ -35,11 +36,11 @@ export const RewardsPane: React.FC = () => {
       </StaticRow>
 
       <Flex variant="layout.actions">
-        <Button variant="cancel" onClick={handleBackPressed} disabled={isManageLiquidityPending}>
+        <Button variant="outline" onClick={handleBackPressed} disabled={isManageLiquidityPending}>
           Back
         </Button>
 
-        <Button variant="primary" onClick={handleConfirmPressed} disabled={!hasRewards}>
+        <Button onClick={handleConfirmPressed} disabled={!hasRewards}>
           {isManageLiquidityPending ? (
             <Spinner size={28} sx={{ color: "white" }} />
           ) : (

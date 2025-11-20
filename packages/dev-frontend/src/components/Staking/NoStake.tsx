@@ -1,6 +1,6 @@
-import { Card, Heading, Box, Flex, Button } from "theme-ui";
-
+import { Box, Card, Flex, Heading } from "theme-ui";
 import { GT } from "../../strings";
+import { Button } from "../ui/button";
 
 import { InfoMessage } from "../InfoMessage";
 import { useStakingView } from "./context/StakingViewContext";

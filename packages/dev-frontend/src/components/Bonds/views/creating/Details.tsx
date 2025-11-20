@@ -1,32 +1,33 @@
 /** @jsxImportSource theme-ui */
-import React, { useEffect, useMemo, useState } from "react";
-import { Flex, Heading, Button, Card, Grid, Close, Text, Image, Spinner } from "theme-ui";
+import { Button } from "@/components/ui/button";
 import { Decimal } from "@liquity/lib-base";
-import { EditableRow } from "../../../Trove/Editor";
-import { Record } from "../../Record";
-import { InfoIcon } from "../../../InfoIcon";
-import { useBondView } from "../../context/BondViewContext";
-import { HorizontalTimeline, Label, SubLabel, UNKNOWN_DATE } from "../../../HorizontalTimeline";
+import React, { useEffect, useMemo, useState } from "react";
+import { Card, Close, Flex, Grid, Heading, Image, Spinner, Text } from "theme-ui";
 import { ActionDescription, Amount } from "../../../ActionDescription";
-import { EXAMPLE_NFT } from "../../context/BondViewProvider";
-import * as l from "../../lexicon";
-import { useWizard } from "../../../Wizard/Context";
+import { ErrorDescription } from "../../../ErrorDescription";
+import { HorizontalSlider } from "../../../HorizontalSlider";
+import { HorizontalTimeline, Label, SubLabel, UNKNOWN_DATE } from "../../../HorizontalTimeline";
+import { InfoIcon } from "../../../InfoIcon";
+import { LearnMoreLink } from "../../../Tooltip";
+import { EditableRow } from "../../../Trove/Editor";
 import { WarningBubble } from "../../../WarningBubble";
+import { useWizard } from "../../../Wizard/Context";
+import { useBondView } from "../../context/BondViewContext";
+import { EXAMPLE_NFT } from "../../context/BondViewProvider";
 import type { CreateBondPayload } from "../../context/transitions";
+import * as l from "../../lexicon";
+import { Record } from "../../Record";
 import {
   dateWithoutHours,
+  getBreakEvenPeriodInDays,
+  getRebondOrBreakEvenTimeWithControllerAdjustment,
+  getRebondPeriodInDays,
+  getRemainingRebondOrBreakEvenDays,
   getReturn,
   percentify,
-  toFloat,
-  getRemainingRebondOrBreakEvenDays,
-  getBreakEvenPeriodInDays,
-  getRebondPeriodInDays,
-  getRebondOrBreakEvenTimeWithControllerAdjustment
+  toFloat
 } from "../../utils";
-import { HorizontalSlider } from "../../../HorizontalSlider";
-import { ErrorDescription } from "../../../ErrorDescription";
 import { InfiniteEstimate } from "../InfiniteEstimation";
-import { LearnMoreLink } from "../../../Tooltip";
 
 type DetailsProps = { onBack?: () => void };
 
@@ -307,7 +308,7 @@ export const Details: React.FC<DetailsProps> = ({ onBack }) => {
       </Flex>
 
       <Flex variant="layout.actions">
-        <Button variant="cancel" onClick={handleBack} disabled={isApprovingOrConfirming}>
+        <Button variant="outline" onClick={handleBack} disabled={isApprovingOrConfirming}>
           Back
         </Button>
         {!isInfiniteBondApproved && (

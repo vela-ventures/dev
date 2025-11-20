@@ -1,4 +1,4 @@
-import { Button } from "theme-ui";
+import { Button } from "../ui/button";
 
 import { Decimal, TroveChange } from "@liquity/lib-base";
 

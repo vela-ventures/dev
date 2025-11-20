@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Box, Button, Card, Heading } from "theme-ui";
-
 import { Decimal, Decimalish, Difference, LiquityStoreState, LQTYStake } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
+import React, { useState } from "react";
+import { Box, Card, Heading } from "theme-ui";
+import { Button } from "../ui/button";
 
 import { COIN, GT } from "../../strings";
 
@@ -53,11 +53,11 @@ export const StakingEditor: React.FC<StakingEditorProps> = ({
         {title}
         {edited && !changePending && (
           <Button
-            variant="titleIcon"
-            sx={{ ":enabled:hover": { color: "danger" } }}
+            variant="link"
+            className="hover:enabled:text-destructive"
             onClick={() => dispatch({ type: "revert" })}
           >
-            <HistoryIcon/>
+            <HistoryIcon className="size-6"/>
           </Button>
         )}
       </Heading>

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { Button, Flex, Spinner } from "theme-ui";
+import { Flex, Spinner } from "theme-ui";
+import { Button } from "./ui/button";
 
 import { LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
@@ -32,7 +33,7 @@ export const CollateralSurplusAction: React.FC = () => {
 
   return myTransactionState.type === "waitingForApproval" ? (
     <Flex variant="layout.actions">
-      <Button disabled sx={{ mx: 2 }}>
+      <Button disabled className="mx-2">
         <Spinner sx={{ mr: 2, color: "white" }} size={20} />
         Waiting for your approval
       </Button>
@@ -44,7 +45,7 @@ export const CollateralSurplusAction: React.FC = () => {
         id={myTransactionId}
         send={liquity.claimCollateralSurplus.bind(liquity, undefined)}
       >
-        <Button sx={{ mx: 2 }}>Claim {collateralSurplusBalance.prettify()} ETH</Button>
+        <Button className="mx-2">Claim {collateralSurplusBalance.prettify()} ETH</Button>
       </Transaction>
     </Flex>
   ) : null;

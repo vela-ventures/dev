@@ -1,5 +1,6 @@
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Box, Button, Card, Flex, Heading, Input, Label, Paragraph, Spinner } from "theme-ui";
+import { Box, Card, Flex, Heading, Input, Label, Paragraph, Spinner } from "theme-ui";
 
 import { Decimal } from "@liquity/lib-base";
 

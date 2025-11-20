@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Button, Flex, Input, Label, SxProp, Text, ThemeUICSSProperties } from "theme-ui";
+import { Flex, Input, Label, SxProp, Text, ThemeUICSSProperties } from "theme-ui";
+import { Button } from "../ui/button";
 
 import { ChevronDownIcon, ChevronsDownIcon, ChevronsUpIcon, ChevronUpIcon } from "lucide-react";
 
@@ -299,7 +300,7 @@ export const EditableRow: React.FC<EditableRowProps> = ({
       >
         {maxAmount && (
           <Button
-            sx={{ fontSize: 1, p: 1, px: 3 }}
+            className="text-xs p-1 px-3"
             onClick={event => {
               setEditedAmount(maxAmount);
               event.stopPropagation();

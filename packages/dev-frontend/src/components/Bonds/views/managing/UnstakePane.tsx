@@ -1,6 +1,7 @@
+import { Button } from "@/components/ui/button";
 import { Decimal } from "@liquity/lib-base";
 import React, { useState } from "react";
-import { Flex, Button, Spinner } from "theme-ui";
+import { Flex, Spinner } from "theme-ui";
 import { Amount } from "../../../ActionDescription";
 import { ErrorDescription } from "../../../ErrorDescription";
 import { EditableRow, StaticAmounts, StaticRow } from "../../../Trove/Editor";
@@ -65,12 +66,11 @@ export const UnstakePane: React.FC = () => {
       )}
 
       <Flex variant="layout.actions">
-        <Button variant="cancel" onClick={handleBackPressed} disabled={isManageLiquidityPending}>
+        <Button variant="outline" onClick={handleBackPressed} disabled={isManageLiquidityPending}>
           Back
         </Button>
 
         <Button
-          variant="primary"
           onClick={handleConfirmPressed}
           disabled={unstakeAmount.isZero || isBalanceInsufficient || isManageLiquidityPending}
         >

@@ -13,7 +13,6 @@ export const InfiniteEstimate: React.FC<InfiniteEstimateProps> = ({ estimate, ch
     <>
       {Decimal.INFINITY.toString()}
       <InfoIcon
-        size="xs"
         tooltip={l.INFINITE_ESTIMATION.description}
         link={l.INFINITE_ESTIMATION.link}
       />

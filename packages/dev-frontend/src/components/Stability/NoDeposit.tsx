@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
-import { Box, Button, Card, Flex, Heading } from "theme-ui";
+import { Box, Card, Flex, Heading } from "theme-ui";
 import { InfoMessage } from "../InfoMessage";
+import { Button } from "../ui/button";
 import { useStabilityView } from "./context/StabilityViewContext";
 import { RemainingLQTY } from "./RemainingLQTY";
 import { Yield } from "./Yield";

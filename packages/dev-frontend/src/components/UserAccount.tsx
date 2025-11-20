@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Button, Flex, Heading, Text } from "theme-ui";
+import { Box, Flex, Heading, Text } from "theme-ui";
+import { Button } from "./ui/button";
 
 import { Decimal, LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
@@ -35,13 +36,10 @@ export const UserAccount: React.FC = () => {
         {connectKit => (
           <Button
             variant="outline"
-            sx={{ alignItems: "center", p: 2, mr: 3 }}
+            className="items-center p-2 mr-3"
             onClick={connectKit.show}
           >
-            <CircleUserIcon/>
-            <Text as="span" sx={{ ml: 2, fontSize: 1 }}>
-              {shortenAddress(account)}
-            </Text>
+            <CircleUserIcon/> {shortenAddress(account)}
           </Button>
         )}
       </ConnectKitButton.Custom>

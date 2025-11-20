@@ -1,9 +1,10 @@
 import { LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import React, { useCallback } from "react";
-import { Box, Button, Card, Flex, Heading } from "theme-ui";
+import { Box, Card, Flex, Heading } from "theme-ui";
 import { CollateralSurplusAction } from "../CollateralSurplusAction";
 import { InfoMessage } from "../InfoMessage";
+import { Button } from "../ui/button";
 import { useTroveView } from "./context/TroveViewContext";
 
 const select = ({ collateralSurplusBalance }: LiquityStoreState) => ({

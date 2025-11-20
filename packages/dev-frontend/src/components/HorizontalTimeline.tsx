@@ -114,7 +114,7 @@ export const Label: React.FC<LabelProps> = ({ children, description, style }) =>
     >
       {children}
       &nbsp;
-      {description ? <InfoIcon size="xs" tooltip={description} /> : null}
+      {description ? <InfoIcon tooltip={description} /> : null}
     </Flex>
   );
 };

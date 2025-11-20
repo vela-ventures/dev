@@ -1,9 +1,10 @@
 /** @jsxImportSource theme-ui */
 
+import { Button } from "@/components/ui/button";
 import { Decimal, Percent } from "@liquity/lib-base";
 import { MoveDownIcon } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
-import { Box, Button, Close, Flex, Heading, Input, Label, Link, Radio, Spinner } from "theme-ui";
+import { Box, Close, Flex, Heading, Input, Label, Link, Radio, Spinner } from "theme-ui";
 import { Amount } from "../../../ActionDescription";
 import { ErrorDescription } from "../../../ErrorDescription";
 import { Placeholder } from "../../../Placeholder";
@@ -185,7 +186,7 @@ export const SwapPane: React.FC = () => {
       />
 
       <Flex sx={{ justifyContent: "center", mb: 3 }}>
-        <MoveDownIcon>
+        <MoveDownIcon/>
       </Flex>
 
       <DisabledEditableRow label="Buy">
@@ -333,7 +334,7 @@ export const SwapPane: React.FC = () => {
 
       <Flex variant="layout.actions">
         <Button
-          variant="cancel"
+          variant="outline"
           onClick={handleBackPressed}
           disabled={isApprovePending || isSwapPending}
         >
@@ -342,7 +343,6 @@ export const SwapPane: React.FC = () => {
 
         {isInputTokenApprovedWithBLusdAmm ? (
           <Button
-            variant="primary"
             onClick={handleConfirmPressed}
             disabled={
               inputAmount.isZero ||
@@ -355,7 +355,7 @@ export const SwapPane: React.FC = () => {
             {isSwapPending ? <Spinner size={28} sx={{ color: "white" }} /> : <>Confirm</>}
           </Button>
         ) : (
-          <Button variant="primary" onClick={handleApprovePressed} disabled={isApprovePending}>
+          <Button onClick={handleApprovePressed} disabled={isApprovePending}>
             {isApprovePending ? <Spinner size={28} sx={{ color: "white" }} /> : <>Approve</>}
           </Button>
         )}

@@ -22,7 +22,6 @@ export const PendingRewards: React.FC = () => {
                   {reward.name}
                   <InfoIcon
                     placement="right"
-                    size="xs"
                     tooltip={<Card variant="tooltip">Reward token address: {reward.address}</Card>}
                   />
                 </Flex>

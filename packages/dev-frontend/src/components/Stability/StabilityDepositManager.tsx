@@ -1,16 +1,16 @@
-import React, { useCallback, useEffect } from "react";
-import { Button, Flex } from "theme-ui";
-
 import { Decimal, Decimalish, LiquityStoreState } from "@liquity/lib-base";
 import { LiquityStoreUpdate, useLiquityReducer, useLiquitySelector } from "@liquity/lib-react";
+import React, { useCallback, useEffect } from "react";
+import { Flex } from "theme-ui";
+import { Button } from "../ui/button";
 
 import { COIN } from "../../strings";
 
 import { InfoBubble } from "../InfoBubble";
 import { useMyTransactionState } from "../Transaction";
 
-import { StabilityDepositEditor } from "./StabilityDepositEditor";
 import { StabilityDepositAction } from "./StabilityDepositAction";
+import { StabilityDepositEditor } from "./StabilityDepositEditor";
 import { useStabilityView } from "./context/StabilityViewContext";
 import {
   selectForStabilityDepositChangeValidation,
@@ -138,7 +138,7 @@ export const StabilityDepositManager: React.FC = () => {
         ))}
 
       <Flex variant="layout.actions">
-        <Button variant="cancel" onClick={handleCancel}>
+        <Button variant="outline" onClick={handleCancel}>
           Cancel
         </Button>
 

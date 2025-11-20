@@ -1,7 +1,8 @@
-import { Flex, Text, Slider as ThemeUiSlider, Button } from "theme-ui";
 import { Decimal } from "@liquity/lib-base";
+import { Flex, Text, Slider as ThemeUiSlider } from "theme-ui";
 import { toFloat } from "./Bonds/utils";
 import { InfoIcon } from "./InfoIcon";
+import { Button } from "./ui/button";
 
 type SliderProps = {
   name: string;
@@ -39,19 +40,11 @@ export const HorizontalSlider: React.FC<SliderProps> = ({
         }}
       >
         {name}
-        {description && <InfoIcon size="xs" tooltip={description} link={descriptionLink} />}
+        {description && <InfoIcon tooltip={description} link={descriptionLink} />}
         {onReset && (
           <Button
-            variant="icon"
-            sx={{
-              m: 0,
-              ml: "24px",
-              mt: 1,
-              border: "none",
-              fontSize: 1,
-              width: 0,
-              height: 0
-            }}
+            variant="link"
+            className="m-0 ml-6 mt-1 border-none text-xs w-auto h-auto"
             onClick={onReset}
           >
             Reset

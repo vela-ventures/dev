@@ -15,7 +15,7 @@ export const Record: React.FC<RecordType> = ({ lexicon, value, type, style }) =>
   return (
     <Flex sx={{ flexDirection: "column", ...style }}>
       <Flex as="h4" sx={{ fontWeight: "300", alignItems: "baseline", justifyContent: "center" }}>
-        {lexicon.term} <InfoIcon size="xs" tooltip={lexicon.description} link={lexicon.link} />
+        {lexicon.term} <InfoIcon tooltip={lexicon.description} link={lexicon.link} />
       </Flex>
       <Text as="h3" sx={{ display: "flex", justifyContent: "center" }}>
         {value ? (

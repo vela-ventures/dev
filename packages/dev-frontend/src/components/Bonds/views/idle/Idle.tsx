@@ -1,13 +1,14 @@
+import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
-import { Card, Box, Heading, Flex, Button } from "theme-ui";
-import { Empty } from "./Empty";
-import { BondList } from "./BondList";
-import { useBondView } from "../../context/BondViewContext";
-import { BONDS } from "../../lexicon";
-import { InfoIcon } from "../../../InfoIcon";
-import { BLusdAmmTokenIndex, SwapPressedPayload } from "../../context/transitions";
+import { Box, Card, Flex, Heading } from "theme-ui";
 import { useLiquity } from "../../../../hooks/LiquityContext";
+import { InfoIcon } from "../../../InfoIcon";
 import { useBondAddresses } from "../../context/BondAddressesContext";
+import { useBondView } from "../../context/BondViewContext";
+import { BLusdAmmTokenIndex, SwapPressedPayload } from "../../context/transitions";
+import { BONDS } from "../../lexicon";
+import { BondList } from "./BondList";
+import { Empty } from "./Empty";
 
 export const Idle: React.FC = () => {
   const { liquity } = useLiquity();
@@ -54,13 +55,13 @@ export const Idle: React.FC = () => {
         </Button>
 
         {showLusdFaucet && (
-          <Button variant={hasBonds ? "outline" : "primary"} onClick={() => getLusdFromFaucet()}>
+          <Button variant={hasBonds ? "outline" : "default"} onClick={() => getLusdFromFaucet()}>
             Get 10k LUSD
           </Button>
         )}
 
         {hasBonds && (
-          <Button variant="primary" onClick={() => dispatchEvent("CREATE_BOND_PRESSED")}>
+          <Button onClick={() => dispatchEvent("CREATE_BOND_PRESSED")}>
             Create another bond
           </Button>
         )}
@@ -73,7 +74,6 @@ export const Idle: React.FC = () => {
               {BONDS.term}
               <InfoIcon
                 placement="left"
-                size="xs"
                 tooltip={<Card variant="tooltip">{BONDS.description}</Card>}
               />
             </Flex>
@@ -82,7 +82,7 @@ export const Idle: React.FC = () => {
             <Empty />
 
             <Flex variant="layout.actions" mt={4}>
-              <Button variant="primary" onClick={() => dispatchEvent("CREATE_BOND_PRESSED")}>
+              <Button onClick={() => dispatchEvent("CREATE_BOND_PRESSED")}>
                 Create bond
               </Button>
             </Flex>

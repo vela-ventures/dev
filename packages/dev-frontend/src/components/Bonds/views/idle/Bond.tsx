@@ -1,4 +1,5 @@
-import { Card, Flex, Button, Image, ThemeUIStyleObject } from "theme-ui";
+import { Card, Flex, Image, ThemeUIStyleObject } from "theme-ui";
+import { Button } from "@/components/ui/button";
 import { EventType, HorizontalTimeline } from "../../../HorizontalTimeline";
 import { Record } from "../../Record";
 import { Actions } from "./actions/Actions";
@@ -150,7 +151,7 @@ export const Bond: React.FC<BondProps> = ({ bond, style }) => {
             </Flex>
             {bond.status === "PENDING" && <Actions bondId={bond.id} />}
             {bond.status !== "PENDING" && bond.status === "CLAIMED" && (
-              <Button variant="outline" sx={{ height: "44px" }} onClick={handleSellBLusdPressed}>
+              <Button variant="outline" className="h-11" onClick={handleSellBLusdPressed}>
                 Sell bLUSD
               </Button>
             )}
