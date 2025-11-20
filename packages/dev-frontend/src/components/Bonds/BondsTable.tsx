@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 import { Decimal } from "@liquity/lib-base";
 import React from "react";
-import { Box, Card, Flex, Grid, Heading, Text } from "theme-ui";
+import { Box, Card, Grid, Heading, Text } from "theme-ui";
 import { InfoIcon } from "../InfoIcon";
 import { Link } from "../Link";
 import { Button } from "../ui/button";
@@ -20,12 +20,12 @@ const {
 } = lexicon;
 
 const LineSegment: React.FC = () => (
-  <Flex
-    sx={{
+  <div
+    className="flex w-full"
+    style={{
       borderTop: "1px dotted gray",
-      width: "100%",
-      mt: "-20px",
-      mb: 0
+      marginTop: "-20px",
+      marginBottom: 0
     }}
   />
 );
@@ -56,13 +56,13 @@ export const BondsTable: React.FC = () => {
   return (
     <Card>
       <Heading>
-        <Flex>
+        <div className="flex">
           Pending bonds{" "}
           <InfoIcon
             placement="left"
             tooltip={<Card variant="tooltip">{BONDS.description}</Card>}
           />
-        </Flex>
+        </div>
       </Heading>
 
       <Box sx={{ p: [2, 3] }}>
@@ -129,11 +129,11 @@ export const BondsTable: React.FC = () => {
             })}
           </Grid>
         )}
-        <Flex variant="layout.actions" mt={3}>
+        <div className="flex justify-end gap-2 mt-4">
           <Link to="/bonds/pending" m={0} p={0}>
             <Button>Go to bonds</Button>
           </Link>
-        </Flex>
+        </div>
       </Box>
     </Card>
   );

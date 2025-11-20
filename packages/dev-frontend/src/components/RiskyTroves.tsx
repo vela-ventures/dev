@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { Box, Card, Flex, Heading, Text } from "theme-ui";
+import { Box, Card, Heading, Text } from "theme-ui";
 import { Button } from "./ui/button";
 
 import {
@@ -159,7 +159,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
       <Heading>
         <Abbreviation short="Troves">Risky Vaults</Abbreviation>
 
-        <Flex sx={{ alignItems: "center" }}>
+        <div className="flex items-center">
           {numberOfTroves !== 0 && (
             <>
               <Abbreviation
@@ -188,7 +188,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
           >
             <RotateCwIcon/>
           </Button>
-        </Flex>
+        </div>
       </Heading>
 
       {!troves || troves.length === 0 ? (

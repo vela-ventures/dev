@@ -1,7 +1,7 @@
 import { Wallet } from "@ethersproject/wallet";
 import React from "react";
 import { Route, HashRouter as Router, Switch } from "react-router-dom";
-import { Container, Flex } from "theme-ui";
+import { Container } from "theme-ui";
 
 import { Decimal, Difference, Trove } from "@liquity/lib-base";
 import { LiquityStoreProvider } from "@liquity/lib-react";
@@ -47,7 +47,7 @@ export const LiquityFrontend: React.FC<LiquityFrontendProps> = ({ loader }) => {
           <StabilityViewProvider>
             <StakingViewProvider>
               <BondsProvider>
-                <Flex sx={{ flexDirection: "column", minHeight: "100%" }}>
+                <div className="flex flex-col min-h-full">
                   <Header>
                     <UserAccount />
                     <SystemStatsPopup />
@@ -74,7 +74,7 @@ export const LiquityFrontend: React.FC<LiquityFrontendProps> = ({ loader }) => {
                       </Route>
                     </Switch>
                   </Container>
-                </Flex>
+                </div>
               </BondsProvider>
             </StakingViewProvider>
           </StabilityViewProvider>

@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text } from "theme-ui";
+import { Box, Heading, Text } from "theme-ui";
 
 import { InfoIcon } from "lucide-react";
 
@@ -9,11 +9,11 @@ type InfoMessageProps = React.PropsWithChildren<{
 
 export const InfoMessage: React.FC<InfoMessageProps> = ({ title, children, icon }) => (
   <Box sx={{ mx: 1, mb: 3 }}>
-    <Flex sx={{ alignItems: "center", mb: "10px" }}>
+    <div className="flex items-center mb-2.5">
       <Box sx={{ mr: "12px", fontSize: "20px" }}>{icon || <InfoIcon/>}</Box>
 
       <Heading as="h3">{title}</Heading>
-    </Flex>
+    </div>
 
     <Text sx={{ fontSize: 2 }}>{children}</Text>
   </Box>

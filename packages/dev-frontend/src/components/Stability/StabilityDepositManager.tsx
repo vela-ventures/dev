@@ -1,7 +1,6 @@
 import { Decimal, Decimalish, LiquityStoreState } from "@liquity/lib-base";
 import { LiquityStoreUpdate, useLiquityReducer, useLiquitySelector } from "@liquity/lib-react";
 import React, { useCallback, useEffect } from "react";
-import { Flex } from "theme-ui";
 import { Button } from "../ui/button";
 
 import { COIN } from "../../strings";
@@ -137,7 +136,7 @@ export const StabilityDepositManager: React.FC = () => {
           <InfoBubble>Adjust the {COIN} amount to deposit or withdraw.</InfoBubble>
         ))}
 
-      <Flex variant="layout.actions">
+      <div className="flex justify-end gap-2 mt-4">
         <Button variant="outline" onClick={handleCancel}>
           Cancel
         </Button>
@@ -149,7 +148,7 @@ export const StabilityDepositManager: React.FC = () => {
         ) : (
           <Button disabled>Confirm</Button>
         )}
-      </Flex>
+      </div>
     </StabilityDepositEditor>
   );
 };

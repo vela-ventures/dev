@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Card, Flex, Heading, Input, Label } from "theme-ui";
+import { Box, Card, Heading, Input, Label } from "theme-ui";
 import { useLiquity } from "../hooks/LiquityContext";
 import { Button } from "./ui/button";
 
@@ -17,7 +17,7 @@ export const LiquidationManager: React.FC = () => {
       <Heading>Liquidate</Heading>
 
       <Box sx={{ p: [2, 3] }}>
-        <Flex sx={{ alignItems: "stretch" }}>
+        <div className="flex items-stretch">
           <Label>Up to</Label>
 
           <Input
@@ -30,7 +30,7 @@ export const LiquidationManager: React.FC = () => {
 
           <Label>Vaults</Label>
 
-          <Flex sx={{ alignItems: "center" }}>
+          <div className="flex items-center">
             <Transaction
               id="batch-liquidate"
               tooltip="Liquidate"
@@ -46,8 +46,8 @@ export const LiquidationManager: React.FC = () => {
                 <Trash2Icon className="size-6"/>
               </Button>
             </Transaction>
-          </Flex>
-        </Flex>
+          </div>
+        </div>
       </Box>
     </Card>
   );

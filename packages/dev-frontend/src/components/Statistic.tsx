@@ -1,5 +1,4 @@
 import React from "react";
-import { Flex } from "theme-ui";
 import { InfoIcon } from "./InfoIcon";
 import type { Lexicon } from "../lexicon";
 
@@ -9,12 +8,12 @@ type StatisticProps = React.PropsWithChildren<{
 
 export const Statistic: React.FC<StatisticProps> = ({ lexicon, children }) => {
   return (
-    <Flex sx={{ borderBottom: 1, borderColor: "rgba(0, 0, 0, 0.1)" }}>
-      <Flex sx={{ alignItems: "center", justifyContent: "flex-start", flex: 1.2, fontWeight: 200 }}>
-        <Flex>{lexicon.term}</Flex>
+    <div className="flex border-b border-black/10">
+      <div className="flex items-center justify-start flex-[1.2] font-extralight">
+        <div className="flex">{lexicon.term}</div>
         {lexicon.term && <InfoIcon tooltip={lexicon.description} link={lexicon.link} />}
-      </Flex>
-      <Flex sx={{ justifyContent: "flex-end", flex: 1, alignItems: "center" }}>{children}</Flex>
-    </Flex>
+      </div>
+      <div className="flex justify-end flex-1 items-center">{children}</div>
+    </div>
   );
 };

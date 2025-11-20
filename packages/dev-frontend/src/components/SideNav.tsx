@@ -1,6 +1,6 @@
 import { Menu, XIcon } from "lucide-react";
 import React, { useRef, useState } from "react";
-import { Box, Container, Flex } from "theme-ui";
+import { Box, Container } from "theme-ui";
 import { Link } from "./Link";
 import { LiquityLogo } from "./LiquityLogo";
 import { Button } from "./ui/button";
@@ -28,7 +28,7 @@ export const SideNav: React.FC = () => {
         }
       }}
     >
-      <Flex variant="layout.sidenav">
+      <div className="flex flex-col" style={{ width: "75vw", height: "100%", padding: "16px", backgroundColor: "var(--theme-ui-colors-background)" }}>
         <Button
           className="fixed right-[25vw] m-2"
           variant="ghost"
@@ -43,7 +43,7 @@ export const SideNav: React.FC = () => {
           <Link to="/risky-troves">Risky Vaults</Link>
           <Link to="/faucet">Faucet</Link>
         </Box>
-      </Flex>
+      </div>
     </Container>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Heading, Text } from "theme-ui";
+import { Box, Heading, Text } from "theme-ui";
 import { Button } from "./ui/button";
 
 import { Decimal, LiquityStoreState } from "@liquity/lib-base";
@@ -31,7 +31,7 @@ export const UserAccount: React.FC = () => {
   const lusdBalance = LUSD_OVERRIDE_ADDRESS === null ? realLusdBalance : customLusdBalance;
 
   return (
-    <Flex>
+    <div className="flex">
       <ConnectKitButton.Custom>
         {connectKit => (
           <Button
@@ -59,12 +59,12 @@ export const UserAccount: React.FC = () => {
           [GT, Decimal.from(lqtyBalance)]
           // ["bLUSD", Decimal.from(bLusdBalance || 0)]
         ] as const).map(([currency, balance], i) => (
-          <Flex key={i} sx={{ ml: 3, flexDirection: "column" }}>
+          <div key={i} className="flex flex-col ml-3">
             <Heading sx={{ fontSize: 1 }}>{currency}</Heading>
             <Text sx={{ fontSize: 1 }}>{balance.prettify()}</Text>
-          </Flex>
+          </div>
         ))}
       </Box>
-    </Flex>
+    </div>
   );
 };

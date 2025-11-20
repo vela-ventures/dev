@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
-import { Box, Card, Flex, Heading } from "theme-ui";
+import { Box, Card, Heading } from "theme-ui";
 import { useLiquity } from "../../../../hooks/LiquityContext";
 import { InfoIcon } from "../../../InfoIcon";
 import { useBondAddresses } from "../../context/BondAddressesContext";
@@ -41,7 +41,7 @@ export const Idle: React.FC = () => {
 
   return (
     <>
-      <Flex variant="layout.actions" sx={{ mt: 4, mb: 3 }}>
+      <div className="flex justify-end gap-2 mt-4 mb-3">
         <Button variant="outline" onClick={handleManageLiquidityPressed}>
           Manage liquidity
         </Button>
@@ -65,27 +65,27 @@ export const Idle: React.FC = () => {
             Create another bond
           </Button>
         )}
-      </Flex>
+      </div>
 
       {!hasBonds && (
         <Card>
           <Heading>
-            <Flex>
+            <div className="flex">
               {BONDS.term}
               <InfoIcon
                 placement="left"
                 tooltip={<Card variant="tooltip">{BONDS.description}</Card>}
               />
-            </Flex>
+            </div>
           </Heading>
           <Box sx={{ p: [2, 3] }}>
             <Empty />
 
-            <Flex variant="layout.actions" mt={4}>
+            <div className="flex justify-end gap-2 mt-4">
               <Button onClick={() => dispatchEvent("CREATE_BOND_PRESSED")}>
                 Create bond
               </Button>
-            </Flex>
+            </div>
           </Box>
         </Card>
       )}

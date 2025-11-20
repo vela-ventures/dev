@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Decimal } from "@liquity/lib-base";
 import React, { useEffect, useMemo, useState } from "react";
-import { Card, Close, Flex, Grid, Heading, Image, Spinner, Text } from "theme-ui";
+import { Card, Close, Grid, Heading, Image, Spinner, Text } from "theme-ui";
 import { ActionDescription, Amount } from "../../../ActionDescription";
 import { ErrorDescription } from "../../../ErrorDescription";
 import { HorizontalSlider } from "../../../HorizontalSlider";
@@ -143,7 +143,7 @@ export const Details: React.FC<DetailsProps> = ({ onBack }) => {
   return (
     <>
       <Heading as="h2" sx={{ pt: 1, pb: 3, px: 2 }}>
-        <Flex sx={{ justifyContent: "center" }}>Bond LUSD</Flex>
+        <div className="flex justify-center">Bond LUSD</div>
         <Close
           onClick={handleDismiss}
           sx={{
@@ -154,7 +154,7 @@ export const Details: React.FC<DetailsProps> = ({ onBack }) => {
         />
       </Heading>
 
-      <Flex sx={{ justifyContent: "center", alignItems: "center" }}>
+      <div className="flex justify-center items-center">
         <Image
           sx={{
             height: 180,
@@ -171,9 +171,9 @@ export const Details: React.FC<DetailsProps> = ({ onBack }) => {
             </Card>
           }
         />
-      </Flex>
+      </div>
 
-      <Flex my={4} sx={{ justifyContent: "center" }}>
+      <div className="flex my-4 justify-center">
         <HorizontalTimeline
           events={[
             {
@@ -218,7 +218,7 @@ export const Details: React.FC<DetailsProps> = ({ onBack }) => {
             }
           ]}
         />
-      </Flex>
+      </div>
 
       <EditableRow
         label={l.BOND_DEPOSIT.term}
@@ -303,11 +303,11 @@ export const Details: React.FC<DetailsProps> = ({ onBack }) => {
         </ErrorDescription>
       )}
 
-      <Flex pb={2} sx={{ fontSize: "15.5px", justifyContent: "center", fontStyle: "italic" }}>
+      <div className="flex pb-2 justify-center" style={{ fontSize: "15.5px", fontStyle: "italic" }}>
         You can cancel your bond at any time to recover your deposited LUSD
-      </Flex>
+      </div>
 
-      <Flex variant="layout.actions">
+      <div className="flex justify-end gap-2 mt-4">
         <Button variant="outline" onClick={handleBack} disabled={isApprovingOrConfirming}>
           Back
         </Button>
@@ -325,7 +325,7 @@ export const Details: React.FC<DetailsProps> = ({ onBack }) => {
             {isApprovingOrConfirming && <Spinner size={28} sx={{ color: "white" }} />}
           </Button>
         )}
-      </Flex>
+      </div>
     </>
   );
 };

@@ -9,7 +9,7 @@ import {
 import { useLiquitySelector } from "@liquity/lib-react";
 import { HistoryIcon } from "lucide-react";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Box, Card, Flex, Heading } from "theme-ui";
+import { Box, Card, Heading } from "theme-ui";
 import { useArweaveBalance } from "../../hooks/useArweaveBalance";
 import { useStableTroveChange } from "../../hooks/useStableTroveChange";
 import { COIN } from "../../strings";
@@ -271,7 +271,7 @@ export const Adjusting: React.FC = () => {
           setGasEstimationState={setGasEstimationState}
         />
 
-        <Flex variant="layout.actions">
+        <div className="flex justify-end gap-2 mt-4">
           <Button variant="outline" onClick={handleCancelPressed}>
             Cancel
           </Button>
@@ -288,7 +288,7 @@ export const Adjusting: React.FC = () => {
           ) : (
             <Button disabled>Confirm</Button>
           )}
-        </Flex>
+        </div>
       </Box>
       {isTransactionPending && <LoadingOverlay />}
     </Card>

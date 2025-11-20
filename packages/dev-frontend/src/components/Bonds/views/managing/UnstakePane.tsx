@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Decimal } from "@liquity/lib-base";
 import React, { useState } from "react";
-import { Flex, Spinner } from "theme-ui";
+import { Spinner } from "theme-ui";
 import { Amount } from "../../../ActionDescription";
 import { ErrorDescription } from "../../../ErrorDescription";
 import { EditableRow, StaticAmounts, StaticRow } from "../../../Trove/Editor";
@@ -53,10 +53,10 @@ export const UnstakePane: React.FC = () => {
         </StaticAmounts>
       </StaticRow>
 
-      <Flex mb={3} sx={{ fontWeight: 300, fontSize: "16px" }}>
+      <div className="flex mb-3 font-light text-base">
         Your staked LP tokens will be unstaked from the bLUSD Curve gauge and moved into your wallet.
         Pending rewards will also be claimed and moved into your wallet.
-      </Flex>
+      </div>
 
       {isBalanceInsufficient && (
         <ErrorDescription>
@@ -65,7 +65,7 @@ export const UnstakePane: React.FC = () => {
         </ErrorDescription>
       )}
 
-      <Flex variant="layout.actions">
+      <div className="flex justify-end gap-2 mt-4">
         <Button variant="outline" onClick={handleBackPressed} disabled={isManageLiquidityPending}>
           Back
         </Button>
@@ -76,7 +76,7 @@ export const UnstakePane: React.FC = () => {
         >
           {isManageLiquidityPending ? <Spinner size={28} sx={{ color: "white" }} /> : <>Confirm</>}
         </Button>
-      </Flex>
+      </div>
     </>
   );
 };

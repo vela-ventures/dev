@@ -1,4 +1,3 @@
-import { Flex } from "theme-ui";
 import type { ThemeUIStyleObject } from "theme-ui";
 import { keyframes } from "@emotion/react";
 
@@ -15,22 +14,17 @@ type PlaceholderProps = { style?: ThemeUIStyleObject };
 
 export const Placeholder: React.FC<PlaceholderProps> = ({ style }) => {
   return (
-    <Flex
-      sx={{
-        position: "relative",
+    <div
+      className="flex relative overflow-hidden rounded h-full w-full"
+      style={{
         backgroundColor: "rgb(225, 230, 230)",
-        overflow: "hidden",
-        borderRadius: "5px",
-        height: "100%",
-        width: "100%",
-        ...style
+        ...(style as React.CSSProperties)
       }}
     >
-      <Flex
-        sx={{
-          position: "absolute",
+      <div
+        className="absolute h-full"
+        style={{
           left: "-25%",
-          height: "100%",
           width: "45%",
           backgroundImage:
             "linear-gradient(to left, rgba(251,251,251, .05), rgba(251,251,251, .3), rgba(251,251,251, .6), rgba(251,251,251, .3), rgba(251,251,251, .05))",
@@ -38,6 +32,6 @@ export const Placeholder: React.FC<PlaceholderProps> = ({ style }) => {
         }}
       />
       &nbsp;
-    </Flex>
+    </div>
   );
 };

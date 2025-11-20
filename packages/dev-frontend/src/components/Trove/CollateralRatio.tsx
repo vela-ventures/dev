@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Card, Flex } from "theme-ui";
+import { Box, Card } from "theme-ui";
 
 import { CRITICAL_COLLATERAL_RATIO, Decimal, Difference, Percent } from "@liquity/lib-base";
 
@@ -20,7 +20,7 @@ export const CollateralRatio: React.FC<CollateralRatioProps> = ({ value, change 
   const changePct = change && new Percent(change);
   return (
     <>
-      <Flex>
+      <div className="flex">
         <Box sx={{ mt: [2, 0], ml: 3, mr: -2, fontSize: "24px" }}>
           <HeartPulseIcon />
         </Box>
@@ -60,7 +60,7 @@ export const CollateralRatio: React.FC<CollateralRatioProps> = ({ value, change 
             />
           }
         />
-      </Flex>
+      </div>
     </>
   );
 };

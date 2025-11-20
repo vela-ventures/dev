@@ -2,8 +2,8 @@ import { Decimal, LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import React, { useEffect, useState } from "react";
 import { Card, Paragraph, Text } from "theme-ui";
-import { Badge } from "../Badge";
 import { InfoIcon } from "../InfoIcon";
+import { Badge } from "../ui/badge";
 import { fetchLqtyPrice } from "./context/fetchLqtyPrice";
 
 const selector = ({ lusdInStabilityPool, remainingStabilityPoolLQTYReward }: LiquityStoreState) => ({
@@ -42,7 +42,7 @@ export const Yield: React.FC = () => {
   if (aprPercentage.isZero) return null;
 
   return (
-    <Badge>
+    <Badge variant="secondary">
       <Text>NAU APR {aprPercentage.toString(2)}%</Text>
       <InfoIcon
         tooltip={

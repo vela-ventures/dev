@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Box, Card, Flex, Heading } from "theme-ui";
+import { Box, Card, Heading } from "theme-ui";
 import { InfoMessage } from "../InfoMessage";
 import { Button } from "../ui/button";
 import { useTroveView } from "./context/TroveViewContext";
@@ -19,9 +19,9 @@ export const NoTrove: React.FC = () => {
           You can borrow GiB by opening a Vault.
         </InfoMessage>
 
-        <Flex variant="layout.actions">
+        <div className="flex justify-end gap-2 mt-4">
           <Button onClick={handleOpenTrove}>Open Vault</Button>
-        </Flex>
+        </div>
       </Box>
     </Card>
   );

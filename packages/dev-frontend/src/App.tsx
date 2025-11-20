@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitProvider, getDefaultConfig, getDefaultConnectors } from "connectkit";
 import React from "react";
-import { Flex, Heading, Link, Paragraph, ThemeUIProvider } from "theme-ui";
+import { Heading, Link, Paragraph, ThemeUIProvider } from "theme-ui";
 import { WagmiProvider, createConfig, fallback, http } from "wagmi";
 import { goerli, localhost, mainnet, sepolia } from "wagmi/chains";
 import { injected } from "wagmi/connectors";
@@ -60,15 +60,7 @@ getConfig().then(config => {
 });
 
 const UnsupportedMainnetFallback: React.FC = () => (
-  <Flex
-    sx={{
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      height: "100vh",
-      textAlign: "center"
-    }}
-  >
+  <div className="flex flex-col items-center justify-center h-screen text-center">
     <Heading sx={{ mb: 3 }}>
       <TriangleAlertIcon/> This app is for testing purposes only.
     </Heading>
@@ -82,24 +74,16 @@ const UnsupportedMainnetFallback: React.FC = () => (
       </Link>
       .
     </Paragraph>
-  </Flex>
+  </div>
 );
 
 const UnsupportedNetworkFallback: React.FC = () => (
-  <Flex
-    sx={{
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      height: "100vh",
-      textAlign: "center"
-    }}
-  >
+  <div className="flex flex-col items-center justify-center h-screen text-center">
     <Heading sx={{ mb: 3 }}>
       <TriangleAlertIcon/> Liquity is not supported on this network.
     </Heading>
     Please switch to mainnet, Görli or Sepolia.
-  </Flex>
+  </div>
 );
 
 const queryClient = new QueryClient();

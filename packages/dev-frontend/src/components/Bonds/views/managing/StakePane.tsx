@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Decimal } from "@liquity/lib-base";
 import React, { useState } from "react";
-import { Flex, Spinner } from "theme-ui";
+import { Spinner } from "theme-ui";
 import { Amount } from "../../../ActionDescription";
 import { ErrorDescription } from "../../../ErrorDescription";
 import { EditableRow, StaticAmounts, StaticRow } from "../../../Trove/Editor";
@@ -64,7 +64,7 @@ export const StakePane: React.FC = () => {
         maxedOut={stakeAmount.eq(coalescedLpTokenBalance)}
       />
 
-      <Flex mt={3}>
+      <div className="flex mt-3">
         <StaticRow label="bLUSD LP APR">
           <StaticAmounts sx={{ alignItems: "center", justifyContent: "flex-start" }}>
             <PoolBalance symbol="%">
@@ -72,12 +72,12 @@ export const StakePane: React.FC = () => {
             </PoolBalance>{" "}
           </StaticAmounts>
         </StaticRow>
-      </Flex>
+      </div>
 
-      <Flex my={3} sx={{ fontWeight: 300, fontSize: "16px" }}>
+      <div className="flex my-3" style={{ fontWeight: 300, fontSize: "16px" }}>
         Your LP tokens will be staked in the bLUSD Curve gauge to earn protocol fees and Curve
         rewards.
-      </Flex>
+      </div>
 
       {isBalanceInsufficient && (
         <ErrorDescription>
@@ -86,7 +86,7 @@ export const StakePane: React.FC = () => {
         </ErrorDescription>
       )}
 
-      <Flex variant="layout.actions">
+      <div className="flex justify-end gap-2 mt-4">
         <Button variant="outline" onClick={handleBackPressed} disabled={isManageLiquidityPending}>
           Back
         </Button>
@@ -108,7 +108,7 @@ export const StakePane: React.FC = () => {
             {isManageLiquidityPending ? <Spinner size={28} sx={{ color: "white" }} /> : <>Confirm</>}
           </Button>
         )}
-      </Flex>
+      </div>
     </>
   );
 };

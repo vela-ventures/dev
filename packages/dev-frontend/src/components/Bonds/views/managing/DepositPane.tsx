@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Decimal } from "@liquity/lib-base";
 import { MoveDownIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { Card, Checkbox, Flex, Label, Spinner, Text } from "theme-ui";
+import { Card, Checkbox, Label, Spinner, Text } from "theme-ui";
 import { Amount } from "../../../ActionDescription";
 import { ErrorDescription } from "../../../ErrorDescription";
 import { InfoIcon } from "../../../InfoIcon";
@@ -153,9 +153,9 @@ export const DepositPane: React.FC = () => {
         maxedOut={lusdAmount.eq(coalescedLusdBalance)}
       />
 
-      <Flex sx={{ justifyContent: "center", mb: 3 }}>
+      <div className="flex justify-center mb-3">
         <MoveDownIcon/>
-      </Flex>
+      </div>
 
       <DisabledEditableRow
         label="Mint LP tokens"
@@ -164,7 +164,7 @@ export const DepositPane: React.FC = () => {
       />
 
       <Label>
-        <Flex sx={{ alignItems: "center" }}>
+        <div className="flex items-center">
           <Checkbox checked={shouldDepositBalanced} onChange={handleToggleShouldDepositBalanced} />
           <Text sx={{ fontWeight: 300, fontSize: "16px" }}>Deposit tokens in a balanced ratio</Text>
           <InfoIcon
@@ -176,11 +176,11 @@ export const DepositPane: React.FC = () => {
               </Card>
             }
           />
-        </Flex>
+        </div>
       </Label>
 
       <Label mb={2}>
-        <Flex sx={{ alignItems: "center" }}>
+        <div className="flex items-center">
           <Checkbox checked={shouldStakeInGauge} onChange={handleToggleShouldStakeInGauge} />
           <Text sx={{ fontWeight: 300, fontSize: "16px" }}>Stake LP tokens in Curve gauge</Text>
           <InfoIcon
@@ -192,7 +192,7 @@ export const DepositPane: React.FC = () => {
               </Card>
             }
           />
-        </Flex>
+        </div>
       </Label>
 
       <PoolDetails />
@@ -212,7 +212,7 @@ export const DepositPane: React.FC = () => {
         </ErrorDescription>
       )}
 
-      <Flex variant="layout.actions">
+      <div className="flex justify-end gap-2 mt-4">
         <Button
           variant="outline"
           onClick={handleBackPressed}
@@ -237,7 +237,7 @@ export const DepositPane: React.FC = () => {
             {isApprovePending ? <Spinner size={28} sx={{ color: "white" }} /> : <>Approve</>}
           </Button>
         )}
-      </Flex>
+      </div>
     </>
   );
 };

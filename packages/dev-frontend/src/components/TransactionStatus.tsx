@@ -2,7 +2,7 @@ import { CheckIcon, EllipsisIcon, XIcon } from "lucide-react";
 import { memo, useEffect, useState } from "react";
 import { buildStyles, CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { Box, Flex, Text, ThemeUIStyleObject } from "theme-ui";
+import { Box, Text, ThemeUIStyleObject } from "theme-ui";
 import type { TransactionState } from "./Transaction";
 
 const strokeWidth = 10;
@@ -79,24 +79,18 @@ export const TransactionStatus: React.FC<TransactionStatusProps> = ({ state, mes
   }
 
   return (
-    <Flex
-      sx={{
-        alignItems: "center",
-        bg:
+    <div
+      className="flex items-center p-3 pl-4 fixed w-screen bottom-0 overflow-hidden"
+      style={{
+        backgroundColor:
           state === "confirmed"
-            ? "success"
+            ? "var(--theme-ui-colors-success)"
             : state === "cancelled"
-            ? "warning"
+            ? "var(--theme-ui-colors-warning)"
             : state === "failed"
-            ? "danger"
-            : "primary",
-        p: 3,
-        pl: 4,
-        position: "fixed",
-        width: "100vw",
-        bottom: 0,
-        overflow: "hidden",
-        ...style
+            ? "var(--theme-ui-colors-danger)"
+            : "var(--theme-ui-colors-primary)",
+        ...(style as React.CSSProperties)
       }}
     >
       <Box sx={{ mr: 3, width: "40px", height: "40px" }}>
@@ -112,6 +106,6 @@ export const TransactionStatus: React.FC<TransactionStatusProps> = ({ state, mes
           ? message || "Transaction failed. Please try again."
           : "Confirmed"}
       </Text>
-    </Flex>
+    </div>
   );
 };
