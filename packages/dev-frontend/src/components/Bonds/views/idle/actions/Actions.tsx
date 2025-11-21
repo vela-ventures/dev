@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "theme-ui";
+import { Button } from "@/components/ui/button";
 import Tippy from "@tippyjs/react";
 import { useBondView } from "../../../context/BondViewContext";
 import type { SelectBondPayload } from "../../../context/transitions";
@@ -29,7 +29,7 @@ export const Actions: React.FC<ActionsProps> = ({ bondId, disabled = false }) =>
       <Button
         disabled={disabled}
         variant="outline"
-        sx={{ height: "44px" }}
+        className="h-11"
         style={{
           cursor
         }}
@@ -45,7 +45,7 @@ export const Actions: React.FC<ActionsProps> = ({ bondId, disabled = false }) =>
           maxWidth="268px"
         >
           <span>
-            <Button disabled={true} variant="outline" sx={{ height: "44px" }}>
+            <Button disabled={true} variant="outline" className="h-11">
               {CLAIM_BOND.term}
             </Button>
           </span>
@@ -55,7 +55,7 @@ export const Actions: React.FC<ActionsProps> = ({ bondId, disabled = false }) =>
         <Button
           disabled={disabled}
           variant="outline"
-          sx={{ height: "44px" }}
+          className="h-11"
           style={{
             cursor: disabled ? "auto" : cursor
           }}

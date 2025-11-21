@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "theme-ui";
+import { Box, Text } from "theme-ui";
 
 export const ActionDescription: React.FC<React.PropsWithChildren> = ({ children }) => (
   <Box
@@ -14,9 +14,9 @@ export const ActionDescription: React.FC<React.PropsWithChildren> = ({ children 
       borderColor: "transparent"
     }}
   >
-    <Flex sx={{ alignItems: "center" }}>
+    <div className="flex items-center">
       <Text>{children}</Text>
-    </Flex>
+    </div>
   </Box>
 );
 

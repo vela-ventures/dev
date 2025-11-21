@@ -1,5 +1,5 @@
+import { Button } from "@/components/ui/button";
 import React from "react";
-import { Button } from "theme-ui";
 import { useLiquity } from "../../../hooks/LiquityContext";
 import { useTransactionFunction } from "../../Transaction";
 
@@ -18,7 +18,7 @@ export const ClaimAndMove: React.FC<ClaimAndMoveProps> = ({ disabled, children }
   return (
     <Button
       variant="outline"
-      sx={{ mt: 3, width: "100%" }}
+      className="mt-3 w-full"
       onClick={sendTransaction}
       disabled={disabled}
     >

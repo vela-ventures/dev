@@ -1,6 +1,3 @@
-import React, { useState } from "react";
-import { Box, Button, Card, Heading } from "theme-ui";
-
 import {
   Decimal,
   Decimalish,
@@ -8,8 +5,10 @@ import {
   LiquityStoreState,
   StabilityDeposit
 } from "@liquity/lib-base";
-
 import { useLiquitySelector } from "@liquity/lib-react";
+import React, { useState } from "react";
+import { Box, Card, Heading } from "theme-ui";
+import { Button } from "../ui/button";
 
 import { COIN, GT } from "../../strings";
 
@@ -61,11 +60,11 @@ export const StabilityDepositEditor: React.FC<StabilityDepositEditorProps> = ({
         Stability Pool
         {edited && !changePending && (
           <Button
-            variant="titleIcon"
-            sx={{ ":enabled:hover": { color: "danger" } }}
+            variant="link"
+            className="hover:enabled:text-destructive"
             onClick={() => dispatch({ type: "revert" })}
           >
-            <HistoryIcon/>
+            <HistoryIcon className="size-6"/>
           </Button>
         )}
       </Heading>

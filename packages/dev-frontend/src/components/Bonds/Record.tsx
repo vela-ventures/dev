@@ -1,4 +1,4 @@
-import { ThemeUIStyleObject, Flex, Text } from "theme-ui";
+import { Text } from "theme-ui";
 import { InfoIcon } from "../InfoIcon";
 import { Placeholder } from "../Placeholder";
 import type { Lexicon } from "../../lexicon";
@@ -8,15 +8,14 @@ type RecordType = {
   description?: string;
   value?: string;
   type?: string;
-  style?: ThemeUIStyleObject;
 };
 
-export const Record: React.FC<RecordType> = ({ lexicon, value, type, style }) => {
+export const Record: React.FC<RecordType> = ({ lexicon, value, type }) => {
   return (
-    <Flex sx={{ flexDirection: "column", ...style }}>
-      <Flex as="h4" sx={{ fontWeight: "300", alignItems: "baseline", justifyContent: "center" }}>
-        {lexicon.term} <InfoIcon size="xs" tooltip={lexicon.description} link={lexicon.link} />
-      </Flex>
+    <div className="flex flex-col">
+      <h4 className="flex font-light items-baseline justify-center">
+        {lexicon.term} <InfoIcon tooltip={lexicon.description} link={lexicon.link} />
+      </h4>
       <Text as="h3" sx={{ display: "flex", justifyContent: "center" }}>
         {value ? (
           <Text sx={{ fontWeight: "400" }}>{value}</Text>
@@ -26,6 +25,6 @@ export const Record: React.FC<RecordType> = ({ lexicon, value, type, style }) =>
         &nbsp;
         {value && <Text sx={{ fontWeight: "light", opacity: 0.8 }}>{type}</Text>}
       </Text>
-    </Flex>
+    </div>
   );
 };

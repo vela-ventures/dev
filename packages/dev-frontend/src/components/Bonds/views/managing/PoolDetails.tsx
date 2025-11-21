@@ -1,5 +1,5 @@
 import { Decimal } from "@liquity/lib-base";
-import { Text, Box, Flex } from "theme-ui";
+import { Text, Box } from "theme-ui";
 import { StaticRow, StaticAmounts } from "../../../Trove/Editor";
 import { useBondView } from "../../context/BondViewContext";
 import { PoolBalance } from "./PoolBalance";
@@ -44,7 +44,7 @@ export const PoolDetails: React.FC = () => {
           </StaticAmounts>
         </StaticRow>
 
-        <Flex>
+        <div className="flex">
           <StaticRow
             label="LP token supply"
             inputId="deposit-mint-lp-tokens"
@@ -66,7 +66,7 @@ export const PoolDetails: React.FC = () => {
               </PoolBalance>{" "}
             </StaticAmounts>
           </StaticRow>
-        </Flex>
+        </div>
       </Box>
     </details>
   );

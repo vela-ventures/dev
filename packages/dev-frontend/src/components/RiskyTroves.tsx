@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { Box, Button, Card, Flex, Heading, Text } from "theme-ui";
+import { Box, Card, Heading, Text } from "theme-ui";
+import { Button } from "./ui/button";
 
 import {
   CRITICAL_COLLATERAL_RATIO,
@@ -158,7 +159,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
       <Heading>
         <Abbreviation short="Troves">Risky Vaults</Abbreviation>
 
-        <Flex sx={{ alignItems: "center" }}>
+        <div className="flex items-center">
           {numberOfTroves !== 0 && (
             <>
               <Abbreviation
@@ -169,14 +170,11 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
                 of {numberOfTroves}
               </Abbreviation>
 
-              <Button variant="titleIcon" onClick={previousPage} disabled={clampedPage <= 0}>
+              <Button variant="ghost" onClick={previousPage} disabled={clampedPage <= 0}>
                 <ChevronLeftIcon/>
               </Button>
 
-              <Button
-                variant="titleIcon"
-                onClick={nextPage}
-                disabled={clampedPage >= numberOfPages - 1}
+              <Button variant="ghost" onClick={nextPage} disabled={clampedPage >= numberOfPages - 1}
               >
                 <ChevronRightIcon/>
               </Button>
@@ -184,13 +182,13 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
           )}
 
           <Button
-            variant="titleIcon"
-            sx={{ opacity: loading ? 0 : 1, ml: [0, 3] }}
+            variant="ghost"
+            className={`ml-0 md:ml-3 ${loading ? "opacity-0" : "opacity-100"}`}
             onClick={forceReload}
           >
             <RotateCwIcon/>
           </Button>
-        </Flex>
+        </div>
       </Heading>
 
       {!troves || troves.length === 0 ? (
@@ -282,7 +280,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
                           text={trove.ownerAddress}
                           onCopy={() => setCopied(trove.ownerAddress)}
                         >
-                          <Button variant="icon" sx={{ width: "24px", height: "24px" }}>
+                          <Button variant="link" className="w-6 h-6">
                             {copied === trove.ownerAddress ? <ClipboardCheckIcon size={16}/> : <ClipboardIcon size={16}/>}
                           </Button>
                         </CopyToClipboard>
@@ -328,7 +326,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
                           ]}
                           send={liquity.send.liquidate.bind(liquity.send, trove.ownerAddress)}
                         >
-                          <Button variant="dangerIcon">
+                          <Button variant="link">
                             <Trash2Icon/>
                           </Button>
                         </Transaction>

@@ -1,6 +1,8 @@
+import { Button } from "@/components/ui/button";
 import { Contract } from "@ethersproject/contracts";
+import { DropletIcon } from "lucide-react";
 import React, { useState } from "react";
-import { Box, Button, Card, Container, Flex, Heading } from "theme-ui";
+import { Box, Card, Container, Heading } from "theme-ui";
 
 import { useLiquity } from "../hooks/LiquityContext";
 
@@ -36,11 +38,11 @@ export const Faucet: React.FC = () => {
         <Heading>Faucet</Heading>
         <Box sx={{ p: [2, 3] }}>
           <Box>Click the button to drip test AR.</Box>
-          <Flex variant="layout.actions">
+          <div className="flex justify-end gap-2 mt-4">
             <Button onClick={handleDrip} disabled={isLoading}>
-              {isLoading ? "Dripping..." : "Drip"}
+              <DropletIcon/> {isLoading ? "Dripping..." : "Drip"}
             </Button>
-          </Flex>
+          </div>
         </Box>
       </Card>
     </Container>

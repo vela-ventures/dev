@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Box, Text } from "theme-ui";
+import { Box, Text } from "theme-ui";
 import type { ThemeUIStyleObject } from "theme-ui";
 import { InfoIcon } from "./InfoIcon";
 import { Placeholder } from "./Placeholder";
@@ -86,53 +86,36 @@ type SubLabelProps = React.PropsWithChildren<{
   style?: ThemeUIStyleObject;
 }>;
 
-export const SubLabel: React.FC<SubLabelProps> = ({ style, children }) => (
-  <Flex
-    sx={{
-      fontWeight: 200,
-      fontSize: "0.98em",
-      alignSelf: "center",
-      justifyContent: "center",
-      flexGrow: 1,
-      ...style
-    }}
-  >
+export const SubLabel: React.FC<SubLabelProps> = ({ children }) => (
+  <div className="flex font-extralight text-[0.98em] self-center justify-center grow">
     {children}
-  </Flex>
+  </div>
 );
 
-export const Label: React.FC<LabelProps> = ({ children, description, style }) => {
+export const Label: React.FC<LabelProps> = ({ children, description }) => {
   return (
-    <Flex
-      sx={{
-        fontWeight: 300,
-        alignSelf: "center",
-        alignContent: "center",
-        alignItems: "center",
-        ...style
-      }}
-    >
+    <div className="flex font-light self-center content-center items-center">
       {children}
       &nbsp;
-      {description ? <InfoIcon size="xs" tooltip={description} /> : null}
-    </Flex>
+      {description ? <InfoIcon tooltip={description} /> : null}
+    </div>
   );
 };
 
 const LoadingEvent: React.FC<{ label: React.ReactNode }> = ({ label }) => {
   return (
-    <Flex sx={{ flexDirection: "column", flexGrow: 1 }}>
-      <Flex sx={{ justifyContent: "center" }}>
+    <div className="flex flex-col grow">
+      <div className="flex justify-center">
         <Placeholder style={{ mx: "20%" }} />
-      </Flex>
-      <Flex sx={{ my: 1, alignItems: "center" }}>
+      </div>
+      <div className="flex my-1 items-center">
         <Line style={defaultLineStyle} />
         <Circle style={defaultCircleStyle} />
         <Line style={defaultLineStyle} />
-      </Flex>
+      </div>
 
-      <Flex sx={{ flexDirection: "column" }}>{label}</Flex>
-    </Flex>
+      <div className="flex flex-col">{label}</div>
+    </div>
   );
 };
 const Event: React.FC<EventProps> = ({
@@ -183,18 +166,18 @@ const Event: React.FC<EventProps> = ({
       : date.toLocaleDateString("en-GB", { month: "short", day: "2-digit", year: "numeric" });
 
   return (
-    <Flex sx={{ flexDirection: "column", flexGrow: 1 }}>
-      <Flex sx={{ justifyContent: "center" }}>
+    <div className="flex flex-col grow">
+      <div className="flex justify-center">
         <Text sx={{ fontWeight: 400, alignSelf: "center" }}>{dateText}</Text>
-      </Flex>
-      <Flex sx={{ my: 1, alignItems: "center" }}>
+      </div>
+      <div className="flex my-1 items-center">
         <Line style={leftLineStyle} />
         <Circle style={circleStyle} />
         <Line style={rightLineStyle} />
-      </Flex>
+      </div>
 
-      <Flex sx={{ flexDirection: "column" }}>{label}</Flex>
-    </Flex>
+      <div className="flex flex-col">{label}</div>
+    </div>
   );
 };
 
@@ -203,7 +186,7 @@ type HorizontalTimelineProps = {
   style?: ThemeUIStyleObject;
 };
 
-export const HorizontalTimeline: React.FC<HorizontalTimelineProps> = ({ events, style }) => {
+export const HorizontalTimeline: React.FC<HorizontalTimelineProps> = ({ events }) => {
   // Order by date, then by whether its selected or not (selected is newer)
   const orderedEvents = [...events].sort((a, b) =>
     a.date.getTime() === b.date.getTime()
@@ -216,7 +199,7 @@ export const HorizontalTimeline: React.FC<HorizontalTimelineProps> = ({ events, 
   const endOfLifeIdx = orderedEvents.findIndex(event => event.isEndOfLife);
 
   return (
-    <Flex sx={{ flexGrow: 1, ...style }}>
+    <div className="flex grow">
       {orderedEvents.map((event, idx) => (
         <Event
           key={idx}
@@ -230,6 +213,6 @@ export const HorizontalTimeline: React.FC<HorizontalTimelineProps> = ({ events, 
           isLoading={event.isLoading}
         />
       ))}
-    </Flex>
+    </div>
   );
 };

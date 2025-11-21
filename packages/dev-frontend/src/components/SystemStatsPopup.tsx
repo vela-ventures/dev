@@ -1,8 +1,8 @@
-import React, { useRef, useState } from "react";
-import { Button, Container } from "theme-ui";
-
 import { LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
+import React, { useRef, useState } from "react";
+import { Container } from "theme-ui";
+import { Button } from "./ui/button";
 
 import { InfoIcon } from "lucide-react";
 import { SystemStats } from "./SystemStats";
@@ -19,11 +19,8 @@ export const SystemStatsPopup: React.FC = () => {
     <>
       <Button
         onClick={() => setSystemStatsOpen(!systemStatsOpen)}
-        variant="icon"
-        sx={{
-          position: "relative",
-          display: ["block", "none"]
-        }}
+        variant="link"
+        className="relative block md:hidden"
       >
         {total.collateralRatioIsBelowCritical(price) ? <InfoIcon color="red"/> : <InfoIcon/> }
       </Button>

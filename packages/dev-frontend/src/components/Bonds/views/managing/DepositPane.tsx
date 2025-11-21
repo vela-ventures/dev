@@ -1,7 +1,8 @@
+import { Button } from "@/components/ui/button";
 import { Decimal } from "@liquity/lib-base";
 import { MoveDownIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { Button, Card, Checkbox, Flex, Label, Spinner, Text } from "theme-ui";
+import { Card, Checkbox, Label, Spinner, Text } from "theme-ui";
 import { Amount } from "../../../ActionDescription";
 import { ErrorDescription } from "../../../ErrorDescription";
 import { InfoIcon } from "../../../InfoIcon";
@@ -152,9 +153,9 @@ export const DepositPane: React.FC = () => {
         maxedOut={lusdAmount.eq(coalescedLusdBalance)}
       />
 
-      <Flex sx={{ justifyContent: "center", mb: 3 }}>
+      <div className="flex justify-center mb-3">
         <MoveDownIcon/>
-      </Flex>
+      </div>
 
       <DisabledEditableRow
         label="Mint LP tokens"
@@ -163,12 +164,11 @@ export const DepositPane: React.FC = () => {
       />
 
       <Label>
-        <Flex sx={{ alignItems: "center" }}>
+        <div className="flex items-center">
           <Checkbox checked={shouldDepositBalanced} onChange={handleToggleShouldDepositBalanced} />
           <Text sx={{ fontWeight: 300, fontSize: "16px" }}>Deposit tokens in a balanced ratio</Text>
           <InfoIcon
             placement="right"
-            size="xs"
             tooltip={
               <Card variant="tooltip">
                 Tick this box to deposit bLUSD and LUSD-3CRV in the pool's current liquidity ratio.
@@ -176,16 +176,15 @@ export const DepositPane: React.FC = () => {
               </Card>
             }
           />
-        </Flex>
+        </div>
       </Label>
 
       <Label mb={2}>
-        <Flex sx={{ alignItems: "center" }}>
+        <div className="flex items-center">
           <Checkbox checked={shouldStakeInGauge} onChange={handleToggleShouldStakeInGauge} />
           <Text sx={{ fontWeight: 300, fontSize: "16px" }}>Stake LP tokens in Curve gauge</Text>
           <InfoIcon
             placement="right"
-            size="xs"
             tooltip={
               <Card variant="tooltip">
                 Tick this box to have your Curve LP tokens staked in the bLUSD Curve gauge. Staked LP
@@ -193,7 +192,7 @@ export const DepositPane: React.FC = () => {
               </Card>
             }
           />
-        </Flex>
+        </div>
       </Label>
 
       <PoolDetails />
@@ -213,9 +212,9 @@ export const DepositPane: React.FC = () => {
         </ErrorDescription>
       )}
 
-      <Flex variant="layout.actions">
+      <div className="flex justify-end gap-2 mt-4">
         <Button
-          variant="cancel"
+          variant="outline"
           onClick={handleBackPressed}
           disabled={isApprovePending || isManageLiquidityPending}
         >
@@ -224,7 +223,6 @@ export const DepositPane: React.FC = () => {
 
         {!isApprovalNeeded ? (
           <Button
-            variant="primary"
             onClick={handleConfirmPressed}
             disabled={
               (bLusdAmount.isZero && lusdAmount.isZero) ||
@@ -235,11 +233,11 @@ export const DepositPane: React.FC = () => {
             {isManageLiquidityPending ? <Spinner size={28} sx={{ color: "white" }} /> : <>Confirm</>}
           </Button>
         ) : (
-          <Button variant="primary" onClick={handleApprovePressed} disabled={isApprovePending}>
+          <Button onClick={handleApprovePressed} disabled={isApprovePending}>
             {isApprovePending ? <Spinner size={28} sx={{ color: "white" }} /> : <>Approve</>}
           </Button>
         )}
-      </Flex>
+      </div>
     </>
   );
 };

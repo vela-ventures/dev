@@ -1,4 +1,5 @@
-import { Box, Button, Card, Flex, Heading } from "theme-ui";
+import { Box, Card, Heading } from "theme-ui";
+import { Button } from "../ui/button";
 
 import { LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
@@ -58,14 +59,13 @@ export const ReadOnlyStake: React.FC = () => {
           unit={COIN}
         />
 
-        <Flex variant="layout.actions">
-          <Button variant="outline" onClick={() => dispatch({ type: "startAdjusting" })}>
-            <PencilIcon size="16"/>
-            &nbsp;Adjust
+        <div className="flex justify-end gap-2 mt-4">
+          <Button size="lg" variant="outline" onClick={() => dispatch({ type: "startAdjusting" })}>
+            <PencilIcon/> Adjust
           </Button>
 
           <StakingGainsAction />
-        </Flex>
+        </div>
       </Box>
 
       {changePending && <LoadingOverlay />}

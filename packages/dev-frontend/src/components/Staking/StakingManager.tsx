@@ -1,6 +1,3 @@
-import React from "react";
-import { Button, Flex } from "theme-ui";
-
 import {
   Decimal,
   Decimalish,
@@ -8,6 +5,8 @@ import {
   LQTYStake,
   LQTYStakeChange
 } from "@liquity/lib-base";
+import React from "react";
+import { Button } from "../ui/button";
 
 import { LiquityStoreUpdate, useLiquityReducer, useLiquitySelector } from "@liquity/lib-react";
 
@@ -149,9 +148,9 @@ export const StakingManager: React.FC = () => {
           <InfoBubble>Adjust the {GT} amount to stake or withdraw.</InfoBubble>
         ))}
 
-      <Flex variant="layout.actions">
+      <div className="flex justify-end gap-2 mt-4">
         <Button
-          variant="cancel"
+          variant="outline"
           onClick={() => dispatchStakingViewAction({ type: "cancelAdjusting" })}
         >
           Cancel
@@ -162,7 +161,7 @@ export const StakingManager: React.FC = () => {
         ) : (
           <Button disabled>Confirm</Button>
         )}
-      </Flex>
+      </div>
     </StakingEditor>
   );
 };

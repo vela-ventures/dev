@@ -1,4 +1,4 @@
-import { Box, Flex } from "theme-ui";
+import { Box } from "theme-ui";
 import { Link } from "./Link";
 
 // const TemporaryNewBadge = () => {
@@ -14,22 +14,22 @@ import { Link } from "./Link";
 export const Nav: React.FC = () => {
   return (
     <Box as="nav" sx={{ display: ["none", "flex"], alignItems: "center", flex: 1 }}>
-      <Flex>
+      <div className="flex">
         <Link to="/">Dashboard</Link>
         <Link to="/risky-troves">Risky Vaults</Link>
         <Link to="/faucet">Faucet</Link>
         {/* <Link to="/bonds">
-          <Flex sx={{ alignItems: "center" }}>
+          <div className="flex items-center">
             <Text>Bonds</Text>
             <TemporaryNewBadge />
-          </Flex> 
+          </div>
         </Link> */}
-      </Flex>
-      {/* <Flex sx={{ justifyContent: "flex-end", mr: 3, flex: 1 }}>
+      </div>
+      {/* <div className="flex justify-end mr-3 flex-1">
         <Link sx={{ fontSize: 1 }} to="/risky-troves">
           Risky Vaults
         </Link>
-      </Flex> */}
+      </div> */}
     </Box>
   );
 };

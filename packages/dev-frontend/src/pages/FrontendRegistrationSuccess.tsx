@@ -1,4 +1,5 @@
-import { Box, Button, Flex, Heading, Paragraph } from "theme-ui";
+import { Button } from "@/components/ui/button";
+import { Box, Heading, Paragraph } from "theme-ui";
 
 import { CheckIcon } from "lucide-react";
 
@@ -31,10 +32,10 @@ export const FrontendRegistrationSuccess: React.FC<FrontendRegistrationSuccessPr
         boxShadow: 2
       }}
     >
-      <Flex sx={{ alignItems: "center", mx: 3, mb: 4, fontSize: 5 }}>
+      <div className="flex items-center mx-3 mb-4" style={{ fontSize: "var(--theme-ui-fontSizes-5)" }}>
         <CheckIcon/>
         <Heading sx={{ ml: 3, fontSize: 4 }}>Success!</Heading>
-      </Flex>
+      </div>
 
       <Paragraph sx={{ fontSize: 2 }}>Your frontend is now ready to receive LQTY rewards.</Paragraph>
     </Box>

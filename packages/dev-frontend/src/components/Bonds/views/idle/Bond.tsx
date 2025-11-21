@@ -1,4 +1,5 @@
-import { Card, Flex, Button, Image, ThemeUIStyleObject } from "theme-ui";
+import { Card, Image, ThemeUIStyleObject } from "theme-ui";
+import { Button } from "@/components/ui/button";
 import { EventType, HorizontalTimeline } from "../../../HorizontalTimeline";
 import { Record } from "../../Record";
 import { Actions } from "./actions/Actions";
@@ -92,22 +93,17 @@ export const Bond: React.FC<BondProps> = ({ bond, style }) => {
   };
 
   return (
-    <Flex
-      sx={{
-        justifyContent: "center",
-        alignItems: "center",
-        gap: "12px",
-        ...style
-      }}
+    <div
+      className="flex justify-center items-center gap-3"
+      style={style as React.CSSProperties}
     >
-      <Flex
-        sx={{
-          flexShrink: 0,
-          boxShadow: 2,
-          borderRadius: 8.5,
-          border: 1,
-          borderColor: "muted",
-          bg: "background"
+      <div
+        className="flex-shrink-0"
+        style={{
+          boxShadow: "var(--theme-ui-shadows-2)",
+          borderRadius: "8.5px",
+          border: "1px solid var(--theme-ui-colors-muted)",
+          backgroundColor: "var(--theme-ui-colors-background)"
         }}
       >
         <Image
@@ -121,23 +117,18 @@ export const Bond: React.FC<BondProps> = ({ bond, style }) => {
             );
           }}
         />
-      </Flex>
+      </div>
       <Card mt={[0, 0, 0, 0]} sx={{ borderRadius: 12, flexGrow: 1 }}>
-        <Flex p={[2, 3]} sx={{ flexDirection: "column" }}>
+        <div className="flex flex-col p-2 md:p-3">
           <HorizontalTimeline
             style={{ fontSize: "14.5px", justifyContent: "center", pt: 2, mx: 3 }}
             events={events}
           />
 
-          <Flex mt={4} pl={3} variant="layout.actions" sx={{ justifyContent: "flex-end" }}>
-            <Flex
-              sx={{
-                justifyContent: "flex-start",
-                flexGrow: 1,
-                alignItems: "center",
-                gap: "0 28px",
-                fontSize: "14.5px"
-              }}
+          <div className="flex justify-end gap-2 mt-4 pl-3">
+            <div
+              className="flex justify-start grow items-center gap-x-7"
+              style={{ fontSize: "14.5px" }}
             >
               <Record lexicon={l.BOND_DEPOSIT} value={bond.deposit.prettify(2)} type="LUSD" />
               {bond.status === "PENDING" && (
@@ -147,16 +138,16 @@ export const Bond: React.FC<BondProps> = ({ bond, style }) => {
                   type="LUSD"
                 />
               )}
-            </Flex>
+            </div>
             {bond.status === "PENDING" && <Actions bondId={bond.id} />}
             {bond.status !== "PENDING" && bond.status === "CLAIMED" && (
-              <Button variant="outline" sx={{ height: "44px" }} onClick={handleSellBLusdPressed}>
+              <Button variant="outline" className="h-11" onClick={handleSellBLusdPressed}>
                 Sell bLUSD
               </Button>
             )}
-          </Flex>
-        </Flex>
+          </div>
+        </div>
       </Card>
-    </Flex>
+    </div>
   );
 };

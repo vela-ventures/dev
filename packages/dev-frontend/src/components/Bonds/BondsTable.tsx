@@ -1,12 +1,13 @@
 /** @jsxImportSource theme-ui */
+import { Decimal } from "@liquity/lib-base";
 import React from "react";
-import { Card, Text, Box, Heading, Flex, Grid, Button } from "theme-ui";
+import { Box, Card, Grid, Heading, Text } from "theme-ui";
 import { InfoIcon } from "../InfoIcon";
+import { Link } from "../Link";
+import { Button } from "../ui/button";
+import { useBondView } from "./context/BondViewContext";
 import * as lexicon from "./lexicon";
 import { Empty } from "./views/idle/Empty";
-import { Link } from "../Link";
-import { useBondView } from "./context/BondViewContext";
-import { Decimal } from "@liquity/lib-base";
 import { InfiniteEstimate } from "./views/InfiniteEstimation";
 
 const {
@@ -19,12 +20,12 @@ const {
 } = lexicon;
 
 const LineSegment: React.FC = () => (
-  <Flex
-    sx={{
+  <div
+    className="flex w-full"
+    style={{
       borderTop: "1px dotted gray",
-      width: "100%",
-      mt: "-20px",
-      mb: 0
+      marginTop: "-20px",
+      marginBottom: 0
     }}
   />
 );
@@ -55,14 +56,13 @@ export const BondsTable: React.FC = () => {
   return (
     <Card>
       <Heading>
-        <Flex>
+        <div className="flex">
           Pending bonds{" "}
           <InfoIcon
             placement="left"
-            size="xs"
             tooltip={<Card variant="tooltip">{BONDS.description}</Card>}
           />
-        </Flex>
+        </div>
       </Heading>
 
       <Box sx={{ p: [2, 3] }}>
@@ -76,35 +76,30 @@ export const BondsTable: React.FC = () => {
             <Text sx={{ fontWeight: "bold" }}>
               {BOND_AMOUNT.term}{" "}
               <InfoIcon
-                size="xs"
                 tooltip={<Card variant="tooltip">{BOND_AMOUNT.description}</Card>}
               />
             </Text>
             <Text sx={{ fontWeight: "bold" }}>
               {ACCRUED_AMOUNT.term}{" "}
               <InfoIcon
-                size="xs"
                 tooltip={<Card variant="tooltip">{ACCRUED_AMOUNT.description}</Card>}
               />
             </Text>
             <Text sx={{ fontWeight: "bold" }}>
               {MARKET_VALUE.term}{" "}
               <InfoIcon
-                size="xs"
                 tooltip={<Card variant="tooltip">{MARKET_VALUE.description}</Card>}
               />
             </Text>
             <Text sx={{ fontWeight: "bold" }}>
               {BREAK_EVEN_TIME.term}{" "}
               <InfoIcon
-                size="xs"
                 tooltip={<Card variant="tooltip">{BREAK_EVEN_TIME.description}</Card>}
               />
             </Text>
             <Text sx={{ fontWeight: "bold" }}>
               {OPTIMUM_REBOND_TIME.term}{" "}
               <InfoIcon
-                size="xs"
                 tooltip={<Card variant="tooltip">{OPTIMUM_REBOND_TIME.description}</Card>}
               />
             </Text>
@@ -134,11 +129,11 @@ export const BondsTable: React.FC = () => {
             })}
           </Grid>
         )}
-        <Flex variant="layout.actions" mt={3}>
+        <div className="flex justify-end gap-2 mt-4">
           <Link to="/bonds/pending" m={0} p={0}>
-            <Button variant="primary">Go to bonds</Button>
+            <Button>Go to bonds</Button>
           </Link>
-        </Flex>
+        </div>
       </Box>
     </Card>
   );

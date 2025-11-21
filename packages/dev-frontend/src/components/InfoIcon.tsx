@@ -14,7 +14,7 @@ export const InfoIcon: React.FC<InfoIconProps> = ({
 }) => {
   return (
     <Tooltip message={tooltip} placement={placement} link={link}>
-      <CircleQuestionMarkIcon size={12} className="ml-1"/>
+      <CircleQuestionMarkIcon className={`ml-1 size-3`}/>
     </Tooltip>
   );
 };

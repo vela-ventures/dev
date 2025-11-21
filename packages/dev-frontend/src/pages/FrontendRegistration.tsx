@@ -1,5 +1,6 @@
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Box, Button, Card, Flex, Heading, Input, Label, Paragraph, Spinner } from "theme-ui";
+import { Box, Card, Heading, Input, Label, Paragraph, Spinner } from "theme-ui";
 
 import { Decimal } from "@liquity/lib-base";
 
@@ -46,7 +47,7 @@ export const FrontendRegistration: React.FC = () => {
         <Heading>Choose a kickback rate</Heading>
 
         <Box sx={{ p: [2, 3] }}>
-          <Flex>
+          <div className="flex">
             <Label>Kickback rate</Label>
             <Label variant="unit">%</Label>
 
@@ -69,7 +70,7 @@ export const FrontendRegistration: React.FC = () => {
                 setKickbackRateString(kickbackRate.mul(100).toString());
               }}
             />
-          </Flex>
+          </div>
         </Box>
       </Card>
 
@@ -91,10 +92,10 @@ export const FrontendRegistration: React.FC = () => {
           boxShadow: 2
         }}
       >
-        <Flex sx={{ alignItems: "center", mx: 3, fontSize: 4 }}>
+        <div className="flex items-center mx-3" style={{ fontSize: "var(--theme-ui-fontSizes-4)" }}>
           <HandIcon/>
           <Heading sx={{ ml: 3, fontSize: "18px" }}>Before you proceed</Heading>
-        </Flex>
+        </div>
 
         <Paragraph sx={{ fontSize: 1, mt: 3 }}>
           You are about to register <b>{shortenAddress(account)}</b> to receive{" "}

@@ -2,8 +2,9 @@ import { LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import { PencilIcon } from "lucide-react";
 import React, { useCallback } from "react";
-import { Box, Button, Card, Flex, Heading } from "theme-ui";
+import { Box, Card, Heading } from "theme-ui";
 import { COIN } from "../../strings";
+import { Button } from "../ui/button";
 import { CollateralRatio, CollateralRatioInfoBubble } from "./CollateralRatio";
 import { DisabledEditableRow } from "./Editor";
 import { useTroveView } from "./context/TroveViewContext";
@@ -45,15 +46,14 @@ export const ReadOnlyTrove: React.FC = () => {
           <CollateralRatioInfoBubble value={trove.collateralRatio(price)} />
         </Box>
 
-        <Flex variant="layout.actions">
+        <div className="flex justify-end gap-2 mt-4">
           <Button variant="outline" onClick={handleCloseTrove}>
             Close Vault
           </Button>
           <Button onClick={handleAdjustTrove}>
-            <PencilIcon size="16"/>
-            &nbsp;Adjust
+            <PencilIcon/> Adjust
           </Button>
-        </Flex>
+        </div>
       </Box>
     </Card>
   );

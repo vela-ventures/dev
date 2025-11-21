@@ -1,5 +1,5 @@
+import { Button } from "@/components/ui/button";
 import React from "react";
-import { Button } from "theme-ui";
 // import { useBondView } from "../../../context/BondViewContext";
 
 type ApprovePropTypes = {
