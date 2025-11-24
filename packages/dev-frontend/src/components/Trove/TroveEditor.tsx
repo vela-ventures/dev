@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Card, Heading } from "theme-ui";
+import { Box, Card } from "theme-ui";
 
 import {
   Decimal,
@@ -51,7 +51,7 @@ export const TroveEditor: React.FC<TroveEditorProps> = ({
 
   return (
     <Card>
-      <Heading>Vault</Heading>
+      <h1 className="text-lg font-semibold p-4 pb-0">Vault</h1>
 
       <Box sx={{ p: [2, 3] }}>
         <StaticRow

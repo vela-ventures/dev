@@ -1,4 +1,3 @@
-import { Text } from "theme-ui";
 import { InfoIcon } from "../InfoIcon";
 import { Placeholder } from "../Placeholder";
 import type { Lexicon } from "../../lexicon";
@@ -16,15 +15,15 @@ export const Record: React.FC<RecordType> = ({ lexicon, value, type }) => {
       <h4 className="flex font-light items-baseline justify-center">
         {lexicon.term} <InfoIcon tooltip={lexicon.description} link={lexicon.link} />
       </h4>
-      <Text as="h3" sx={{ display: "flex", justifyContent: "center" }}>
+      <h3 className="flex justify-center">
         {value ? (
-          <Text sx={{ fontWeight: "400" }}>{value}</Text>
+          <span className="font-normal">{value}</span>
         ) : (
           <Placeholder style={{ mx: "20%" }} />
         )}
         &nbsp;
-        {value && <Text sx={{ fontWeight: "light", opacity: 0.8 }}>{type}</Text>}
-      </Text>
+        {value && <span className="font-light opacity-80">{type}</span>}
+      </h3>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Heading, Text } from "theme-ui";
+import { Card } from "theme-ui";
 import { Decimal } from "@liquity/lib-base";
 import * as l from "../components/Bonds/lexicon";
 import { Statistic } from "./Statistic";
@@ -20,7 +20,7 @@ const Metric: React.FC<MetricProps> = ({ value, unit }) => {
     <>
       {value}
       &nbsp;
-      {unit && <Text sx={{ fontWeight: "light", fontSize: 1 }}>{unit}</Text>}
+      {unit && <span className="font-light text-sm">{unit}</span>}
     </>
   );
 };
@@ -32,11 +32,11 @@ export const BondStats: React.FC<BondStatsProps> = () => {
 
   return (
     <Card variant="info">
-      <Heading sx={{ fontweight: "bold" }}>LUSD bonds</Heading>
+      <h1 className="text-lg font-bold">LUSD bonds</h1>
 
-      <Heading as="h2" sx={{ mt: 3, fontWeight: "body" }}>
+      <h2 className="mt-3 font-normal">
         bLUSD
-      </Heading>
+      </h2>
       <Statistic lexicon={l.BLUSD_MARKET_PRICE}>
         <Metric value={protocolInfo.marketPrice.prettify(3)} unit="LUSD" />
       </Statistic>
@@ -90,9 +90,9 @@ export const BondStats: React.FC<BondStatsProps> = () => {
         <Metric value={protocolInfo.bLusdSupply.shorten()} unit="bLUSD" />
       </Statistic>
 
-      <Heading as="h2" sx={{ mt: 3, fontWeight: "body" }}>
+      <h2 className="mt-3 font-normal">
         Statistics
-      </Heading>
+      </h2>
       <Statistic lexicon={l.PENDING_BONDS_STATISTIC}>
         <Metric value={stats.pendingBonds.prettify(0)} />
       </Statistic>
@@ -106,9 +106,9 @@ export const BondStats: React.FC<BondStatsProps> = () => {
         <Metric value={stats.totalBonds.prettify(0)} />
       </Statistic>
 
-      <Heading as="h2" sx={{ mt: 3, fontWeight: "body" }}>
+      <h2 className="mt-3 font-normal">
         Treasury
-      </Heading>
+      </h2>
       <Statistic lexicon={l.TREASURY_PENDING}>
         <Metric value={protocolInfo.treasury.pending.shorten()} unit="LUSD" />
       </Statistic>

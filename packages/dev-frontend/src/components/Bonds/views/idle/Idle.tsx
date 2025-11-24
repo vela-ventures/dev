@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
-import { Box, Card, Heading } from "theme-ui";
+import { Box, Card } from "theme-ui";
 import { useLiquity } from "../../../../hooks/LiquityContext";
 import { InfoIcon } from "../../../InfoIcon";
 import { useBondAddresses } from "../../context/BondAddressesContext";
@@ -69,7 +69,7 @@ export const Idle: React.FC = () => {
 
       {!hasBonds && (
         <Card>
-          <Heading>
+          <h1 className="text-lg font-semibold p-4 pb-0">
             <div className="flex">
               {BONDS.term}
               <InfoIcon
@@ -77,7 +77,7 @@ export const Idle: React.FC = () => {
                 tooltip={<Card variant="tooltip">{BONDS.description}</Card>}
               />
             </div>
-          </Heading>
+          </h1>
           <Box sx={{ p: [2, 3] }}>
             <Empty />
 

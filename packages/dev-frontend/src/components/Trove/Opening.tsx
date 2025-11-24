@@ -11,7 +11,7 @@ import { useLiquitySelector } from "@liquity/lib-react";
 import { HistoryIcon } from "lucide-react";
 import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Box, Card, Heading, Spinner } from "theme-ui";
+import { Box, Card, Spinner } from "theme-ui";
 import { useArweaveBalance } from "../../hooks/useArweaveBalance";
 import { useStableTroveChange } from "../../hooks/useStableTroveChange";
 import { COIN } from "../../strings";
@@ -99,14 +99,14 @@ export const Opening: React.FC = () => {
 
   return (
     <Card>
-      <Heading>
+      <h1 className="text-lg font-semibold p-4 pb-0 flex justify-between items-center">
         Vault
         {isDirty && !isTransactionPending && (
           <Button variant="link" sx={{ ":enabled:hover": { color: "danger" } }} onClick={reset}>
             <HistoryIcon/>
           </Button>
         )}
-      </Heading>
+      </h1>
 
       <Box sx={{ p: [2, 3] }}>
         <EditableRow

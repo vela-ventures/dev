@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Decimal } from "@liquity/lib-base";
 import { MoveDownIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { Label, Radio, Spinner, Text } from "theme-ui";
+import { Label, Radio, Spinner } from "theme-ui";
 import { Amount } from "../../../ActionDescription";
 import { ErrorDescription } from "../../../ErrorDescription";
 import { DisabledEditableAmounts, DisabledEditableRow, EditableRow } from "../../../Trove/Editor";
@@ -22,9 +22,9 @@ type WithdrawnAmountProps = React.PropsWithChildren<{
 
 const WithdrawnAmount: React.FC<WithdrawnAmountProps> = ({ symbol, children }) => (
   <>
-    <Text sx={{ fontWeight: "medium" }}>{children}</Text>
+    <span className="font-medium">{children}</span>
     &nbsp;
-    <Text sx={{ fontWeight: "light", opacity: 0.8 }}>{symbol}</Text>
+    <span className="font-light opacity-80">{symbol}</span>
   </>
 );
 
@@ -188,7 +188,7 @@ export const WithdrawPane: React.FC = () => {
         <DisabledEditableAmounts sx={{ justifyContent: "flex-start" }}>
           {Array.from(withdrawal.entries()).map(([token, amount], i) => (
             <React.Fragment key={i}>
-              {i > 0 && <Text sx={{ fontWeight: "light", mx: "12px" }}>+</Text>}
+              {i > 0 && <span className="font-light mx-3">+</span>}
               <WithdrawnAmount symbol={tokenSymbol.get(token) ?? ""}>
                 {amount.prettify(2)}
               </WithdrawnAmount>

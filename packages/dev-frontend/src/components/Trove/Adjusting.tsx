@@ -9,7 +9,7 @@ import {
 import { useLiquitySelector } from "@liquity/lib-react";
 import { HistoryIcon } from "lucide-react";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Box, Card, Heading } from "theme-ui";
+import { Box, Card } from "theme-ui";
 import { useArweaveBalance } from "../../hooks/useArweaveBalance";
 import { useStableTroveChange } from "../../hooks/useStableTroveChange";
 import { COIN } from "../../strings";
@@ -161,7 +161,7 @@ export const Adjusting: React.FC = () => {
 
   return (
     <Card>
-      <Heading>
+      <h1 className="text-lg font-semibold p-4 pb-0 flex justify-between items-center">
         Vault
         {isDirty && !isTransactionPending && (
           <Button
@@ -172,7 +172,7 @@ export const Adjusting: React.FC = () => {
             <HistoryIcon className="size-6"/>
           </Button>
         )}
-      </Heading>
+      </h1>
 
       <Box sx={{ p: [2, 3] }}>
         <EditableRow

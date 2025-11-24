@@ -1,5 +1,5 @@
 import { Decimal } from "@liquity/lib-base";
-import { Text, Box } from "theme-ui";
+import { Box } from "theme-ui";
 import { StaticRow, StaticAmounts } from "../../../Trove/Editor";
 import { useBondView } from "../../context/BondViewContext";
 import { PoolBalance } from "./PoolBalance";
@@ -26,7 +26,7 @@ export const PoolDetails: React.FC = () => {
             <PoolBalance symbol="bLUSD">
               {(bLusdAmmBLusdBalance ?? Decimal.ZERO).prettify(2)}
             </PoolBalance>
-            <Text sx={{ fontWeight: "light", mx: "12px" }}>+</Text>
+            <span className="font-light mx-3">+</span>
             <PoolBalance symbol="LUSD-3CRV">
               {(bLusdAmmLusdBalance ?? Decimal.ZERO).prettify(2)}
             </PoolBalance>
@@ -39,7 +39,7 @@ export const PoolDetails: React.FC = () => {
             inputId="deposit-pool-ratio"
           >
             <PoolBalance symbol="bLUSD">1</PoolBalance>
-            <Text sx={{ fontWeight: "thin", mx: "6px" }}>:</Text>
+            <span className="font-thin mx-1.5">:</span>
             <PoolBalance symbol="LUSD-3CRV">{poolBalanceRatio.prettify(2)}</PoolBalance>
           </StaticAmounts>
         </StaticRow>

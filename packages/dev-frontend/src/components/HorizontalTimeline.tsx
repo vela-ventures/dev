@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text } from "theme-ui";
+import { Box } from "theme-ui";
 import type { ThemeUIStyleObject } from "theme-ui";
 import { InfoIcon } from "./InfoIcon";
 import { Placeholder } from "./Placeholder";
@@ -168,7 +168,7 @@ const Event: React.FC<EventProps> = ({
   return (
     <div className="flex flex-col grow">
       <div className="flex justify-center">
-        <Text sx={{ fontWeight: 400, alignSelf: "center" }}>{dateText}</Text>
+        <span className="font-normal self-center">{dateText}</span>
       </div>
       <div className="flex my-1 items-center">
         <Line style={leftLineStyle} />

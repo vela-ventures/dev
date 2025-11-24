@@ -2,7 +2,7 @@ import { LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import { PencilIcon } from "lucide-react";
 import React, { useCallback } from "react";
-import { Box, Card, Heading } from "theme-ui";
+import { Box, Card } from "theme-ui";
 import { COIN } from "../../strings";
 import { Button } from "../ui/button";
 import { CollateralRatio, CollateralRatioInfoBubble } from "./CollateralRatio";
@@ -25,7 +25,7 @@ export const ReadOnlyTrove: React.FC = () => {
   // console.log("READONLY TROVE", trove.collateral.prettify(4));
   return (
     <Card>
-      <Heading>Vault</Heading>
+      <h1 className="text-lg font-semibold p-4 pb-0">Vault</h1>
       <Box sx={{ p: [2, 3] }}>
         <Box>
           <DisabledEditableRow

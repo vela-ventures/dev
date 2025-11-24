@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Decimal, LiquityStoreState } from "@liquity/lib-base";
@@ -31,9 +31,10 @@ export const PriceManager: React.FC = () => {
     <Card className="mt-8">
       <CardHeader>
         <CardTitle>Price feed</CardTitle>
+        <CardDescription>Set the current price of AR/GiB</CardDescription>
       </CardHeader>
 
-      <CardContent className="p-2 md:p-3 flex items-stretch">
+      <CardContent className="flex items-stretch">
         <Label className="mr-2">AR/GiB</Label>
 
         <Input

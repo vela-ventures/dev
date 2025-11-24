@@ -2,7 +2,7 @@ import { CheckIcon, EllipsisIcon, XIcon } from "lucide-react";
 import { memo, useEffect, useState } from "react";
 import { buildStyles, CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { Box, Text, ThemeUIStyleObject } from "theme-ui";
+import { Box, ThemeUIStyleObject } from "theme-ui";
 import type { TransactionState } from "./Transaction";
 
 const strokeWidth = 10;
@@ -97,7 +97,7 @@ export const TransactionStatus: React.FC<TransactionStatusProps> = ({ state, mes
         <TransactionProgressDonut state={state} />
       </Box>
 
-      <Text sx={{ fontSize: 3, color: "white" }}>
+      <span className="text-xl text-white">
         {state === "waitingForConfirmation"
           ? "Waiting for confirmation"
           : state === "cancelled"
@@ -105,7 +105,7 @@ export const TransactionStatus: React.FC<TransactionStatusProps> = ({ state, mes
           : state === "failed"
           ? message || "Transaction failed. Please try again."
           : "Confirmed"}
-      </Text>
+      </span>
     </div>
   );
 };

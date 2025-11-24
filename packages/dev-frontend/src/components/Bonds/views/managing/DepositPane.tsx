@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Decimal } from "@liquity/lib-base";
 import { MoveDownIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { Card, Checkbox, Label, Spinner, Text } from "theme-ui";
+import { Card, Checkbox, Label, Spinner } from "theme-ui";
 import { Amount } from "../../../ActionDescription";
 import { ErrorDescription } from "../../../ErrorDescription";
 import { InfoIcon } from "../../../InfoIcon";
@@ -166,7 +166,7 @@ export const DepositPane: React.FC = () => {
       <Label>
         <div className="flex items-center">
           <Checkbox checked={shouldDepositBalanced} onChange={handleToggleShouldDepositBalanced} />
-          <Text sx={{ fontWeight: 300, fontSize: "16px" }}>Deposit tokens in a balanced ratio</Text>
+          <span className="font-light text-base">Deposit tokens in a balanced ratio</span>
           <InfoIcon
             placement="right"
             tooltip={
@@ -182,7 +182,7 @@ export const DepositPane: React.FC = () => {
       <Label mb={2}>
         <div className="flex items-center">
           <Checkbox checked={shouldStakeInGauge} onChange={handleToggleShouldStakeInGauge} />
-          <Text sx={{ fontWeight: 300, fontSize: "16px" }}>Stake LP tokens in Curve gauge</Text>
+          <span className="font-light text-base">Stake LP tokens in Curve gauge</span>
           <InfoIcon
             placement="right"
             tooltip={

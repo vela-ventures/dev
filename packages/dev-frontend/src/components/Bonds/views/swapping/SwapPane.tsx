@@ -1,10 +1,11 @@
 /** @jsxImportSource theme-ui */
 
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Decimal, Percent } from "@liquity/lib-base";
 import { MoveDownIcon } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
-import { Box, Close, Heading, Input, Label, Link, Radio, Spinner } from "theme-ui";
+import { Box, Close, Label, Link, Radio, Spinner } from "theme-ui";
 import { Amount } from "../../../ActionDescription";
 import { ErrorDescription } from "../../../ErrorDescription";
 import { Placeholder } from "../../../Placeholder";
@@ -159,7 +160,7 @@ export const SwapPane: React.FC = () => {
 
   return (
     <>
-      <Heading as="h2" sx={{ pt: 2, pb: 3, px: 2 }}>
+      <h2 className="pt-2 pb-3 px-2 relative">
         <div className="flex justify-center">
           {inputToken === BLusdAmmTokenIndex.BLUSD ? <>Sell</> : <>Buy</>} bLUSD
         </div>
@@ -171,7 +172,7 @@ export const SwapPane: React.FC = () => {
             top: "24px"
           }}
         />
-      </Heading>
+      </h2>
 
       <EditableRow
         label="Sell"
@@ -270,19 +271,15 @@ export const SwapPane: React.FC = () => {
             />
             <Input
               ref={customSlippageToleranceRef}
-              sx={{
-                py: "6px",
-                px: "10px",
-                width: "110px",
-                fontSize: 2,
-                ...(!customSlippageToleranceFocus
+              className={`py-1.5 px-2.5 w-[110px] text-base ${
+                !customSlippageToleranceFocus
                   ? isSlippageToleranceInvalid
-                    ? { bg: "invalid", borderColor: "danger" }
+                    ? "bg-red-50 border-red-500"
                     : isSlippageToleranceHigh
-                    ? { borderColor: "warning" }
-                    : {}
-                  : {})
-              }}
+                    ? "border-yellow-500"
+                    : ""
+                  : ""
+              }`}
               type="number"
               min={0}
               max={100}

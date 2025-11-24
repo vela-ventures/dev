@@ -1,7 +1,7 @@
 import { LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import React, { useCallback } from "react";
-import { Box, Card, Heading } from "theme-ui";
+import { Box, Card } from "theme-ui";
 import { CollateralSurplusAction } from "../CollateralSurplusAction";
 import { InfoMessage } from "../InfoMessage";
 import { Button } from "../ui/button";
@@ -21,7 +21,7 @@ export const LiquidatedTrove: React.FC = () => {
 
   return (
     <Card>
-      <Heading>Vault</Heading>
+      <h1 className="text-lg font-semibold p-4 pb-0">Vault</h1>
       <Box sx={{ p: [2, 3] }}>
         <InfoMessage title="Your Vault has been liquidated.">
           {hasSurplusCollateral

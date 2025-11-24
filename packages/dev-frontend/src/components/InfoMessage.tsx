@@ -1,4 +1,4 @@
-import { Box, Heading, Text } from "theme-ui";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 import { InfoIcon } from "lucide-react";
 
@@ -8,13 +8,14 @@ type InfoMessageProps = React.PropsWithChildren<{
 }>;
 
 export const InfoMessage: React.FC<InfoMessageProps> = ({ title, children, icon }) => (
-  <Box sx={{ mx: 1, mb: 3 }}>
-    <div className="flex items-center mb-2.5">
-      <Box sx={{ mr: "12px", fontSize: "20px" }}>{icon || <InfoIcon/>}</Box>
-
-      <Heading as="h3">{title}</Heading>
-    </div>
-
-    <Text sx={{ fontSize: 2 }}>{children}</Text>
-  </Box>
+  <Card className="mt-8">
+    <CardHeader>
+      <CardTitle className="flex items-center">
+        <div>{icon || <InfoIcon className="mr-2"/>}</div> {title}
+      </CardTitle>
+    </CardHeader>
+    <CardContent>
+    {children}
+    </CardContent>
+  </Card>
 );
