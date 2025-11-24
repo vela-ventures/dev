@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Box, Card, Input, Label } from "theme-ui";
+import { Box, Card, Label } from "theme-ui";
 import { useLiquity } from "../hooks/LiquityContext";
 import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 
 import { Trash2Icon } from "lucide-react";
 import { Transaction } from "./Transaction";

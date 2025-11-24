@@ -1,10 +1,15 @@
 /** @jsxImportSource theme-ui */
 
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Decimal, Percent } from "@liquity/lib-base";
 import { MoveDownIcon } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
+<<<<<<< Updated upstream
 import { Box, Close, Input, Label, Link, Radio, Spinner } from "theme-ui";
+=======
+import { Box, Close, Heading, Label, Link, Radio, Spinner } from "theme-ui";
+>>>>>>> Stashed changes
 import { Amount } from "../../../ActionDescription";
 import { ErrorDescription } from "../../../ErrorDescription";
 import { Placeholder } from "../../../Placeholder";
@@ -270,19 +275,15 @@ export const SwapPane: React.FC = () => {
             />
             <Input
               ref={customSlippageToleranceRef}
-              sx={{
-                py: "6px",
-                px: "10px",
-                width: "110px",
-                fontSize: 2,
-                ...(!customSlippageToleranceFocus
+              className={`py-1.5 px-2.5 w-[110px] text-base ${
+                !customSlippageToleranceFocus
                   ? isSlippageToleranceInvalid
-                    ? { bg: "invalid", borderColor: "danger" }
+                    ? "bg-red-50 border-red-500"
                     : isSlippageToleranceHigh
-                    ? { borderColor: "warning" }
-                    : {}
-                  : {})
-              }}
+                    ? "border-yellow-500"
+                    : ""
+                  : ""
+              }`}
               type="number"
               min={0}
               max={100}

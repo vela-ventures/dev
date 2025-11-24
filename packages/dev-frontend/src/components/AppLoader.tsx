@@ -1,8 +1,8 @@
-import { Spinner } from "theme-ui";
+import { Spinner } from "./ui/spinner";
 
 export const AppLoader = () => (
   <div className="flex items-center justify-center h-screen">
-    <Spinner sx={{ m: 2, color: "text" }} size={32} />
-    <h1 className="text-lg font-semibold">Loading...</h1>
+    <Spinner className="m-2 text-foreground size-6" />
+    <h1 className="text-2xl font-bold">Loading...</h1>
   </div>
 );

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { Box, Card, Input, Label, Paragraph, Spinner } from "theme-ui";
+import { Box, Card, Label, Paragraph, Spinner } from "theme-ui";
 
 import { Decimal } from "@liquity/lib-base";
 
@@ -52,7 +53,7 @@ export const FrontendRegistration: React.FC = () => {
             <Label variant="unit">%</Label>
 
             <Input
-              sx={{ maxWidth: "200px" }}
+              className="max-w-[200px]"
               type="number"
               step="any"
               value={kickbackRateString}
