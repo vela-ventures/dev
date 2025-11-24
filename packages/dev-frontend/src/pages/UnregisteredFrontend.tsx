@@ -1,4 +1,4 @@
-import { Box, Heading, Paragraph } from "theme-ui";
+import { Box, Paragraph } from "theme-ui";
 
 import { TriangleAlertIcon } from "lucide-react";
 import { useLiquity } from "../hooks/LiquityContext";
@@ -28,7 +28,7 @@ export const UnregisteredFrontend: React.FC = () => {
     >
       <div className="flex items-center mx-3 mb-2">
         <TriangleAlertIcon/>
-        <Heading sx={{ ml: 3, fontSize: "18px" }}>Frontend not yet registered</Heading>
+        <h1 className="ml-3 text-lg font-semibold">Frontend not yet registered</h1>
       </div>
 
       <Paragraph sx={{ fontSize: 2 }}>

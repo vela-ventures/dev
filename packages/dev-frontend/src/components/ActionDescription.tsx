@@ -1,4 +1,4 @@
-import { Box, Text } from "theme-ui";
+import { Box } from "theme-ui";
 
 export const ActionDescription: React.FC<React.PropsWithChildren> = ({ children }) => (
   <Box
@@ -15,11 +15,11 @@ export const ActionDescription: React.FC<React.PropsWithChildren> = ({ children 
     }}
   >
     <div className="flex items-center">
-      <Text>{children}</Text>
+      <span>{children}</span>
     </div>
   </Box>
 );
 
 export const Amount: React.FC<React.PropsWithChildren> = ({ children }) => (
-  <Text sx={{ fontWeight: "bold", whiteSpace: "nowrap" }}>{children}</Text>
+  <span className="font-bold whitespace-nowrap">{children}</span>
 );

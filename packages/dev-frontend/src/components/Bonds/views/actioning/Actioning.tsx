@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 import React from "react";
-import { Heading, Grid, Close, Box } from "theme-ui";
+import { Grid, Close, Box } from "theme-ui";
 import { Record } from "../../Record";
 import { useBondView } from "../../context/BondViewContext";
 import { HorizontalTimeline, Label, SubLabel } from "../../../HorizontalTimeline";
@@ -88,7 +88,7 @@ export const Actioning: React.FC = () => {
 
   return (
     <ReactModal onDismiss={handleDismiss}>
-      <Heading as="h2" sx={{ pt: 2, pb: 3, px: 2 }}>
+      <h2 className="pt-2 pb-3 px-2 relative">
         <div className="flex justify-center">
           {view === "CANCELLING" ? l.CANCEL_BOND.term : l.CLAIM_BOND.term}
         </div>
@@ -100,7 +100,7 @@ export const Actioning: React.FC = () => {
             top: "24px"
           }}
         />
-      </Heading>
+      </h2>
       <div className="flex my-4 mx-2 justify-center">
         <HorizontalTimeline events={events} />
       </div>

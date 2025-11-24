@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Contract } from "@ethersproject/contracts";
 import { DropletIcon } from "lucide-react";
 import React, { useState } from "react";
-import { Box, Card, Container, Heading } from "theme-ui";
+import { Box, Card, Container } from "theme-ui";
 
 import { useLiquity } from "../hooks/LiquityContext";
 
@@ -35,7 +35,7 @@ export const Faucet: React.FC = () => {
   return (
     <Container>
       <Card>
-        <Heading>Faucet</Heading>
+        <h1 className="text-lg font-semibold p-4 pb-0">Faucet</h1>
         <Box sx={{ p: [2, 3] }}>
           <Box>Click the button to drip test AR.</Box>
           <div className="flex justify-end gap-2 mt-4">

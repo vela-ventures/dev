@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Decimal } from "@liquity/lib-base";
 import React, { useEffect, useMemo, useState } from "react";
-import { Card, Close, Grid, Heading, Image, Spinner, Text } from "theme-ui";
+import { Card, Close, Grid, Image, Spinner } from "theme-ui";
 import { ActionDescription, Amount } from "../../../ActionDescription";
 import { ErrorDescription } from "../../../ErrorDescription";
 import { HorizontalSlider } from "../../../HorizontalSlider";
@@ -142,7 +142,7 @@ export const Details: React.FC<DetailsProps> = ({ onBack }) => {
 
   return (
     <>
-      <Heading as="h2" sx={{ pt: 1, pb: 3, px: 2 }}>
+      <h2 className="pt-1 pb-3 px-2 relative">
         <div className="flex justify-center">Bond LUSD</div>
         <Close
           onClick={handleDismiss}
@@ -152,7 +152,7 @@ export const Details: React.FC<DetailsProps> = ({ onBack }) => {
             top: "24px"
           }}
         />
-      </Heading>
+      </h2>
 
       <div className="flex justify-center items-center">
         <Image
@@ -278,7 +278,7 @@ export const Details: React.FC<DetailsProps> = ({ onBack }) => {
 
       {!isInfiniteBondApproved && (
         <ActionDescription>
-          <Text>You are approving LUSD for bonding</Text>
+          <span>You are approving LUSD for bonding</span>
         </ActionDescription>
       )}
 

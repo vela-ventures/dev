@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Close, Heading, NavLink, NavLinkProps } from "theme-ui";
+import { Close, NavLink, NavLinkProps } from "theme-ui";
 import { ReactModal } from "../../../ReactModal";
 import { useBondView } from "../../context/BondViewContext";
 import { DepositPane } from "./DepositPane";
@@ -30,7 +30,7 @@ export const ManagingLiquidity: React.FC = () => {
 
   return (
     <ReactModal onDismiss={handleDismiss}>
-      <Heading as="h2" sx={{ pt: 2, pb: 3, px: 2 }}>
+      <h2 className="pt-2 pb-3 px-2 relative">
         <div className="flex justify-center">Manage liquidity</div>
         <Close
           onClick={handleDismiss}
@@ -40,7 +40,7 @@ export const ManagingLiquidity: React.FC = () => {
             top: "24px"
           }}
         />
-      </Heading>
+      </h2>
 
       <nav className="flex mb-3">
         <Link active={selectedPane === "deposit"} onClick={() => setSelectedPane("deposit")}>

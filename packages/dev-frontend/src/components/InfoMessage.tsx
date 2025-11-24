@@ -1,4 +1,4 @@
-import { Box, Heading, Text } from "theme-ui";
+import { Box } from "theme-ui";
 
 import { InfoIcon } from "lucide-react";
 
@@ -12,9 +12,9 @@ export const InfoMessage: React.FC<InfoMessageProps> = ({ title, children, icon 
     <div className="flex items-center mb-2.5">
       <Box sx={{ mr: "12px", fontSize: "20px" }}>{icon || <InfoIcon/>}</Box>
 
-      <Heading as="h3">{title}</Heading>
+      <h3 className="text-base font-semibold">{title}</h3>
     </div>
 
-    <Text sx={{ fontSize: 2 }}>{children}</Text>
+    <span className="text-base">{children}</span>
   </Box>
 );

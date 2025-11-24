@@ -1,5 +1,5 @@
 import { Decimal } from "@liquity/lib-base";
-import { Text, Slider as ThemeUiSlider } from "theme-ui";
+import { Slider as ThemeUiSlider } from "theme-ui";
 import { toFloat } from "./Bonds/utils";
 import { InfoIcon } from "./InfoIcon";
 import { Button } from "./ui/button";
@@ -46,9 +46,9 @@ export const HorizontalSlider: React.FC<SliderProps> = ({
       </h4>
 
       <div className="flex grow items-center">
-        <Text mr={2} sx={{ fontSize: 1 }}>
+        <span className="mr-2 text-sm">
           {min}
-        </Text>
+        </span>
         <ThemeUiSlider
           value={toFloat(value)}
           min={min}
@@ -56,14 +56,14 @@ export const HorizontalSlider: React.FC<SliderProps> = ({
           step={step}
           onChange={e => onSliderChange(Decimal.from(e.target.value))}
         ></ThemeUiSlider>
-        <Text ml={2} sx={{ fontSize: 1 }}>
+        <span className="ml-2 text-sm">
           {max}
-        </Text>
+        </span>
       </div>
       <div className="flex font-normal justify-center items-center">
-        <Text>
+        <span>
           {value.prettify(2)} {type}
-        </Text>
+        </span>
       </div>
     </div>
   );

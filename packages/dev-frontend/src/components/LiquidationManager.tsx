@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Card, Heading, Input, Label } from "theme-ui";
+import { Box, Card, Input, Label } from "theme-ui";
 import { useLiquity } from "../hooks/LiquityContext";
 import { Button } from "./ui/button";
 
@@ -14,7 +14,7 @@ export const LiquidationManager: React.FC = () => {
 
   return (
     <Card>
-      <Heading>Liquidate</Heading>
+      <h1 className="text-lg font-semibold p-4 pb-0">Liquidate</h1>
 
       <Box sx={{ p: [2, 3] }}>
         <div className="flex items-stretch">

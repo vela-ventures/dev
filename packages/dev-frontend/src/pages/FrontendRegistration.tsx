@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Box, Card, Heading, Input, Label, Paragraph, Spinner } from "theme-ui";
+import { Box, Card, Input, Label, Paragraph, Spinner } from "theme-ui";
 
 import { Decimal } from "@liquity/lib-base";
 
@@ -44,7 +44,7 @@ export const FrontendRegistration: React.FC = () => {
   return (
     <>
       <Card>
-        <Heading>Choose a kickback rate</Heading>
+        <h1 className="text-lg font-semibold p-4 pb-0">Choose a kickback rate</h1>
 
         <Box sx={{ p: [2, 3] }}>
           <div className="flex">
@@ -94,7 +94,7 @@ export const FrontendRegistration: React.FC = () => {
       >
         <div className="flex items-center mx-3" style={{ fontSize: "var(--theme-ui-fontSizes-4)" }}>
           <HandIcon/>
-          <Heading sx={{ ml: 3, fontSize: "18px" }}>Before you proceed</Heading>
+          <h1 className="ml-3 text-lg font-semibold">Before you proceed</h1>
         </div>
 
         <Paragraph sx={{ fontSize: 1, mt: 3 }}>

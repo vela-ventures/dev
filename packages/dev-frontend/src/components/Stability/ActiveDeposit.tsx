@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import { Box, Card, Heading } from "theme-ui";
+import { Box, Card } from "theme-ui";
 import { Button } from "../ui/button";
 
 import { LiquityStoreState } from "@liquity/lib-base";
@@ -51,14 +51,14 @@ export const ActiveDeposit: React.FC = () => {
 
   return (
     <Card>
-      <Heading>
+      <h1 className="text-lg font-semibold p-4 pb-0 flex justify-between items-center">
         Stability Pool
         {!isWaitingForTransaction && (
           <div className="flex justify-end">
             <RemainingLQTY />
           </div>
         )}
-      </Heading>
+      </h1>
       <Box sx={{ p: [2, 3] }}>
         <Box>
           <DisabledEditableRow

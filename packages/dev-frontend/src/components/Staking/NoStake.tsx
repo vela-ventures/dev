@@ -1,4 +1,4 @@
-import { Box, Card, Heading } from "theme-ui";
+import { Box, Card } from "theme-ui";
 import { GT } from "../../strings";
 import { Button } from "../ui/button";
 
@@ -10,7 +10,7 @@ export const NoStake: React.FC = () => {
 
   return (
     <Card>
-      <Heading>Staking</Heading>
+      <h1 className="text-lg font-semibold p-4 pb-0">Staking</h1>
       <Box sx={{ p: [2, 3] }}>
         <InfoMessage title={`You haven't staked ${GT} yet.`}>
           Stake {GT} to earn a share of borrowing and redemption fees.

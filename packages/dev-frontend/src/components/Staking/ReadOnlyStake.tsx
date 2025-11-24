@@ -1,4 +1,4 @@
-import { Box, Card, Heading } from "theme-ui";
+import { Box, Card } from "theme-ui";
 import { Button } from "../ui/button";
 
 import { LiquityStoreState } from "@liquity/lib-base";
@@ -26,7 +26,7 @@ export const ReadOnlyStake: React.FC = () => {
 
   return (
     <Card>
-      <Heading>Staking</Heading>
+      <h1 className="text-lg font-semibold p-4 pb-0">Staking</h1>
 
       <Box sx={{ p: [2, 3] }}>
         <DisabledEditableRow

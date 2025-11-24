@@ -7,7 +7,7 @@ import {
 } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import React, { useState } from "react";
-import { Box, Card, Heading } from "theme-ui";
+import { Box, Card } from "theme-ui";
 import { Button } from "../ui/button";
 
 import { COIN, GT } from "../../strings";
@@ -56,7 +56,7 @@ export const StabilityDepositEditor: React.FC<StabilityDepositEditorProps> = ({
 
   return (
     <Card>
-      <Heading>
+      <h1 className="text-lg font-semibold p-4 pb-0 flex justify-between items-center">
         Stability Pool
         {edited && !changePending && (
           <Button
@@ -67,7 +67,7 @@ export const StabilityDepositEditor: React.FC<StabilityDepositEditorProps> = ({
             <HistoryIcon className="size-6"/>
           </Button>
         )}
-      </Heading>
+      </h1>
 
       <Box sx={{ p: [2, 3] }}>
         <EditableRow

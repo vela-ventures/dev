@@ -1,4 +1,4 @@
-import { Box, Text } from "theme-ui";
+import { Box } from "theme-ui";
 
 import { TriangleAlertIcon } from "lucide-react";
 
@@ -21,7 +21,7 @@ export const ErrorDescription: React.FC<React.PropsWithChildren> = ({ children }
   >
     <div className="flex items-center">
       <TriangleAlertIcon/>
-      <Text sx={{ ml: 2 }}>{children}</Text>
+      <span className="ml-2">{children}</span>
     </div>
   </Box>
 );

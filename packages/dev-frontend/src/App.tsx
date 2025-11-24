@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitProvider, getDefaultConfig, getDefaultConnectors } from "connectkit";
 import React from "react";
-import { Heading, Link, Paragraph, ThemeUIProvider } from "theme-ui";
+import { Link, Paragraph, ThemeUIProvider } from "theme-ui";
 import { WagmiProvider, createConfig, fallback, http } from "wagmi";
 import { goerli, localhost, mainnet, sepolia } from "wagmi/chains";
 import { injected } from "wagmi/connectors";
@@ -61,9 +61,9 @@ getConfig().then(config => {
 
 const UnsupportedMainnetFallback: React.FC = () => (
   <div className="flex flex-col items-center justify-center h-screen text-center">
-    <Heading sx={{ mb: 3 }}>
+    <h1 className="text-lg font-semibold mb-3">
       <TriangleAlertIcon/> This app is for testing purposes only.
-    </Heading>
+    </h1>
 
     <Paragraph sx={{ mb: 3 }}>Please change your network to Görli or Sepolia.</Paragraph>
 
@@ -79,9 +79,9 @@ const UnsupportedMainnetFallback: React.FC = () => (
 
 const UnsupportedNetworkFallback: React.FC = () => (
   <div className="flex flex-col items-center justify-center h-screen text-center">
-    <Heading sx={{ mb: 3 }}>
+    <h1 className="text-lg font-semibold mb-3">
       <TriangleAlertIcon/> Liquity is not supported on this network.
-    </Heading>
+    </h1>
     Please switch to mainnet, Görli or Sepolia.
   </div>
 );

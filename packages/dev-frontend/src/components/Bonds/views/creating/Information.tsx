@@ -6,7 +6,6 @@ import {
   Checkbox,
   Close,
   Flex,
-  Heading,
   Label,
   Paragraph,
   Link,
@@ -22,7 +21,7 @@ const InformationContainer: React.FC<React.PropsWithChildren> = ({ children }) =
 
   return (
     <>
-      <Heading as="h2" sx={{ pt: 2, pb: 3, px: 2 }}>
+      <h2 className="pt-2 pb-3 px-2 relative">
         <Flex sx={{ justifyContent: "center" }}>Bond LUSD</Flex>
         <Close
           onClick={handleDismiss}
@@ -32,7 +31,7 @@ const InformationContainer: React.FC<React.PropsWithChildren> = ({ children }) =
             top: "24px"
           }}
         />
-      </Heading>
+      </h2>
 
       <Flex sx={{ justifyContent: "center" }}>
         <Image src="./bonds/bond-info.png" sx={{ height: "200px" }} />

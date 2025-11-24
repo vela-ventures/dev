@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Box, Card, Heading } from "theme-ui";
+import { Box, Card } from "theme-ui";
 import { InfoMessage } from "../InfoMessage";
 import { Button } from "../ui/button";
 import { useStabilityView } from "./context/StabilityViewContext";
@@ -15,12 +15,12 @@ export const NoDeposit: React.FC = () => {
 
   return (
     <Card>
-      <Heading>
+      <h1 className="text-lg font-semibold p-4 pb-0 flex justify-between items-center">
         Stability Pool
         <div className="flex justify-end">
           <RemainingLQTY />
         </div>
-      </Heading>
+      </h1>
       <Box sx={{ p: [2, 3] }}>
         <InfoMessage title="You have no GiB in the Stability Pool.">
           You can earn AR and NAU rewards by depositing GiB.

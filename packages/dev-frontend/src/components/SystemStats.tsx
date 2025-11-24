@@ -1,7 +1,7 @@
 import { Decimal, LiquityStoreState, Percent } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import React from "react";
-import { Box, Card, Heading, Text } from "theme-ui";
+import { Box, Card } from "theme-ui";
 
 import * as l from "../lexicon";
 import { Statistic } from "./Statistic";
@@ -17,7 +17,7 @@ const Balances: React.FC = () => {
 
   return (
     <Box sx={{ mb: 3 }}>
-      <Heading>My Account Balances</Heading>
+      <h1 className="text-lg font-semibold">My Account Balances</h1>
       <Statistic lexicon={l.ETH}>{accountBalance.prettify(4)}</Statistic>
       <Statistic lexicon={l.LUSD}>{lusdBalance.prettify()}</Statistic>
       <Statistic lexicon={l.LQTY}>{lqtyBalance.prettify()}</Statistic>
@@ -84,26 +84,26 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
     <Card {...{ variant }}>
       {showBalances && <Balances />}
 
-      <Heading>NAU statistics</Heading>
+      <h1 className="text-lg font-semibold">NAU statistics</h1>
 
-      <Heading as="h2" sx={{ mt: 3, fontWeight: "body" }}>
+      <h2 className="mt-3 font-normal">
         Protocol
-      </Heading>
+      </h2>
 
       <Statistic lexicon={l.BORROW_FEE}>{borrowingFeePct.toString(2)}</Statistic>
 
       <Statistic lexicon={l.TVL}>
-        {total.collateral.shorten()} <Text sx={{ fontSize: 1 }}>&nbsp;ETH</Text>
-        <Text sx={{ fontSize: 1 }}>
+        {total.collateral.shorten()} <span className="text-sm">&nbsp;ETH</span>
+        <span className="text-sm">
           &nbsp;(${Decimal.from(total.collateral.mul(price)).shorten()})
-        </Text>
+        </span>
       </Statistic>
       <Statistic lexicon={l.TROVES}>{Decimal.from(numberOfTroves).prettify(0)}</Statistic>
       <Statistic lexicon={l.LUSD_SUPPLY}>{total.debt.shorten()}</Statistic>
       {lusdInStabilityPoolPct && (
         <Statistic lexicon={l.STABILITY_POOL_LUSD}>
           {lusdInStabilityPool.shorten()}
-          <Text sx={{ fontSize: 1 }}>&nbsp;({lusdInStabilityPoolPct.toString(1)})</Text>
+          <span className="text-sm">&nbsp;({lusdInStabilityPoolPct.toString(1)})</span>
         </Statistic>
       )}
       <Statistic lexicon={l.STAKED_LQTY}>{totalStakedLQTY.shorten()}</Statistic>

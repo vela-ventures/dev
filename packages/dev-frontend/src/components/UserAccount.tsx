@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Heading, Text } from "theme-ui";
+import { Box } from "theme-ui";
 import { Button } from "./ui/button";
 
 import { Decimal, LiquityStoreState } from "@liquity/lib-base";
@@ -60,8 +60,8 @@ export const UserAccount: React.FC = () => {
           // ["bLUSD", Decimal.from(bLusdBalance || 0)]
         ] as const).map(([currency, balance], i) => (
           <div key={i} className="flex flex-col ml-3">
-            <Heading sx={{ fontSize: 1 }}>{currency}</Heading>
-            <Text sx={{ fontSize: 1 }}>{balance.prettify()}</Text>
+            <h1 className="text-sm font-semibold">{currency}</h1>
+            <span className="text-sm">{balance.prettify()}</span>
           </div>
         ))}
       </Box>

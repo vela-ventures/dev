@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 import { Decimal } from "@liquity/lib-base";
 import React from "react";
-import { Box, Card, Grid, Heading, Text } from "theme-ui";
+import { Box, Card, Grid } from "theme-ui";
 import { InfoIcon } from "../InfoIcon";
 import { Link } from "../Link";
 import { Button } from "../ui/button";
@@ -55,7 +55,7 @@ export const BondsTable: React.FC = () => {
   const hasBonds = pendingBonds.length > 0;
   return (
     <Card>
-      <Heading>
+      <h1 className="text-lg font-semibold p-4 pb-0">
         <div className="flex">
           Pending bonds{" "}
           <InfoIcon
@@ -63,7 +63,7 @@ export const BondsTable: React.FC = () => {
             tooltip={<Card variant="tooltip">{BONDS.description}</Card>}
           />
         </div>
-      </Heading>
+      </h1>
 
       <Box sx={{ p: [2, 3] }}>
         {!hasBonds && <Empty />}
@@ -73,36 +73,36 @@ export const BondsTable: React.FC = () => {
             columns={[columns, "1fr 1fr 1.1fr 1.3fr 1fr"]}
             sx={{ alignItems: "center", justifyItems: "center", alignContent: "center" }}
           >
-            <Text sx={{ fontWeight: "bold" }}>
+            <span style={{ fontWeight: "bold" }}>
               {BOND_AMOUNT.term}{" "}
               <InfoIcon
                 tooltip={<Card variant="tooltip">{BOND_AMOUNT.description}</Card>}
               />
-            </Text>
-            <Text sx={{ fontWeight: "bold" }}>
+            </span>
+            <span style={{ fontWeight: "bold" }}>
               {ACCRUED_AMOUNT.term}{" "}
               <InfoIcon
                 tooltip={<Card variant="tooltip">{ACCRUED_AMOUNT.description}</Card>}
               />
-            </Text>
-            <Text sx={{ fontWeight: "bold" }}>
+            </span>
+            <span style={{ fontWeight: "bold" }}>
               {MARKET_VALUE.term}{" "}
               <InfoIcon
                 tooltip={<Card variant="tooltip">{MARKET_VALUE.description}</Card>}
               />
-            </Text>
-            <Text sx={{ fontWeight: "bold" }}>
+            </span>
+            <span style={{ fontWeight: "bold" }}>
               {BREAK_EVEN_TIME.term}{" "}
               <InfoIcon
                 tooltip={<Card variant="tooltip">{BREAK_EVEN_TIME.description}</Card>}
               />
-            </Text>
-            <Text sx={{ fontWeight: "bold" }}>
+            </span>
+            <span style={{ fontWeight: "bold" }}>
               {OPTIMUM_REBOND_TIME.term}{" "}
               <InfoIcon
                 tooltip={<Card variant="tooltip">{OPTIMUM_REBOND_TIME.description}</Card>}
               />
-            </Text>
+            </span>
             {Line(5)}
 
             {pendingBonds.map((bond, idx) => {
@@ -114,15 +114,15 @@ export const BondsTable: React.FC = () => {
               );
               return (
                 <React.Fragment key={idx}>
-                  <Text>{bond.deposit.shorten()} LUSD</Text>
-                  <Text>{bond.accrued.shorten()} bLUSD</Text>
-                  <Text>{bond.marketValue.shorten()} LUSD</Text>
-                  <Text>
+                  <span>{bond.deposit.shorten()} LUSD</span>
+                  <span>{bond.accrued.shorten()} bLUSD</span>
+                  <span>{bond.marketValue.shorten()} LUSD</span>
+                  <span>
                     <InfiniteEstimate estimate={breakEvenDays} />
-                  </Text>
-                  <Text>
+                  </span>
+                  <span>
                     <InfiniteEstimate estimate={rebondDays} />
-                  </Text>
+                  </span>
                   {Line(5)}
                 </React.Fragment>
               );

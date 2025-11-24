@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { Box, Card, Heading, Text } from "theme-ui";
+import { Box, Card } from "theme-ui";
 import { Button } from "./ui/button";
 
 import {
@@ -156,7 +156,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
 
   return (
     <Card sx={{ width: "100%" }}>
-      <Heading>
+      <h1 className="text-lg font-semibold flex justify-between items-center p-4 pb-0">
         <Abbreviation short="Troves">Risky Vaults</Abbreviation>
 
         <div className="flex items-center">
@@ -189,7 +189,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
             <RotateCwIcon/>
           </Button>
         </div>
-      </Heading>
+      </h1>
 
       {!troves || troves.length === 0 ? (
         <Box sx={{ p: [2, 3] }}>
@@ -252,14 +252,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
                         }}
                       >
                         <Tooltip message={trove.ownerAddress} placement="top">
-                          <Text
-                            variant="address"
-                            sx={{
-                              width: ["73px", "unset"],
-                              overflow: "hidden",
-                              position: "relative"
-                            }}
-                          >
+                          <span className="w-[73px] overflow-hidden relative">
                             {shortenAddress(trove.ownerAddress)}
                             <Box
                               sx={{
@@ -273,7 +266,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
                                   "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)"
                               }}
                             />
-                          </Text>
+                          </span>
                         </Tooltip>
 
                         <CopyToClipboard
@@ -297,17 +290,17 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
                       </td>
                       <td>
                         {(collateralRatio => (
-                          <Text
-                            color={
+                          <span
+                            className={
                               collateralRatio.gt(CRITICAL_COLLATERAL_RATIO)
-                                ? "success"
+                                ? "text-success"
                                 : collateralRatio.gt(1.2)
-                                ? "warning"
-                                : "danger"
+                                ? "text-warning"
+                                : "text-danger"
                             }
                           >
                             {new Percent(collateralRatio).prettify()}
-                          </Text>
+                          </span>
                         ))(trove.collateralRatio(price))}
                       </td>
                       <td>

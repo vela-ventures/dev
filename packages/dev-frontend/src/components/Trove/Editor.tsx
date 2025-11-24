@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Flex, Input, Label, SxProp, Text, ThemeUICSSProperties } from "theme-ui";
+import { Flex, Input, Label, SxProp, ThemeUICSSProperties } from "theme-ui";
 import { Button } from "../ui/button";
 
 import { ChevronDownIcon, ChevronsDownIcon, ChevronsUpIcon, ChevronUpIcon } from "lucide-react";
@@ -44,7 +44,7 @@ type PendingAmountProps = SxProp & {
 
 const PendingAmount: React.FC<PendingAmountProps> = ({ sx, value }) => (
   <Flex sx={{ alignItems: "center", ...sx }}>
-    <Text>(</Text>
+    <span>(</span>
     {value === "++" ? (
       <ChevronsUpIcon size={16}/>
     ) : value === "--" ? (
@@ -52,17 +52,17 @@ const PendingAmount: React.FC<PendingAmountProps> = ({ sx, value }) => (
     ) : value?.startsWith("+") ? (
       <>
         <ChevronUpIcon size={16}/>
-        <Text>{value.substr(1)}</Text>
+        <span>{value.substr(1)}</span>
       </>
     ) : value?.startsWith("-") ? (
       <>
         <ChevronDownIcon size={16}/>
-        <Text>{value.substr(1)}</Text>
+        <span>{value.substr(1)}</span>
       </>
     ) : (
-      <Text>{value}</Text>
+      <span>{value}</span>
     )}
-    <Text>)</Text>
+    <span>)</span>
   </Flex>
 );
 
@@ -106,12 +106,12 @@ export const StaticAmounts: React.FC<StaticAmountsProps & SxProp> = ({
     >
       {amount && (
         <Flex sx={{ alignItems: "center" }}>
-          <Text sx={{ color, fontWeight: "medium" }}>{amount}</Text>
+          <span className="font-medium" style={{ color }}>{amount}</span>
 
           {unit && (
             <>
               &nbsp;
-              <Text sx={{ fontWeight: "light", opacity: 0.8 }}>{unit}</Text>
+              <span className="font-light opacity-80">{unit}</span>
             </>
           )}
 

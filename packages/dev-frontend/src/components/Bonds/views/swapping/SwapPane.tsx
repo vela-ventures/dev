@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Decimal, Percent } from "@liquity/lib-base";
 import { MoveDownIcon } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
-import { Box, Close, Heading, Input, Label, Link, Radio, Spinner } from "theme-ui";
+import { Box, Close, Input, Label, Link, Radio, Spinner } from "theme-ui";
 import { Amount } from "../../../ActionDescription";
 import { ErrorDescription } from "../../../ErrorDescription";
 import { Placeholder } from "../../../Placeholder";
@@ -159,7 +159,7 @@ export const SwapPane: React.FC = () => {
 
   return (
     <>
-      <Heading as="h2" sx={{ pt: 2, pb: 3, px: 2 }}>
+      <h2 className="pt-2 pb-3 px-2 relative">
         <div className="flex justify-center">
           {inputToken === BLusdAmmTokenIndex.BLUSD ? <>Sell</> : <>Buy</>} bLUSD
         </div>
@@ -171,7 +171,7 @@ export const SwapPane: React.FC = () => {
             top: "24px"
           }}
         />
-      </Heading>
+      </h2>
 
       <EditableRow
         label="Sell"
