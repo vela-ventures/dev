@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Contract } from "@ethersproject/contracts";
 import { DropletIcon } from "lucide-react";
 import React, { useState } from "react";
-import { Box, Card, Container } from "theme-ui";
 
+import { SystemStats } from "../components/SystemStats";
 import { useLiquity } from "../hooks/LiquityContext";
 
 const FAUCET_ADDRESS = "0xBBC0157d436fe4dFbAfaA12b6af330b11588c4FE";
@@ -33,18 +34,23 @@ export const Faucet: React.FC = () => {
   };
 
   return (
-    <Container>
-      <Card>
-        <h1 className="text-lg font-semibold p-4 pb-0">Faucet</h1>
-        <Box sx={{ p: [2, 3] }}>
-          <Box>Click the button to drip test AR.</Box>
-          <div className="flex justify-end gap-2 mt-4">
+    <div className="grid grid-cols-5 gap-8 w-full">
+      <div className="col-span-3">
+        <Card className="mt-8">
+          <CardHeader>
+            <CardTitle>Faucet</CardTitle>
+            <CardDescription>Click the button to drip test AR.</CardDescription>
+          </CardHeader>
+          <CardContent className="flex justify-end">
             <Button onClick={handleDrip} disabled={isLoading}>
-              <DropletIcon/> {isLoading ? "Dripping..." : "Drip"}
+              <DropletIcon /> {isLoading ? "Dripping..." : "Drip"}
             </Button>
-          </div>
-        </Box>
-      </Card>
-    </Container>
+          </CardContent>
+        </Card>
+      </div>
+      <div className="col-span-2">
+        <SystemStats />
+      </div>
+    </div>
   );
 };

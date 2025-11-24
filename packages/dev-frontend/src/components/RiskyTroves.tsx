@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { Box, Card } from "theme-ui";
+import { Box } from "theme-ui";
 import { Button } from "./ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 import {
   CRITICAL_COLLATERAL_RATIO,
@@ -155,182 +156,188 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
   }, [copied]);
 
   return (
-    <Card sx={{ width: "100%" }}>
-      <h1 className="text-lg font-semibold flex justify-between items-center p-4 pb-0">
-        <Abbreviation short="Troves">Risky Vaults</Abbreviation>
+    <Card>
+      <CardHeader>
+        <CardTitle>
+          <h1 className="text-lg font-semibold flex justify-between items-center p-4 pb-0">
+            <Abbreviation short="Troves">Risky Vaults</Abbreviation>
 
-        <div className="flex items-center">
-          {numberOfTroves !== 0 && (
-            <>
-              <Abbreviation
-                short={`page ${clampedPage + 1} / ${numberOfPages}`}
-                sx={{ mr: [0, 3], fontWeight: "body", fontSize: [1, 2], letterSpacing: [-1, 0] }}
-              >
-                {clampedPage * pageSize + 1}-{Math.min((clampedPage + 1) * pageSize, numberOfTroves)}{" "}
-                of {numberOfTroves}
-              </Abbreviation>
+            <div className="flex items-center">
+              {numberOfTroves !== 0 && (
+                <>
+                  <Abbreviation
+                    short={`page ${clampedPage + 1} / ${numberOfPages}`}
+                    sx={{ mr: [0, 3], fontWeight: "body", fontSize: [1, 2], letterSpacing: [-1, 0] }}
+                  >
+                    {clampedPage * pageSize + 1}-{Math.min((clampedPage + 1) * pageSize, numberOfTroves)}{" "}
+                    of {numberOfTroves}
+                  </Abbreviation>
 
-              <Button variant="ghost" onClick={previousPage} disabled={clampedPage <= 0}>
-                <ChevronLeftIcon/>
-              </Button>
+                  <Button variant="ghost" onClick={previousPage} disabled={clampedPage <= 0}>
+                    <ChevronLeftIcon/>
+                  </Button>
 
-              <Button variant="ghost" onClick={nextPage} disabled={clampedPage >= numberOfPages - 1}
-              >
-                <ChevronRightIcon/>
-              </Button>
-            </>
-          )}
-
-          <Button
-            variant="ghost"
-            className={`ml-0 md:ml-3 ${loading ? "opacity-0" : "opacity-100"}`}
-            onClick={forceReload}
-          >
-            <RotateCwIcon/>
-          </Button>
-        </div>
-      </h1>
-
-      {!troves || troves.length === 0 ? (
-        <Box sx={{ p: [2, 3] }}>
-          <Box sx={{ p: 4, fontSize: 3, textAlign: "center" }}>
-            {!troves ? "Loading..." : "There are no Vaults yet"}
-          </Box>
-        </Box>
-      ) : (
-        <Box sx={{ p: [2, 3] }}>
-          <Box
-            as="table"
-            sx={{
-              mt: 2,
-              pl: [1, 4],
-              width: "100%",
-
-              textAlign: "center",
-              lineHeight: 1.15
-            }}
-          >
-            <colgroup>
-              <col style={{ width: "50px" }} />
-              <col />
-              <col />
-              <col />
-              <col style={{ width: rowHeight }} />
-            </colgroup>
-
-            <thead>
-              <tr>
-                <th>Owner</th>
-                <th>
-                  <Abbreviation short="Coll.">Collateral</Abbreviation>
-                  <Box sx={{ fontSize: [0, 1], fontWeight: "body", opacity: 0.5 }}>AR</Box>
-                </th>
-                <th>
-                  Debt
-                  <Box sx={{ fontSize: [0, 1], fontWeight: "body", opacity: 0.5 }}>{COIN}</Box>
-                </th>
-                <th>
-                  Coll.
-                  <br />
-                  Ratio
-                </th>
-                <th></th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {troves.map(
-                trove =>
-                  !trove.isEmpty && ( // making sure the Trove hasn't been liquidated
-                    // (WONT-FIX: remove check after we can fetch multiple Troves in one call)
-                    <tr key={trove.ownerAddress}>
-                      <td
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          height: rowHeight
-                        }}
-                      >
-                        <Tooltip message={trove.ownerAddress} placement="top">
-                          <span className="w-[73px] overflow-hidden relative">
-                            {shortenAddress(trove.ownerAddress)}
-                            <Box
-                              sx={{
-                                display: ["block", "none"],
-                                position: "absolute",
-                                top: 0,
-                                right: 0,
-                                width: "50px",
-                                height: "100%",
-                                background:
-                                  "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)"
-                              }}
-                            />
-                          </span>
-                        </Tooltip>
-
-                        <CopyToClipboard
-                          text={trove.ownerAddress}
-                          onCopy={() => setCopied(trove.ownerAddress)}
-                        >
-                          <Button variant="link" className="w-6 h-6">
-                            {copied === trove.ownerAddress ? <ClipboardCheckIcon size={16}/> : <ClipboardIcon size={16}/>}
-                          </Button>
-                        </CopyToClipboard>
-                      </td>
-                      <td>
-                        <Abbreviation short={trove.collateral.shorten()}>
-                          {trove.collateral.prettify(4)}
-                        </Abbreviation>
-                      </td>
-                      <td>
-                        <Abbreviation short={trove.debt.shorten()}>
-                          {trove.debt.prettify()}
-                        </Abbreviation>
-                      </td>
-                      <td>
-                        {(collateralRatio => (
-                          <span
-                            className={
-                              collateralRatio.gt(CRITICAL_COLLATERAL_RATIO)
-                                ? "text-success"
-                                : collateralRatio.gt(1.2)
-                                ? "text-warning"
-                                : "text-danger"
-                            }
-                          >
-                            {new Percent(collateralRatio).prettify()}
-                          </span>
-                        ))(trove.collateralRatio(price))}
-                      </td>
-                      <td>
-                        <Transaction
-                          id={`liquidate-${trove.ownerAddress}`}
-                          tooltip="Liquidate"
-                          requires={[
-                            recoveryMode
-                              ? liquidatableInRecoveryMode(
-                                  trove,
-                                  price,
-                                  totalCollateralRatio,
-                                  lusdInStabilityPool
-                                )
-                              : liquidatableInNormalMode(trove, price)
-                          ]}
-                          send={liquity.send.liquidate.bind(liquity.send, trove.ownerAddress)}
-                        >
-                          <Button variant="link">
-                            <Trash2Icon/>
-                          </Button>
-                        </Transaction>
-                      </td>
-                    </tr>
-                  )
+                  <Button variant="ghost" onClick={nextPage} disabled={clampedPage >= numberOfPages - 1}
+                  >
+                    <ChevronRightIcon/>
+                  </Button>
+                </>
               )}
-            </tbody>
+
+              <Button
+                variant="ghost"
+                className={`ml-0 md:ml-3 ${loading ? "opacity-0" : "opacity-100"}`}
+                onClick={forceReload}
+              >
+                <RotateCwIcon/>
+              </Button>
+            </div>
+          </h1>
+        </CardTitle>
+      </CardHeader>
+
+      <CardContent>
+        {!troves || troves.length === 0 ? (
+          <Box sx={{ p: [2, 3] }}>
+            <Box sx={{ p: 4, fontSize: 3, textAlign: "center" }}>
+              {!troves ? "Loading..." : "There are no Vaults yet"}
+            </Box>
           </Box>
-        </Box>
-      )}
+        ) : (
+          <Box sx={{ p: [2, 3] }}>
+            <Box
+              as="table"
+              sx={{
+                mt: 2,
+                pl: [1, 4],
+                width: "100%",
+
+                textAlign: "center",
+                lineHeight: 1.15
+              }}
+            >
+              <colgroup>
+                <col style={{ width: "50px" }} />
+                <col />
+                <col />
+                <col />
+                <col style={{ width: rowHeight }} />
+              </colgroup>
+
+              <thead>
+                <tr>
+                  <th>Owner</th>
+                  <th>
+                    <Abbreviation short="Coll.">Collateral</Abbreviation>
+                    <Box sx={{ fontSize: [0, 1], fontWeight: "body", opacity: 0.5 }}>AR</Box>
+                  </th>
+                  <th>
+                    Debt
+                    <Box sx={{ fontSize: [0, 1], fontWeight: "body", opacity: 0.5 }}>{COIN}</Box>
+                  </th>
+                  <th>
+                    Coll.
+                    <br />
+                    Ratio
+                  </th>
+                  <th></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {troves.map(
+                  trove =>
+                    !trove.isEmpty && ( // making sure the Trove hasn't been liquidated
+                      // (WONT-FIX: remove check after we can fetch multiple Troves in one call)
+                      <tr key={trove.ownerAddress}>
+                        <td
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            height: rowHeight
+                          }}
+                        >
+                          <Tooltip message={trove.ownerAddress} placement="top">
+                            <span className="w-[73px] overflow-hidden relative">
+                              {shortenAddress(trove.ownerAddress)}
+                              <Box
+                                sx={{
+                                  display: ["block", "none"],
+                                  position: "absolute",
+                                  top: 0,
+                                  right: 0,
+                                  width: "50px",
+                                  height: "100%",
+                                  background:
+                                    "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)"
+                                }}
+                              />
+                            </span>
+                          </Tooltip>
+
+                          <CopyToClipboard
+                            text={trove.ownerAddress}
+                            onCopy={() => setCopied(trove.ownerAddress)}
+                          >
+                            <Button variant="link" className="w-6 h-6">
+                              {copied === trove.ownerAddress ? <ClipboardCheckIcon size={16}/> : <ClipboardIcon size={16}/>}
+                            </Button>
+                          </CopyToClipboard>
+                        </td>
+                        <td>
+                          <Abbreviation short={trove.collateral.shorten()}>
+                            {trove.collateral.prettify(4)}
+                          </Abbreviation>
+                        </td>
+                        <td>
+                          <Abbreviation short={trove.debt.shorten()}>
+                            {trove.debt.prettify()}
+                          </Abbreviation>
+                        </td>
+                        <td>
+                          {(collateralRatio => (
+                            <span
+                              className={
+                                collateralRatio.gt(CRITICAL_COLLATERAL_RATIO)
+                                  ? "text-success"
+                                  : collateralRatio.gt(1.2)
+                                  ? "text-warning"
+                                  : "text-danger"
+                              }
+                            >
+                              {new Percent(collateralRatio).prettify()}
+                            </span>
+                          ))(trove.collateralRatio(price))}
+                        </td>
+                        <td>
+                          <Transaction
+                            id={`liquidate-${trove.ownerAddress}`}
+                            tooltip="Liquidate"
+                            requires={[
+                              recoveryMode
+                                ? liquidatableInRecoveryMode(
+                                    trove,
+                                    price,
+                                    totalCollateralRatio,
+                                    lusdInStabilityPool
+                                  )
+                                : liquidatableInNormalMode(trove, price)
+                            ]}
+                            send={liquity.send.liquidate.bind(liquity.send, trove.ownerAddress)}
+                          >
+                            <Button variant="link">
+                              <Trash2Icon/>
+                            </Button>
+                          </Transaction>
+                        </td>
+                      </tr>
+                    )
+                )}
+              </tbody>
+            </Box>
+          </Box>
+        )}
+      </CardContent>
 
       {loading && <LoadingOverlay />}
     </Card>

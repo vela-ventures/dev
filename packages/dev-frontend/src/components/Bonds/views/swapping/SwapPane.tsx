@@ -5,11 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Decimal, Percent } from "@liquity/lib-base";
 import { MoveDownIcon } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
-<<<<<<< Updated upstream
-import { Box, Close, Input, Label, Link, Radio, Spinner } from "theme-ui";
-=======
-import { Box, Close, Heading, Label, Link, Radio, Spinner } from "theme-ui";
->>>>>>> Stashed changes
+import { Box, Close, Label, Link, Radio, Spinner } from "theme-ui";
 import { Amount } from "../../../ActionDescription";
 import { ErrorDescription } from "../../../ErrorDescription";
 import { Placeholder } from "../../../Placeholder";

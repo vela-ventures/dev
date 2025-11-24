@@ -1,7 +1,7 @@
 import { Decimal, LiquityStoreState, Percent } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import React from "react";
-import { Box, Card } from "theme-ui";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 
 import * as l from "../lexicon";
 import { Statistic } from "./Statistic";
@@ -16,12 +16,12 @@ const Balances: React.FC = () => {
   const { accountBalance, lusdBalance, lqtyBalance } = useLiquitySelector(selectBalances);
 
   return (
-    <Box sx={{ mb: 3 }}>
+    <div className="mb-3">
       <h1 className="text-lg font-semibold">My Account Balances</h1>
       <Statistic lexicon={l.ETH}>{accountBalance.prettify(4)}</Statistic>
       <Statistic lexicon={l.LUSD}>{lusdBalance.prettify()}</Statistic>
       <Statistic lexicon={l.LQTY}>{lqtyBalance.prettify()}</Statistic>
-    </Box>
+    </div>
   );
 };
 
@@ -81,37 +81,37 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
   // const kickbackRatePct = frontendTag === AddressZero ? "100" : kickbackRate?.mul(100).prettify();
 
   return (
-    <Card {...{ variant }}>
-      {showBalances && <Balances />}
+    <Card className="mt-8">
+      <CardHeader>
+        <CardTitle>NAU statistics</CardTitle>
+        <CardDescription>Protocol</CardDescription>
+      </CardHeader>
 
-      <h1 className="text-lg font-semibold">NAU statistics</h1>
+      <CardContent>
+        <Statistic lexicon={l.BORROW_FEE}>{borrowingFeePct.toString(2)}</Statistic>
 
-      <h2 className="mt-3 font-normal">
-        Protocol
-      </h2>
-
-      <Statistic lexicon={l.BORROW_FEE}>{borrowingFeePct.toString(2)}</Statistic>
-
-      <Statistic lexicon={l.TVL}>
-        {total.collateral.shorten()} <span className="text-sm">&nbsp;ETH</span>
-        <span className="text-sm">
-          &nbsp;(${Decimal.from(total.collateral.mul(price)).shorten()})
-        </span>
-      </Statistic>
-      <Statistic lexicon={l.TROVES}>{Decimal.from(numberOfTroves).prettify(0)}</Statistic>
-      <Statistic lexicon={l.LUSD_SUPPLY}>{total.debt.shorten()}</Statistic>
-      {lusdInStabilityPoolPct && (
-        <Statistic lexicon={l.STABILITY_POOL_LUSD}>
-          {lusdInStabilityPool.shorten()}
-          <span className="text-sm">&nbsp;({lusdInStabilityPoolPct.toString(1)})</span>
+        <Statistic lexicon={l.TVL}>
+          {total.collateral.shorten()} <span className="text-sm">&nbsp;ETH</span>
+          <span className="text-sm">
+            &nbsp;(${Decimal.from(total.collateral.mul(price)).shorten()})
+          </span>
         </Statistic>
-      )}
-      <Statistic lexicon={l.STAKED_LQTY}>{totalStakedLQTY.shorten()}</Statistic>
-      <Statistic lexicon={l.TCR}>{totalCollateralRatioPct.prettify()}</Statistic>
-      <Statistic lexicon={l.RECOVERY_MODE}>
-        {total.collateralRatioIsBelowCritical(price) ? <Box color="danger">Yes</Box> : "No"}
-      </Statistic>
-      {}
+        <Statistic lexicon={l.TROVES}>{Decimal.from(numberOfTroves).prettify(0)}</Statistic>
+        <Statistic lexicon={l.LUSD_SUPPLY}>{total.debt.shorten()}</Statistic>
+        {lusdInStabilityPoolPct && (
+          <Statistic lexicon={l.STABILITY_POOL_LUSD}>
+            {lusdInStabilityPool.shorten()}
+            <span className="text-sm">&nbsp;({lusdInStabilityPoolPct.toString(1)})</span>
+          </Statistic>
+        )}
+        <Statistic lexicon={l.STAKED_LQTY}>{totalStakedLQTY.shorten()}</Statistic>
+        <Statistic lexicon={l.TCR}>{totalCollateralRatioPct.prettify()}</Statistic>
+        <Statistic lexicon={l.RECOVERY_MODE}>
+          {total.collateralRatioIsBelowCritical(price) ? <div color="danger">Yes</div> : "No"}
+        </Statistic>
+
+        {showBalances && <Balances />}
+      </CardContent>
 
       {/* <Heading as="h2" sx={{ mt: 3, fontWeight: "body" }}>
         Frontend
