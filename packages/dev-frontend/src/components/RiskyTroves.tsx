@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { Box } from "theme-ui";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table";
 
 import {
   CRITICAL_COLLATERAL_RATIO,
@@ -198,80 +198,43 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
 
       <CardContent>
         {!troves || troves.length === 0 ? (
-          <Box sx={{ p: [2, 3] }}>
-            <Box sx={{ p: 4, fontSize: 3, textAlign: "center" }}>
-              {!troves ? "Loading..." : "There are no Vaults yet"}
-            </Box>
-          </Box>
+          <div className="p-4 text-center text-lg">
+            {!troves ? "Loading..." : "There are no Vaults yet"}
+          </div>
         ) : (
-          <Box sx={{ p: [2, 3] }}>
-            <Box
-              as="table"
-              sx={{
-                mt: 2,
-                pl: [1, 4],
-                width: "100%",
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Owner</TableHead>
+                <TableHead>
+                  <Abbreviation short="Coll.">Collateral</Abbreviation>
+                  <div className="text-xs md:text-sm font-normal opacity-50">AR</div>
+                </TableHead>
+                <TableHead>
+                  Debt
+                  <div className="text-xs md:text-sm font-normal opacity-50">{COIN}</div>
+                </TableHead>
+                <TableHead>
+                  Coll.
+                  <br />
+                  Ratio
+                </TableHead>
+                <TableHead></TableHead>
+              </TableRow>
+            </TableHeader>
 
-                textAlign: "center",
-                lineHeight: 1.15
-              }}
-            >
-              <colgroup>
-                <col style={{ width: "50px" }} />
-                <col />
-                <col />
-                <col />
-                <col style={{ width: rowHeight }} />
-              </colgroup>
-
-              <thead>
-                <tr>
-                  <th>Owner</th>
-                  <th>
-                    <Abbreviation short="Coll.">Collateral</Abbreviation>
-                    <Box sx={{ fontSize: [0, 1], fontWeight: "body", opacity: 0.5 }}>AR</Box>
-                  </th>
-                  <th>
-                    Debt
-                    <Box sx={{ fontSize: [0, 1], fontWeight: "body", opacity: 0.5 }}>{COIN}</Box>
-                  </th>
-                  <th>
-                    Coll.
-                    <br />
-                    Ratio
-                  </th>
-                  <th></th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {troves.map(
-                  trove =>
-                    !trove.isEmpty && ( // making sure the Trove hasn't been liquidated
-                      // (WONT-FIX: remove check after we can fetch multiple Troves in one call)
-                      <tr key={trove.ownerAddress}>
-                        <td
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            height: rowHeight
-                          }}
-                        >
+            <TableBody>
+              {troves.map(
+                trove =>
+                  !trove.isEmpty && ( // making sure the Trove hasn't been liquidated
+                    // (WONT-FIX: remove check after we can fetch multiple Troves in one call)
+                    <TableRow key={trove.ownerAddress}>
+                      <TableCell>
+                        <div className="flex items-center" style={{ height: rowHeight }}>
                           <Tooltip message={trove.ownerAddress} placement="top">
                             <span className="w-[73px] overflow-hidden relative">
                               {shortenAddress(trove.ownerAddress)}
-                              <Box
-                                sx={{
-                                  display: ["block", "none"],
-                                  position: "absolute",
-                                  top: 0,
-                                  right: 0,
-                                  width: "50px",
-                                  height: "100%",
-                                  background:
-                                    "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)"
-                                }}
-                              />
+                              <div className="block md:hidden absolute top-0 right-0 w-[50px] h-full bg-gradient-to-r from-transparent to-white" />
                             </span>
                           </Tooltip>
 
@@ -283,59 +246,59 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
                               {copied === trove.ownerAddress ? <ClipboardCheckIcon size={16}/> : <ClipboardIcon size={16}/>}
                             </Button>
                           </CopyToClipboard>
-                        </td>
-                        <td>
-                          <Abbreviation short={trove.collateral.shorten()}>
-                            {trove.collateral.prettify(4)}
-                          </Abbreviation>
-                        </td>
-                        <td>
-                          <Abbreviation short={trove.debt.shorten()}>
-                            {trove.debt.prettify()}
-                          </Abbreviation>
-                        </td>
-                        <td>
-                          {(collateralRatio => (
-                            <span
-                              className={
-                                collateralRatio.gt(CRITICAL_COLLATERAL_RATIO)
-                                  ? "text-success"
-                                  : collateralRatio.gt(1.2)
-                                  ? "text-warning"
-                                  : "text-danger"
-                              }
-                            >
-                              {new Percent(collateralRatio).prettify()}
-                            </span>
-                          ))(trove.collateralRatio(price))}
-                        </td>
-                        <td>
-                          <Transaction
-                            id={`liquidate-${trove.ownerAddress}`}
-                            tooltip="Liquidate"
-                            requires={[
-                              recoveryMode
-                                ? liquidatableInRecoveryMode(
-                                    trove,
-                                    price,
-                                    totalCollateralRatio,
-                                    lusdInStabilityPool
-                                  )
-                                : liquidatableInNormalMode(trove, price)
-                            ]}
-                            send={liquity.send.liquidate.bind(liquity.send, trove.ownerAddress)}
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <Abbreviation short={trove.collateral.shorten()}>
+                          {trove.collateral.prettify(4)}
+                        </Abbreviation>
+                      </TableCell>
+                      <TableCell>
+                        <Abbreviation short={trove.debt.shorten()}>
+                          {trove.debt.prettify()}
+                        </Abbreviation>
+                      </TableCell>
+                      <TableCell>
+                        {(collateralRatio => (
+                          <span
+                            className={
+                              collateralRatio.gt(CRITICAL_COLLATERAL_RATIO)
+                                ? "text-success"
+                                : collateralRatio.gt(1.2)
+                                ? "text-warning"
+                                : "text-danger"
+                            }
                           >
-                            <Button variant="link">
-                              <Trash2Icon/>
-                            </Button>
-                          </Transaction>
-                        </td>
-                      </tr>
-                    )
-                )}
-              </tbody>
-            </Box>
-          </Box>
+                            {new Percent(collateralRatio).prettify()}
+                          </span>
+                        ))(trove.collateralRatio(price))}
+                      </TableCell>
+                      <TableCell>
+                        <Transaction
+                          id={`liquidate-${trove.ownerAddress}`}
+                          tooltip="Liquidate"
+                          requires={[
+                            recoveryMode
+                              ? liquidatableInRecoveryMode(
+                                  trove,
+                                  price,
+                                  totalCollateralRatio,
+                                  lusdInStabilityPool
+                                )
+                              : liquidatableInNormalMode(trove, price)
+                          ]}
+                          send={liquity.send.liquidate.bind(liquity.send, trove.ownerAddress)}
+                        >
+                          <Button variant="link">
+                            <Trash2Icon/>
+                          </Button>
+                        </Transaction>
+                      </TableCell>
+                    </TableRow>
+                  )
+              )}
+            </TableBody>
+          </Table>
         )}
       </CardContent>
 
