@@ -11,7 +11,7 @@ export const RemainingLQTY: React.FC = () => {
   const { remainingStabilityPoolLQTYReward } = useLiquitySelector(selector);
 
   return (
-    <div className="flex mr-2" style={{ fontSize: "var(--theme-ui-fontSizes-2)", fontWeight: 500 }}>
+    <div className="flex mr-2 text-sm font-medium">
       {remainingStabilityPoolLQTYReward.prettify(0)} NAU remaining
     </div>
   );

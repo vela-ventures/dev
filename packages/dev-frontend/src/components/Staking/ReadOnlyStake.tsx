@@ -1,4 +1,3 @@
-import { Box, Card } from "theme-ui";
 import { Button } from "../ui/button";
 
 import { LiquityStoreState } from "@liquity/lib-base";
@@ -8,6 +7,7 @@ import { COIN, GT } from "../../strings";
 
 import { LoadingOverlay } from "../LoadingOverlay";
 import { DisabledEditableRow, StaticRow } from "../Trove/Editor";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 
 import { PencilIcon } from "lucide-react";
 import { useStakingView } from "./context/StakingViewContext";
@@ -25,10 +25,13 @@ export const ReadOnlyStake: React.FC = () => {
   const poolShare = lqtyStake.stakedLQTY.mulDiv(100, totalStakedLQTY);
 
   return (
-    <Card>
-      <h1 className="text-lg font-semibold p-4 pb-0">Staking</h1>
+    <Card className="mt-8">
+      <CardHeader>
+        <CardTitle>Staking</CardTitle>
+        <CardDescription>Stake NAU and earn AR</CardDescription>
+      </CardHeader>
 
-      <Box sx={{ p: [2, 3] }}>
+      <CardContent>
         <DisabledEditableRow
           label="Stake"
           inputId="stake-lqty"
@@ -66,7 +69,7 @@ export const ReadOnlyStake: React.FC = () => {
 
           <StakingGainsAction />
         </div>
-      </Box>
+      </CardContent>
 
       {changePending && <LoadingOverlay />}
     </Card>

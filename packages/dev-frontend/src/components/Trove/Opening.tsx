@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import {
   Decimal,
   LiquityStoreState,
@@ -11,7 +10,6 @@ import { useLiquitySelector } from "@liquity/lib-react";
 import { HistoryIcon } from "lucide-react";
 import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Box, Card, Spinner } from "theme-ui";
 import { useArweaveBalance } from "../../hooks/useArweaveBalance";
 import { useStableTroveChange } from "../../hooks/useStableTroveChange";
 import { COIN } from "../../strings";
@@ -20,6 +18,8 @@ import { InfoIcon } from "../InfoIcon";
 import { LoadingOverlay } from "../LoadingOverlay";
 import { useMyTransactionState } from "../Transaction";
 import { Button } from "../ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import { Spinner } from "../ui/spinner";
 import { CollateralRatio, CollateralRatioInfoBubble } from "./CollateralRatio";
 import { EditableRow, StaticRow } from "./Editor";
 import { ExpensiveTroveChangeWarning, GasEstimationState } from "./ExpensiveTroveChangeWarning";
@@ -98,17 +98,24 @@ export const Opening: React.FC = () => {
   }, [collateral, borrowAmount]);
 
   return (
-    <Card>
-      <h1 className="text-lg font-semibold p-4 pb-0 flex justify-between items-center">
-        Vault
-        {isDirty && !isTransactionPending && (
-          <Button variant="link" sx={{ ":enabled:hover": { color: "danger" } }} onClick={reset}>
-            <HistoryIcon/>
-          </Button>
-        )}
-      </h1>
+    <Card className="mt-8">
+      <CardHeader>
+        <CardTitle className="flex justify-between items-center">
+          Vault
+          {isDirty && !isTransactionPending && (
+            <Button
+              variant="link"
+              className="hover:enabled:text-destructive"
+              onClick={reset}
+            >
+              <HistoryIcon className="size-6"/>
+            </Button>
+          )}
+        </CardTitle>
+        <CardDescription>Borrow GiB with AR as collateral</CardDescription>
+      </CardHeader>
 
-      <Box sx={{ p: [2, 3] }}>
+      <CardContent>
         <EditableRow
           label="Collateral"
           inputId="trove-collateral"
@@ -139,11 +146,11 @@ export const Opening: React.FC = () => {
           infoIcon={
             <InfoIcon
               tooltip={
-                <Card variant="tooltip" sx={{ width: "200px" }}>
-                  An amount set aside to cover the liquidator’s gas costs if your Vault needs to be
+                <div className="w-[200px]">
+                  An amount set aside to cover the liquidator's gas costs if your Vault needs to be
                   liquidated. The amount increases your debt and is refunded if you close your Vault
                   by fully paying off its net debt.
-                </Card>
+                </div>
               }
             />
           }
@@ -158,10 +165,10 @@ export const Opening: React.FC = () => {
           infoIcon={
             <InfoIcon
               tooltip={
-                <Card variant="tooltip" sx={{ width: "240px" }}>
+                <div className="w-[240px]">
                   This amount is deducted from the borrowed amount as a one-time fee. There are no
                   recurring fees for borrowing, which is thus interest-free.
-                </Card>
+                </div>
               }
             />
           }
@@ -175,7 +182,7 @@ export const Opening: React.FC = () => {
           infoIcon={
             <InfoIcon
               tooltip={
-                <Card variant="tooltip" sx={{ width: "240px" }}>
+                <div className="w-[240px]">
                   The total amount of GiB your Vault will hold.{" "}
                   {isDirty && (
                     <>
@@ -184,7 +191,7 @@ export const Opening: React.FC = () => {
                       Liquidation Reserve excluded).
                     </>
                   )}
-                </Card>
+                </div>
               }
             />
           }
@@ -194,7 +201,7 @@ export const Opening: React.FC = () => {
 
         <InfoBubble>
           Keep your collateral ratio above the{" "}
-          <Link sx={{ variant: "styles.a" }} to="/risky-troves">
+          <Link to="/risky-troves" className="underline hover:text-primary">
             riskiest Vaults
           </Link>{" "}
           to avoid being redeemed.
@@ -226,7 +233,7 @@ export const Opening: React.FC = () => {
 
           {gasEstimationState.type === "inProgress" ? (
             <Button disabled>
-              <Spinner size={24} sx={{ color: "background" }} />
+              <Spinner />
             </Button>
           ) : stableTroveChange ? (
             <TroveAction
@@ -241,7 +248,7 @@ export const Opening: React.FC = () => {
             <Button disabled>Confirm</Button>
           )}
         </div>
-      </Box>
+      </CardContent>
       {isTransactionPending && <LoadingOverlay />}
     </Card>
   );

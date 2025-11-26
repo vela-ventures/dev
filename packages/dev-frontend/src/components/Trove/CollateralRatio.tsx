@@ -1,5 +1,4 @@
 import React from "react";
-import { Box, Card } from "theme-ui";
 
 import { CRITICAL_COLLATERAL_RATIO, Decimal, Difference, Percent } from "@liquity/lib-base";
 
@@ -21,9 +20,9 @@ export const CollateralRatio: React.FC<CollateralRatioProps> = ({ value, change 
   return (
     <>
       <div className="flex">
-        <Box sx={{ mt: [2, 0], ml: 3, mr: -2, fontSize: "24px" }}>
+        <div className="mt-2 sm:mt-0 ml-3 -mr-2 text-2xl">
           <HeartPulseIcon />
-        </Box>
+        </div>
 
         <StaticRow
           label="Collateral ratio"
@@ -31,12 +30,12 @@ export const CollateralRatio: React.FC<CollateralRatioProps> = ({ value, change 
           amount={collateralRatioPct.prettify()}
           color={
             value?.gt(CRITICAL_COLLATERAL_RATIO)
-              ? "success"
+              ? "green"
               : value?.gt(1.2)
-              ? "warning"
+              ? "yelow"
               : value?.lte(1.2)
-              ? "danger"
-              : "muted"
+              ? "red"
+              : "grey"
           }
           pendingAmount={
             change?.positive?.absoluteValue?.gt(10)
@@ -45,17 +44,17 @@ export const CollateralRatio: React.FC<CollateralRatioProps> = ({ value, change 
               ? "--"
               : changePct?.nonZeroish(2)?.prettify()
           }
-          pendingColor={change?.positive ? "success" : "danger"}
+          pendingColor={change?.positive ? "green" : "red"}
           infoIcon={
             <InfoIcon
               tooltip={
-                <Card variant="tooltip" sx={{ width: "220px" }}>
+                <div className="w-[220px]">
                   The ratio between the dollar value of the collateral and the debt (in LUSD) you are
                   depositing. While the Minimum Collateral Ratio is 110% during normal operation, it
                   is recommended to keep the Collateral Ratio always above 150% to avoid liquidation
                   under Recovery Mode. A Collateral Ratio above 200% or 250% is recommended for
                   additional safety.
-                </Card>
+                </div>
               }
             />
           }

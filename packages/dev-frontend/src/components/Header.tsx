@@ -2,12 +2,11 @@ import { AddressZero } from "@ethersproject/constants";
 import { LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import React from "react";
-import { Box, Container } from "theme-ui";
 import { useLiquity } from "../hooks/LiquityContext";
 import { LiquityLogo } from "./LiquityLogo";
 
 import { Nav } from "./Nav";
-import { SideNav } from "./SideNav";
+import { SideBar } from "./SideBar";
 
 const logoHeight = "32px";
 
@@ -23,27 +22,22 @@ export const Header: React.FC<React.PropsWithChildren> = ({ children }) => {
   const isFrontendRegistered = frontendTag === AddressZero || frontend.status === "registered";
 
   return (
-    <Container variant="header">
-      <div className="flex items-center flex-1">
-        <LiquityLogo height={logoHeight} />
+    <header className="fixed top-4 left-4 right-4 md:left-8 md:right-8 z-10 bg-card text-card-foreground rounded-full border shadow-sm mx-auto max-w-7xl">
+      <div className="flex justify-between items-stretch px-4 md:px-6 lg:px-8 py-3">
+        <div className="flex items-center flex-1">
+          <LiquityLogo height={logoHeight} />
 
-        <Box
-          sx={{
-            mx: [2, 3],
-            width: "0px",
-            height: "100%",
-            borderLeft: ["none", "1px solid lightgrey"]
-          }}
-        />
-        {isFrontendRegistered && (
-          <>
-            <SideNav />
-            <Nav />
-          </>
-        )}
+          <div className="hidden md:block w-0 h-full border-l border-border mx-2 md:mx-4" />
+          {isFrontendRegistered && (
+            <>
+              <SideBar />
+              <Nav />
+            </>
+          )}
+        </div>
+
+        {children}
       </div>
-
-      {children}
-    </Container>
+    </header>
   );
 };

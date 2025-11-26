@@ -1,10 +1,10 @@
 import { LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import React, { useCallback } from "react";
-import { Box, Card } from "theme-ui";
 import { CollateralSurplusAction } from "../CollateralSurplusAction";
 import { InfoMessage } from "../InfoMessage";
 import { Button } from "../ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { useTroveView } from "./context/TroveViewContext";
 
 const select = ({ collateralSurplusBalance }: LiquityStoreState) => ({
@@ -20,9 +20,12 @@ export const LiquidatedTrove: React.FC = () => {
   }, [dispatchEvent]);
 
   return (
-    <Card>
-      <h1 className="text-lg font-semibold p-4 pb-0">Vault</h1>
-      <Box sx={{ p: [2, 3] }}>
+    <Card className="mt-8">
+      <CardHeader>
+        <CardTitle>Vault</CardTitle>
+        <CardDescription>Borrow GiB with AR as collateral</CardDescription>
+      </CardHeader>
+      <CardContent>
         <InfoMessage title="Your Vault has been liquidated.">
           {hasSurplusCollateral
             ? "Please reclaim your remaining collateral before opening a new Vault."
@@ -33,7 +36,7 @@ export const LiquidatedTrove: React.FC = () => {
           {hasSurplusCollateral && <CollateralSurplusAction />}
           {!hasSurplusCollateral && <Button onClick={handleOpenTrove}>Open Vault</Button>}
         </div>
-      </Box>
+      </CardContent>
     </Card>
   );
 };

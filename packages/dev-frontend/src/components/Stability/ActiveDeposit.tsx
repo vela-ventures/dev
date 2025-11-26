@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect } from "react";
-import { Box, Card } from "theme-ui";
 import { Button } from "../ui/button";
 
 import { LiquityStoreState } from "@liquity/lib-base";
@@ -11,6 +10,7 @@ import { InfoIcon } from "../InfoIcon";
 import { LoadingOverlay } from "../LoadingOverlay";
 import { useMyTransactionState } from "../Transaction";
 import { DisabledEditableRow, StaticRow } from "../Trove/Editor";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { ClaimAndMove } from "./actions/ClaimAndMove";
 import { ClaimRewards } from "./actions/ClaimRewards";
 import { useStabilityView } from "./context/StabilityViewContext";
@@ -50,17 +50,20 @@ export const ActiveDeposit: React.FC = () => {
   }, [transactionState.type, dispatchEvent]);
 
   return (
-    <Card>
-      <h1 className="text-lg font-semibold p-4 pb-0 flex justify-between items-center">
-        Stability Pool
-        {!isWaitingForTransaction && (
-          <div className="flex justify-end">
-            <RemainingLQTY />
-          </div>
-        )}
-      </h1>
-      <Box sx={{ p: [2, 3] }}>
-        <Box>
+    <Card className="mt-8">
+      <CardHeader>
+        <CardTitle className="flex justify-between items-center">
+          Stability Pool
+          {!isWaitingForTransaction && (
+            <div className="flex justify-end">
+              <RemainingLQTY />
+            </div>
+          )}
+        </CardTitle>
+        <CardDescription>Supply GiB and earn NAU</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div>
           <DisabledEditableRow
             label="Deposit"
             inputId="deposit-lusd"
@@ -93,11 +96,11 @@ export const ActiveDeposit: React.FC = () => {
               infoIcon={
                 <InfoIcon
                   tooltip={
-                    <Card variant="tooltip" sx={{ width: "240px" }}>
+                    <div className="w-[240px]">
                       Although the NAU rewards accrue every minute, the value on the UI only updates
                       when a user transacts with the Stability Pool. Therefore you may receive more
                       rewards than is displayed when you claim or adjust your deposit.
-                    </Card>
+                    </div>
                   }
                 />
               }
@@ -106,7 +109,7 @@ export const ActiveDeposit: React.FC = () => {
               <Yield />
             </div>
           </div>
-        </Box>
+        </div>
 
         <div className="flex justify-end gap-2 mt-4">
           <Button size="lg" variant="outline" onClick={handleAdjustDeposit}>
@@ -117,7 +120,7 @@ export const ActiveDeposit: React.FC = () => {
         </div>
 
         {hasTrove && <ClaimAndMove disabled={!hasGain}>Claim NAU and move AR to Vault</ClaimAndMove>}
-      </Box>
+      </CardContent>
 
       {isWaitingForTransaction && <LoadingOverlay />}
     </Card>

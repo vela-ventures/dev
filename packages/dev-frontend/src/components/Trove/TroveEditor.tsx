@@ -1,14 +1,13 @@
 import React from "react";
-import { Box, Card } from "theme-ui";
 
 import {
-  Decimal,
-  Decimalish,
-  Difference,
-  LiquityStoreState,
-  LUSD_LIQUIDATION_RESERVE,
-  Percent,
-  Trove
+    Decimal,
+    Decimalish,
+    Difference,
+    LiquityStoreState,
+    LUSD_LIQUIDATION_RESERVE,
+    Percent,
+    Trove
 } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 
@@ -16,6 +15,7 @@ import { COIN } from "../../strings";
 
 import { InfoIcon } from "../InfoIcon";
 import { LoadingOverlay } from "../LoadingOverlay";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { CollateralRatio } from "./CollateralRatio";
 import { StaticRow } from "./Editor";
 
@@ -50,10 +50,13 @@ export const TroveEditor: React.FC<TroveEditorProps> = ({
   const collateralRatioChange = Difference.between(collateralRatio, originalCollateralRatio);
 
   return (
-    <Card>
-      <h1 className="text-lg font-semibold p-4 pb-0">Vault</h1>
+    <Card className="mt-8">
+      <CardHeader>
+        <CardTitle>Vault</CardTitle>
+        <CardDescription>Borrow GiB with AR as collateral</CardDescription>
+      </CardHeader>
 
-      <Box sx={{ p: [2, 3] }}>
+      <CardContent>
         <StaticRow
           label="Collateral"
           inputId="trove-collateral"
@@ -72,11 +75,11 @@ export const TroveEditor: React.FC<TroveEditorProps> = ({
             infoIcon={
               <InfoIcon
                 tooltip={
-                  <Card variant="tooltip" sx={{ width: "200px" }}>
-                    An amount set aside to cover the liquidator’s gas costs if your Vault needs to be
+                  <div className="w-[200px]">
+                    An amount set aside to cover the liquidator's gas costs if your Vault needs to be
                     liquidated. The amount increases your debt and is refunded if you close your
                     Vault by fully paying off its net debt.
-                  </Card>
+                  </div>
                 }
               />
             }
@@ -92,10 +95,10 @@ export const TroveEditor: React.FC<TroveEditorProps> = ({
           infoIcon={
             <InfoIcon
               tooltip={
-                <Card variant="tooltip" sx={{ width: "240px" }}>
+                <div className="w-[240px]">
                   This amount is deducted from the borrowed amount as a one-time fee. There are no
                   recurring fees for borrowing, which is thus interest-free.
-                </Card>
+                </div>
               }
             />
           }
@@ -104,7 +107,7 @@ export const TroveEditor: React.FC<TroveEditorProps> = ({
         <CollateralRatio value={collateralRatio} change={collateralRatioChange} />
 
         {children}
-      </Box>
+      </CardContent>
 
       {changePending && <LoadingOverlay />}
     </Card>

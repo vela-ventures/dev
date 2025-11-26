@@ -20,9 +20,10 @@ import { shortenAddress } from "../utils/shortenAddress";
 
 import { ChevronLeftIcon, ChevronRightIcon, ClipboardCheckIcon, ClipboardIcon, RotateCwIcon, Trash2Icon } from "lucide-react";
 import { Abbreviation } from "./Abbreviation";
-import { LoadingOverlay } from "./LoadingOverlay";
 import { Tooltip } from "./Tooltip";
 import { Transaction } from "./Transaction";
+import { Skeleton } from "./ui/skeleton";
+import { Spinner } from "./ui/spinner";
 
 const rowHeight = "40px";
 
@@ -186,10 +187,11 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
 
               <Button
                 variant="ghost"
-                className={`ml-0 md:ml-3 ${loading ? "opacity-0" : "opacity-100"}`}
+                className="ml-0 md:ml-3"
                 onClick={forceReload}
+                disabled={loading}
               >
-                <RotateCwIcon/>
+                {loading ? <Spinner /> : <RotateCwIcon />}
               </Button>
             </div>
           </h1>
@@ -197,29 +199,74 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
       </CardHeader>
 
       <CardContent>
-        {!troves || troves.length === 0 ? (
+        {!troves ? (
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-36">Owner</TableHead>
+                <TableHead className="w-36">
+                  <Abbreviation short="Coll.">Collateral</Abbreviation>
+                  <div className="text-xs md:text-sm font-normal opacity-50">AR</div>
+                </TableHead>
+                <TableHead className="w-36">
+                  Debt
+                  <div className="text-xs md:text-sm font-normal opacity-50">{COIN}</div>
+                </TableHead>
+                <TableHead className="w-36">
+                  Coll.
+                  <br />
+                  Ratio
+                </TableHead>
+                <TableHead className="w-16"></TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {Array.from({ length: pageSize }).map((_, index) => (
+                <TableRow key={index}>
+                  <TableCell className="w-36">
+                    <div className="flex items-center" style={{ height: rowHeight }}>
+                      <Skeleton className="h-4 w-33" />
+                    </div>
+                  </TableCell>
+                  <TableCell className="w-36">
+                    <Skeleton className="h-4 w-30" />
+                  </TableCell>
+                  <TableCell className="w-36">
+                    <Skeleton className="h-4 w-20" />
+                  </TableCell>
+                  <TableCell className="w-36">
+                    <Skeleton className="h-4 w-12" />
+                  </TableCell>
+                  <TableCell className="w-16">
+                    <Skeleton className="h-8 w-8" />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        ) : troves.length === 0 ? (
           <div className="p-4 text-center text-lg">
-            {!troves ? "Loading..." : "There are no Vaults yet"}
+            There are no Vaults yet
           </div>
         ) : (
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Owner</TableHead>
-                <TableHead>
+                <TableHead className="w-36">Owner</TableHead>
+                <TableHead className="w-36">
                   <Abbreviation short="Coll.">Collateral</Abbreviation>
                   <div className="text-xs md:text-sm font-normal opacity-50">AR</div>
                 </TableHead>
-                <TableHead>
+                <TableHead className="w-36">
                   Debt
                   <div className="text-xs md:text-sm font-normal opacity-50">{COIN}</div>
                 </TableHead>
-                <TableHead>
+                <TableHead className="w-36">
                   Coll.
                   <br />
                   Ratio
                 </TableHead>
-                <TableHead></TableHead>
+                <TableHead className="w-16"></TableHead>
               </TableRow>
             </TableHeader>
 
@@ -229,7 +276,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
                   !trove.isEmpty && ( // making sure the Trove hasn't been liquidated
                     // (WONT-FIX: remove check after we can fetch multiple Troves in one call)
                     <TableRow key={trove.ownerAddress}>
-                      <TableCell>
+                      <TableCell className="w-36">
                         <div className="flex items-center" style={{ height: rowHeight }}>
                           <Tooltip message={trove.ownerAddress} placement="top">
                             <span className="w-[73px] overflow-hidden relative">
@@ -248,17 +295,17 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
                           </CopyToClipboard>
                         </div>
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="w-36">
                         <Abbreviation short={trove.collateral.shorten()}>
                           {trove.collateral.prettify(4)}
                         </Abbreviation>
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="w-36">
                         <Abbreviation short={trove.debt.shorten()}>
                           {trove.debt.prettify()}
                         </Abbreviation>
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="w-36">
                         {(collateralRatio => (
                           <span
                             className={
@@ -273,7 +320,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
                           </span>
                         ))(trove.collateralRatio(price))}
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="w-16">
                         <Transaction
                           id={`liquidate-${trove.ownerAddress}`}
                           tooltip="Liquidate"
@@ -301,8 +348,6 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
           </Table>
         )}
       </CardContent>
-
-      {loading && <LoadingOverlay />}
     </Card>
   );
 };

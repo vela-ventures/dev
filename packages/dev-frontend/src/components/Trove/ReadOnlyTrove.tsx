@@ -2,9 +2,9 @@ import { LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import { PencilIcon } from "lucide-react";
 import React, { useCallback } from "react";
-import { Box, Card } from "theme-ui";
 import { COIN } from "../../strings";
 import { Button } from "../ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
 import { CollateralRatio, CollateralRatioInfoBubble } from "./CollateralRatio";
 import { DisabledEditableRow } from "./Editor";
 import { useTroveView } from "./context/TroveViewContext";
@@ -24,10 +24,12 @@ export const ReadOnlyTrove: React.FC = () => {
 
   // console.log("READONLY TROVE", trove.collateral.prettify(4));
   return (
-    <Card>
-      <h1 className="text-lg font-semibold p-4 pb-0">Vault</h1>
-      <Box sx={{ p: [2, 3] }}>
-        <Box>
+    <Card className="mt-8">
+      <CardHeader>
+        <CardTitle>Vault</CardTitle>
+        <CardDescription>Borrow GiB with AR as collateral</CardDescription>
+      </CardHeader>
+      <CardContent>
           <DisabledEditableRow
             label="Collateral"
             inputId="trove-collateral"
@@ -44,17 +46,16 @@ export const ReadOnlyTrove: React.FC = () => {
 
           <CollateralRatio value={trove.collateralRatio(price)} />
           <CollateralRatioInfoBubble value={trove.collateralRatio(price)} />
-        </Box>
+          </CardContent>
 
-        <div className="flex justify-end gap-2 mt-4">
-          <Button variant="outline" onClick={handleCloseTrove}>
+        <CardFooter className="flex justify-end gap-2">
+        <Button variant="outline" onClick={handleCloseTrove}>
             Close Vault
           </Button>
           <Button onClick={handleAdjustTrove}>
             <PencilIcon/> Adjust
           </Button>
-        </div>
-      </Box>
+        </CardFooter>
     </Card>
   );
 };
