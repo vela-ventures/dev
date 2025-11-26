@@ -1,7 +1,6 @@
 import { Decimal, LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import React, { useEffect, useState } from "react";
-import { Card, Paragraph } from "theme-ui";
 import { InfoIcon } from "../InfoIcon";
 import { Badge } from "../ui/badge";
 import { fetchLqtyPrice } from "./context/fetchLqtyPrice";
@@ -46,23 +45,23 @@ export const Yield: React.FC = () => {
       <span>NAU APR {aprPercentage.toString(2)}%</span>
       <InfoIcon
         tooltip={
-          <Card variant="tooltip" sx={{ width: ["220px", "518px"] }}>
-            <Paragraph>
+          <div className="w-[220px] sm:w-[518px]">
+            <p>
               An <span className="font-bold">estimate</span> of the NAU return on the GiB
               deposited to the Stability Pool over the next year, not including your AR gains from
               liquidations.
-            </Paragraph>
-            <Paragraph sx={{ fontSize: "12px", fontFamily: "monospace", mt: 2 }}>
+            </p>
+            <p className="text-xs font-mono mt-2">
               ($NAU_REWARDS * DAILY_ISSUANCE% / DEPOSITED_GiB) * 365 * 100 ={" "}
               <span className="font-bold"> APR</span>
-            </Paragraph>
-            <Paragraph sx={{ fontSize: "12px", fontFamily: "monospace" }}>
+            </p>
+            <p className="text-xs font-mono">
               ($
               {remainingLqtyInUSD.shorten()} * {dailyIssuancePercentage.toString(4)}% / $
               {lusdInStabilityPool.shorten()}) * 365 * 100 =
               <span className="font-bold"> {aprPercentage.toString(2)}%</span>
-            </Paragraph>
-          </Card>
+            </p>
+          </div>
         }
       ></InfoIcon>
     </Badge>

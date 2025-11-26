@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
-import { Box, Card } from "theme-ui";
 import { InfoMessage } from "../InfoMessage";
 import { Button } from "../ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { useStabilityView } from "./context/StabilityViewContext";
 import { RemainingLQTY } from "./RemainingLQTY";
 import { Yield } from "./Yield";
@@ -14,14 +14,17 @@ export const NoDeposit: React.FC = () => {
   }, [dispatchEvent]);
 
   return (
-    <Card>
-      <h1 className="text-lg font-semibold p-4 pb-0 flex justify-between items-center">
-        Stability Pool
-        <div className="flex justify-end">
-          <RemainingLQTY />
-        </div>
-      </h1>
-      <Box sx={{ p: [2, 3] }}>
+    <Card className="mt-8">
+      <CardHeader>
+        <CardTitle className="flex justify-between items-center">
+          Stability Pool
+          <div className="flex justify-end">
+            <RemainingLQTY />
+          </div>
+        </CardTitle>
+        <CardDescription>Supply GiB and earn NAU</CardDescription>
+      </CardHeader>
+      <CardContent>
         <InfoMessage title="You have no GiB in the Stability Pool.">
           You can earn AR and NAU rewards by depositing GiB.
         </InfoMessage>
@@ -32,7 +35,7 @@ export const NoDeposit: React.FC = () => {
           </div>
           <Button onClick={handleOpenTrove}>Deposit</Button>
         </div>
-      </Box>
+      </CardContent>
     </Card>
   );
 };

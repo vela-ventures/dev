@@ -1,5 +1,4 @@
 import React from "react";
-import { Box } from "theme-ui";
 import { Button } from "./ui/button";
 
 import { Decimal, LiquityStoreState } from "@liquity/lib-base";
@@ -31,7 +30,7 @@ export const UserAccount: React.FC = () => {
   const lusdBalance = LUSD_OVERRIDE_ADDRESS === null ? realLusdBalance : customLusdBalance;
 
   return (
-    <div className="flex">
+    <div className="flex items-center">
       <ConnectKitButton.Custom>
         {connectKit => (
           <Button
@@ -44,12 +43,7 @@ export const UserAccount: React.FC = () => {
         )}
       </ConnectKitButton.Custom>
 
-      <Box
-        sx={{
-          display: ["none", "flex"],
-          alignItems: "center"
-        }}
-      >
+      <div className="hidden md:flex items-center">
         <WalletIcon/>
 
         {([
@@ -64,7 +58,7 @@ export const UserAccount: React.FC = () => {
             <span className="text-sm">{balance.prettify()}</span>
           </div>
         ))}
-      </Box>
+      </div>
     </div>
   );
 };

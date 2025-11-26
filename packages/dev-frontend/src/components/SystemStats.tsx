@@ -57,7 +57,7 @@ const select = ({
   kickbackRate: frontend.status === "registered" ? frontend.kickbackRate : null
 });
 
-export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", showBalances }) => {
+export const SystemStats: React.FC<SystemStatsProps> = ({ showBalances }) => {
   // const {
   //   liquity: {
   //     connection: { version: contractsVersion, deploymentDate, frontendTag }

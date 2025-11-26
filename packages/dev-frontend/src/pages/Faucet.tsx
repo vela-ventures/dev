@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Contract } from "@ethersproject/contracts";
 import { DropletIcon } from "lucide-react";
 import React, { useState } from "react";
@@ -34,21 +34,19 @@ export const Faucet: React.FC = () => {
   };
 
   return (
-    <div className="grid grid-cols-5 gap-8 w-full">
-      <div className="col-span-3">
-        <Card className="mt-8">
-          <CardHeader>
-            <CardTitle>Faucet</CardTitle>
-            <CardDescription>Click the button to drip test AR.</CardDescription>
-          </CardHeader>
-          <CardContent className="flex justify-end">
-            <Button onClick={handleDrip} disabled={isLoading}>
-              <DropletIcon /> {isLoading ? "Dripping..." : "Drip"}
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-      <div className="col-span-2">
+    <div className="grid grid-cols-1 md:grid-cols-5 gap-8 w-full items-start">
+      <Card className="mt-8 mx-4 md:mx-0 md:col-span-3">
+        <CardHeader>
+          <CardTitle>Faucet</CardTitle>
+          <CardDescription>Click the button to drip test AR.</CardDescription>
+        </CardHeader>
+        <CardFooter className="flex justify-end">
+          <Button onClick={handleDrip} disabled={isLoading}>
+            <DropletIcon /> {isLoading ? "Dripping..." : "Drip"}
+          </Button>
+        </CardFooter>
+      </Card>
+      <div className="hidden md:block md:col-span-2">
         <SystemStats />
       </div>
     </div>

@@ -6,7 +6,7 @@ import { Decimal, Decimalish } from "@liquity/lib-base";
 
 export class DisposableWalletProvider {
   private readonly url: string;
-  private id: number = 0;
+  private id = 0;
 
   private readonly wallet: Wallet;
   private readonly funderWallet: Wallet;

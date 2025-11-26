@@ -350,7 +350,7 @@ const theme: Theme = {
       top: 0,
       zIndex: 1,
 
-      px: [2, "12px", "12px", 5],
+      px: cardGapX,
       py: [2, "12px", "12px"],
 
       ...headerGradient,

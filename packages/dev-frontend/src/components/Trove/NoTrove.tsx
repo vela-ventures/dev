@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
-import { Box, Card } from "theme-ui";
 import { InfoMessage } from "../InfoMessage";
 import { Button } from "../ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
 import { useTroveView } from "./context/TroveViewContext";
 
 export const NoTrove: React.FC = () => {
@@ -12,17 +12,19 @@ export const NoTrove: React.FC = () => {
   }, [dispatchEvent]);
 
   return (
-    <Card>
-      <h1 className="text-lg font-semibold p-4 pb-0">Vault</h1>
-      <Box sx={{ p: [2, 3] }}>
+    <Card className="mt-8">
+      <CardHeader>
+        <CardTitle>Vault</CardTitle>
+        <CardDescription>Borrow GiB with AR as collateral</CardDescription>
+      </CardHeader>
+      <CardContent>
         <InfoMessage title="You haven't borrowed any GiB yet.">
           You can borrow GiB by opening a Vault.
         </InfoMessage>
-
-        <div className="flex justify-end gap-2 mt-4">
+      </CardContent>
+      <CardFooter className="flex justify-end">
           <Button onClick={handleOpenTrove}>Open Vault</Button>
-        </div>
-      </Box>
+        </CardFooter>
     </Card>
   );
 };
