@@ -1,18 +1,17 @@
 import React from "react";
-import { Box, BoxProps } from "theme-ui";
 
-type AbbreviationProps = BoxProps & {
+type AbbreviationProps = React.HTMLAttributes<HTMLSpanElement> & {
   short: React.ReactNode;
 };
 
-export const Abbreviation: React.FC<AbbreviationProps> = ({ children, short, ...boxProps }) => (
-  <Box as="span" {...boxProps}>
-    <Box as="span" sx={{ display: ["none", "unset"] }}>
+export const Abbreviation: React.FC<AbbreviationProps> = ({ children, short, className, ...props }) => (
+  <span className={className} {...props}>
+    <span className="hidden md:inline">
       {children}
-    </Box>
+    </span>
 
-    <Box as="span" sx={{ display: ["unset", "none"] }}>
+    <span className="inline md:hidden">
       {short}
-    </Box>
-  </Box>
+    </span>
+  </span>
 );

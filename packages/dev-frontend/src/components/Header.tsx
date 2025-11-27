@@ -36,7 +36,9 @@ export const Header: React.FC<React.PropsWithChildren> = ({ children }) => {
           )}
         </div>
 
-        {children}
+        <div className="flex items-center">
+          {children}
+        </div>
       </div>
     </header>
   );

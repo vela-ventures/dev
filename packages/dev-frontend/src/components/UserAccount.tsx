@@ -35,7 +35,7 @@ export const UserAccount: React.FC = () => {
         {connectKit => (
           <Button
             variant="outline"
-            className="items-center p-2 mr-3"
+            className="items-center p-2 md:mr-3"
             onClick={connectKit.show}
           >
             <CircleUserIcon/> {shortenAddress(account)}
@@ -43,7 +43,7 @@ export const UserAccount: React.FC = () => {
         )}
       </ConnectKitButton.Custom>
 
-      <div className="hidden md:flex items-center">
+      <div className="hidden md:flex items-center mr-3">
         <WalletIcon/>
 
         {([

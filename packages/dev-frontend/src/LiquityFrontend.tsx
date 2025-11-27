@@ -18,6 +18,7 @@ import { RiskyTrovesPage } from "./pages/RiskyTrovesPage";
 
 import "tippy.js/dist/tippy.css"; // Tooltip default style
 import { BondsProvider } from "./components/Bonds/context/BondsProvider";
+import { DarkModeButton } from "./components/DarkModeButton";
 import { StabilityViewProvider } from "./components/Stability/context/StabilityViewProvider";
 import { StakingViewProvider } from "./components/Staking/context/StakingViewProvider";
 import { TroveViewProvider } from "./components/Trove/context/TroveViewProvider";
@@ -51,6 +52,7 @@ export const LiquityFrontend: React.FC<LiquityFrontendProps> = ({ loader }) => {
                   <Header>
                     <UserAccount />
                     <SystemStatsPopup />
+                    <DarkModeButton />
                   </Header>
 
                   <Container
