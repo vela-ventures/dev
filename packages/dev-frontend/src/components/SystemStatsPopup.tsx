@@ -1,7 +1,6 @@
 import { LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 import React, { useRef, useState } from "react";
-import { Container } from "theme-ui";
 import { Button } from "./ui/button";
 
 import { InfoIcon } from "lucide-react";
@@ -26,9 +25,9 @@ export const SystemStatsPopup: React.FC = () => {
       </Button>
 
       {systemStatsOpen && (
-        <Container
-          variant="infoOverlay"
+        <div
           ref={systemStatsOverlayRef}
+          className="fixed inset-0 z-50 flex items-start justify-center bg-black/50 p-4 overflow-y-auto"
           onClick={e => {
             if (e.target === systemStatsOverlayRef.current) {
               setSystemStatsOpen(false);
@@ -36,7 +35,7 @@ export const SystemStatsPopup: React.FC = () => {
           }}
         >
           <SystemStats variant="infoPopup" showBalances />
-        </Container>
+        </div>
       )}
     </>
   );

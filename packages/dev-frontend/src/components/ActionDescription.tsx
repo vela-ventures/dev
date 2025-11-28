@@ -1,23 +1,9 @@
-import { Box } from "theme-ui";
-
 export const ActionDescription: React.FC<React.PropsWithChildren> = ({ children }) => (
-  <Box
-    sx={{
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "space-around",
-
-      mb: [2, 3],
-      p: 3,
-
-      border: 1,
-      borderColor: "transparent"
-    }}
-  >
+  <div className="flex flex-col justify-around mb-2 md:mb-3 p-3 border border-transparent">
     <div className="flex items-center">
       <span>{children}</span>
     </div>
-  </Box>
+  </div>
 );
 
 export const Amount: React.FC<React.PropsWithChildren> = ({ children }) => (

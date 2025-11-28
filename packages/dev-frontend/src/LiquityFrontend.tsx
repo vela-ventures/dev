@@ -1,7 +1,6 @@
 import { Wallet } from "@ethersproject/wallet";
 import React from "react";
 import { Route, HashRouter as Router, Switch } from "react-router-dom";
-import { Container } from "theme-ui";
 
 import { Decimal, Difference, Trove } from "@liquity/lib-base";
 import { LiquityStoreProvider } from "@liquity/lib-react";
@@ -55,16 +54,7 @@ export const LiquityFrontend: React.FC<LiquityFrontendProps> = ({ loader }) => {
                     <DarkModeButton />
                   </Header>
 
-                  <Container
-                    variant="main"
-                    sx={{
-                      display: "flex",
-                      flexGrow: 1,
-                      flexDirection: "column",
-                      alignItems: "center",
-                      mt: ["80px", "80px", "80px"]
-                    }}
-                  >
+                  <div className="flex flex-col flex-grow items-center mt-20 w-full max-w-[1280px] mx-auto mb-10 px-0 md:px-4 lg:px-8">
                     <Switch>
                       <Route path="/" exact>
                         <PageSwitcher />
@@ -76,7 +66,7 @@ export const LiquityFrontend: React.FC<LiquityFrontendProps> = ({ loader }) => {
                         <Faucet />
                       </Route>
                     </Switch>
-                  </Container>
+                  </div>
                 </div>
               </BondsProvider>
             </StakingViewProvider>

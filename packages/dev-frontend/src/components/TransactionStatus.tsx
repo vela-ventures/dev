@@ -2,7 +2,6 @@ import { CheckIcon, EllipsisIcon, XIcon } from "lucide-react";
 import { memo, useEffect, useState } from "react";
 import { buildStyles, CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { Box, ThemeUIStyleObject } from "theme-ui";
 import type { TransactionState } from "./Transaction";
 
 const strokeWidth = 10;
@@ -70,32 +69,30 @@ const TransactionProgressDonut: React.FC<TransactionProgressDonutProps> = ({ sta
 type TransactionStatusProps = {
   state: TransactionStateType;
   message?: string;
-  style?: ThemeUIStyleObject;
+  className?: string;
 };
 
-export const TransactionStatus: React.FC<TransactionStatusProps> = ({ state, message, style }) => {
+export const TransactionStatus: React.FC<TransactionStatusProps> = ({ state, message, className = "" }) => {
   if (state === "idle" || state === "waitingForApproval") {
     return null;
   }
 
+  const bgColor =
+    state === "confirmed"
+      ? "bg-green-600"
+      : state === "cancelled"
+      ? "bg-yellow-500"
+      : state === "failed"
+      ? "bg-destructive"
+      : "bg-primary";
+
   return (
     <div
-      className="flex items-center p-3 pl-4 fixed w-screen bottom-0 overflow-hidden"
-      style={{
-        backgroundColor:
-          state === "confirmed"
-            ? "var(--theme-ui-colors-success)"
-            : state === "cancelled"
-            ? "var(--theme-ui-colors-warning)"
-            : state === "failed"
-            ? "var(--theme-ui-colors-danger)"
-            : "var(--theme-ui-colors-primary)",
-        ...(style as React.CSSProperties)
-      }}
+      className={`flex items-center p-3 pl-4 fixed w-screen bottom-0 overflow-hidden ${bgColor} ${className}`}
     >
-      <Box sx={{ mr: 3, width: "40px", height: "40px" }}>
+      <div className="mr-3 w-10 h-10">
         <TransactionProgressDonut state={state} />
-      </Box>
+      </div>
 
       <span className="text-xl text-white">
         {state === "waitingForConfirmation"

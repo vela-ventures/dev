@@ -8,8 +8,6 @@ import { LiquityLogo } from "./LiquityLogo";
 import { Nav } from "./Nav";
 import { SideBar } from "./SideBar";
 
-const logoHeight = "32px";
-
 const select = ({ frontend }: LiquityStoreState) => ({
   frontend
 });
@@ -22,10 +20,10 @@ export const Header: React.FC<React.PropsWithChildren> = ({ children }) => {
   const isFrontendRegistered = frontendTag === AddressZero || frontend.status === "registered";
 
   return (
-    <header className="fixed top-4 left-4 right-4 md:left-8 md:right-8 z-10 bg-card text-card-foreground rounded-full border shadow-sm mx-auto max-w-7xl">
-      <div className="flex justify-between items-stretch px-4 md:px-6 lg:px-8 py-3">
+    <header className="fixed top-4 left-4 right-4 z-10 mx-auto max-w-[1280px] md:px-4 lg:px-8 md:left-0 md:right-0">
+      <div className="bg-card text-card-foreground rounded-full border shadow-sm flex justify-between items-stretch px-4 md:px-6 lg:px-8 py-3">
         <div className="flex items-center flex-1">
-          <LiquityLogo height={logoHeight} />
+          <LiquityLogo />
 
           <div className="hidden md:block w-0 h-full border-l border-border mx-2 md:mx-4" />
           {isFrontendRegistered && (

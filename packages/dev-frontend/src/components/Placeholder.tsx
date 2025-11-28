@@ -1,4 +1,3 @@
-import type { ThemeUIStyleObject } from "theme-ui";
 import { keyframes } from "@emotion/react";
 
 const loading = keyframes`
@@ -10,7 +9,7 @@ const loading = keyframes`
   }
 `;
 
-type PlaceholderProps = { style?: ThemeUIStyleObject };
+type PlaceholderProps = { style?: React.CSSProperties };
 
 export const Placeholder: React.FC<PlaceholderProps> = ({ style }) => {
   return (
@@ -18,7 +17,7 @@ export const Placeholder: React.FC<PlaceholderProps> = ({ style }) => {
       className="flex relative overflow-hidden rounded h-full w-full"
       style={{
         backgroundColor: "rgb(225, 230, 230)",
-        ...(style as React.CSSProperties)
+        ...style
       }}
     >
       <div

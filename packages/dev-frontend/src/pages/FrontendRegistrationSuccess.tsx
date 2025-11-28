@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Box, Paragraph } from "theme-ui";
 
 import { CheckIcon } from "lucide-react";
 
