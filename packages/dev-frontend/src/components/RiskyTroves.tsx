@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { Button } from "./ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table";
 
 import {
@@ -159,43 +159,42 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>
-          <h1 className="text-lg font-semibold flex justify-between items-center p-4 pb-0">
-            <Abbreviation short="Troves">Risky Vaults</Abbreviation>
+        <CardTitle className="flex justify-between items-center">
+          <Abbreviation short="Troves">Risky Vaults</Abbreviation>
 
-            <div className="flex items-center">
-              {numberOfTroves !== 0 && (
-                <>
-                  <Abbreviation
-                    short={`page ${clampedPage + 1} / ${numberOfPages}`}
-                    sx={{ mr: [0, 3], fontWeight: "body", fontSize: [1, 2], letterSpacing: [-1, 0] }}
-                  >
-                    {clampedPage * pageSize + 1}-{Math.min((clampedPage + 1) * pageSize, numberOfTroves)}{" "}
-                    of {numberOfTroves}
-                  </Abbreviation>
+          <div className="flex items-center">
+            {numberOfTroves !== 0 && (
+              <>
+                <Abbreviation
+                  short={`${clampedPage + 1} / ${numberOfPages}`}
+                  className="mr-0 md:mr-3 flex item text-sm"
+                >
+                  {clampedPage * pageSize + 1}-{Math.min((clampedPage + 1) * pageSize, numberOfTroves)}{" "}
+                  of {numberOfTroves}
+                </Abbreviation>
 
-                  <Button variant="ghost" onClick={previousPage} disabled={clampedPage <= 0}>
-                    <ChevronLeftIcon/>
-                  </Button>
+                <Button variant="ghost" onClick={previousPage} disabled={clampedPage <= 0}>
+                  <ChevronLeftIcon/>
+                </Button>
 
-                  <Button variant="ghost" onClick={nextPage} disabled={clampedPage >= numberOfPages - 1}
-                  >
-                    <ChevronRightIcon/>
-                  </Button>
-                </>
-              )}
+                <Button variant="ghost" onClick={nextPage} disabled={clampedPage >= numberOfPages - 1}
+                >
+                  <ChevronRightIcon/>
+                </Button>
+              </>
+            )}
 
-              <Button
-                variant="ghost"
-                className="ml-0 md:ml-3"
-                onClick={forceReload}
-                disabled={loading}
-              >
-                {loading ? <Spinner /> : <RotateCwIcon />}
-              </Button>
-            </div>
-          </h1>
+            <Button
+              variant="ghost"
+              className="ml-0 md:ml-3"
+              onClick={forceReload}
+              disabled={loading}
+            >
+              {loading ? <Spinner /> : <RotateCwIcon />}
+            </Button>
+          </div>
         </CardTitle>
+        <CardDescription>Visualize Active Vaults</CardDescription>
       </CardHeader>
 
       <CardContent>
@@ -281,7 +280,7 @@ export const RiskyTroves: React.FC<RiskyTrovesProps> = ({ pageSize }) => {
                           <Tooltip message={trove.ownerAddress} placement="top">
                             <span className="w-[73px] overflow-hidden relative">
                               {shortenAddress(trove.ownerAddress)}
-                              <div className="block md:hidden absolute top-0 right-0 w-[50px] h-full bg-gradient-to-r from-transparent to-white" />
+                              <div className="block md:hidden absolute top-0 right-0 w-[50px] h-full" />
                             </span>
                           </Tooltip>
 

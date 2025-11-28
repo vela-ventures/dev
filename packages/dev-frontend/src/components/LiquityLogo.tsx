@@ -1,12 +1,7 @@
 import React from "react";
-import { Box, Image } from "theme-ui";
 
-type LiquityLogoProps = React.ComponentProps<typeof Box> & {
-  height?: number | string;
-};
+type LiquityLogoProps = React.HTMLAttributes<HTMLDivElement>;
 
-export const LiquityLogo: React.FC<LiquityLogoProps> = ({ height, ...boxProps }) => (
-  <Box sx={{ lineHeight: 0 }} {...boxProps}>
-    <Image src="./favicon.png" sx={{ height }} />
-  </Box>
+export const LiquityLogo: React.FC<LiquityLogoProps> = () => (
+  <img src="./favicon.png" className="h-8" alt="Liquity" />
 );

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { Spinner } from "theme-ui";
 import { Button } from "./ui/button";
+import { Spinner } from "./ui/spinner";
 
 import { LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
@@ -34,7 +34,7 @@ export const CollateralSurplusAction: React.FC = () => {
   return myTransactionState.type === "waitingForApproval" ? (
     <div className="flex justify-end gap-2 mt-4">
       <Button disabled className="mx-2">
-        <Spinner sx={{ mr: 2, color: "white" }} size={20} />
+        <Spinner className="mr-2 text-white size-5" />
         Waiting for your approval
       </Button>
     </div>

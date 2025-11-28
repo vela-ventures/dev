@@ -5,8 +5,6 @@ import { LiquityLogo } from "./LiquityLogo";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetHeader } from "./ui/sheet";
 
-const logoHeight = "32px";
-
 export const SideBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -23,7 +21,7 @@ export const SideBar: React.FC = () => {
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetContent side="left" className="w-[75vw] p-0">
           <SheetHeader className="flex flex-row items-center justify-between p-4 pb-0 space-y-0">
-            <LiquityLogo height={logoHeight} className="" />
+            <LiquityLogo />
           </SheetHeader>
           <div className="flex h-full flex-col p-4 pt-4">
             <nav className="flex flex-col" onClick={() => setIsOpen(false)}>
