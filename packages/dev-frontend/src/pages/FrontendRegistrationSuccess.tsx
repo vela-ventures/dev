@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-
 import { CheckIcon } from "lucide-react";
 
 type FrontendRegistrationSuccessProps = {
@@ -10,34 +9,14 @@ export const FrontendRegistrationSuccess: React.FC<FrontendRegistrationSuccessPr
   onDismiss
 }) => (
   <>
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-around",
-
-        m: 3,
-        mt: 4,
-        mb: 4,
-        p: 4,
-        maxWidth: "500px",
-
-        bg: "rgba(40, 192, 129, 0.05)",
-        color: "success",
-
-        border: 1,
-        borderRadius: "8px",
-        borderColor: "success",
-        boxShadow: 2
-      }}
-    >
-      <div className="flex items-center mx-3 mb-4" style={{ fontSize: "var(--theme-ui-fontSizes-5)" }}>
-        <CheckIcon/>
+    <div className="flex flex-col justify-around m-3 mt-4 mb-4 p-4 max-w-[500px] bg-green-50 text-green-600 border border-green-600 rounded-lg shadow-md">
+      <div className="flex items-center mx-3 mb-4 text-2xl">
+        <CheckIcon />
         <h1 className="ml-3 text-xl font-semibold">Success!</h1>
       </div>
 
-      <Paragraph sx={{ fontSize: 2 }}>Your frontend is now ready to receive LQTY rewards.</Paragraph>
-    </Box>
+      <p className="text-base">Your frontend is now ready to receive LQTY rewards.</p>
+    </div>
 
     <Button onClick={onDismiss}>Go to Dashboard</Button>
   </>

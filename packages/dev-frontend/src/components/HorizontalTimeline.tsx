@@ -106,7 +106,9 @@ const LoadingEvent: React.FC<{ label: React.ReactNode }> = ({ label }) => {
   return (
     <div className="flex flex-col grow">
       <div className="flex justify-center">
-        <Placeholder style={{ mx: "20%" }} />
+        <div className="mx-[20%]">
+          <Placeholder />
+        </div>
       </div>
       <div className="flex my-1 items-center">
         <Line style={defaultLineStyle} />

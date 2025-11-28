@@ -16,7 +16,6 @@ import { PageSwitcher } from "./pages/PageSwitcher";
 import { RiskyTrovesPage } from "./pages/RiskyTrovesPage";
 
 import "tippy.js/dist/tippy.css"; // Tooltip default style
-import { BondsProvider } from "./components/Bonds/context/BondsProvider";
 import { DarkModeButton } from "./components/DarkModeButton";
 import { StabilityViewProvider } from "./components/Stability/context/StabilityViewProvider";
 import { StakingViewProvider } from "./components/Staking/context/StakingViewProvider";
@@ -46,29 +45,27 @@ export const LiquityFrontend: React.FC<LiquityFrontendProps> = ({ loader }) => {
         <TroveViewProvider>
           <StabilityViewProvider>
             <StakingViewProvider>
-              <BondsProvider>
-                <div className="flex flex-col min-h-full">
-                  <Header>
-                    <UserAccount />
-                    <SystemStatsPopup />
-                    <DarkModeButton />
-                  </Header>
+              <div className="flex flex-col min-h-full">
+                <Header>
+                  <UserAccount />
+                  <SystemStatsPopup />
+                  <DarkModeButton />
+                </Header>
 
-                  <div className="flex flex-col flex-grow items-center mt-20 w-full max-w-[1280px] mx-auto mb-10 px-0 md:px-4 lg:px-8">
-                    <Switch>
-                      <Route path="/" exact>
-                        <PageSwitcher />
-                      </Route>
-                      <Route path="/risky-troves">
-                        <RiskyTrovesPage />
-                      </Route>
-                      <Route path="/faucet">
-                        <Faucet />
-                      </Route>
-                    </Switch>
-                  </div>
+                <div className="flex flex-col flex-grow items-center mt-20 w-full max-w-[1280px] mx-auto mb-10 px-0 md:px-4 lg:px-8">
+                  <Switch>
+                    <Route path="/" exact>
+                      <PageSwitcher />
+                    </Route>
+                    <Route path="/risky-troves">
+                      <RiskyTrovesPage />
+                    </Route>
+                    <Route path="/faucet">
+                      <Faucet />
+                    </Route>
+                  </Switch>
                 </div>
-              </BondsProvider>
+              </div>
             </StakingViewProvider>
           </StabilityViewProvider>
         </TroveViewProvider>

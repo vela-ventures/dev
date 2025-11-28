@@ -11,8 +11,6 @@ import { shortenAddress } from "../utils/shortenAddress";
 
 import { ConnectKitButton } from "connectkit";
 import { CircleUserIcon, WalletIcon } from "lucide-react";
-import { useBondAddresses } from "./Bonds/context/BondAddressesContext";
-import { useBondView } from "./Bonds/context/BondViewContext";
 
 const select = ({ accountBalance, lusdBalance, lqtyBalance }: LiquityStoreState) => ({
   accountBalance,
@@ -22,12 +20,8 @@ const select = ({ accountBalance, lusdBalance, lqtyBalance }: LiquityStoreState)
 
 export const UserAccount: React.FC = () => {
   const { account } = useLiquity();
-  const { accountBalance, lusdBalance: realLusdBalance, lqtyBalance } = useLiquitySelector(select);
-  const { lusdBalance: customLusdBalance } = useBondView();
-  const { LUSD_OVERRIDE_ADDRESS } = useBondAddresses();
+  const { accountBalance, lusdBalance, lqtyBalance } = useLiquitySelector(select);
   const arweaveBalance = useArweaveBalance();
-
-  const lusdBalance = LUSD_OVERRIDE_ADDRESS === null ? realLusdBalance : customLusdBalance;
 
   return (
     <div className="flex items-center">
